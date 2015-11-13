@@ -19,7 +19,7 @@ struct exception : std::runtime_error
     exception();
 };
 
-void Init(uint32_t flags);
+void Init();
 
 struct Point
 {

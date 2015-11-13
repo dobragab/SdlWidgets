@@ -196,9 +196,9 @@ Surface Font::Render(std::wstring text, Color color, Font::RenderMode mode, Colo
 
 
 
-void Init(uint32_t flags)
+void Init()
 {
-    int result = SDL_Init(flags);
+    int result = SDL_Init(SDL_INIT_EVERYTHING);
 
     if (result < 0)
         throw Sdl::exception();

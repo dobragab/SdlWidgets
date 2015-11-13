@@ -28,11 +28,7 @@ class Window
     std::vector<Item> Items;
 
 public:
-    Window(int16_t width, int16_t height, uint32_t flags, const char * caption = nullptr);
-
-    Window(Point p, uint32_t flags, const char * caption = nullptr) :
-        Window{p.x, p.y, flags, caption}
-    { }
+    Window(int16_t width, int16_t height, const char * caption = nullptr);
 
     ~Window();
 

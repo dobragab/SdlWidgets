@@ -12,8 +12,8 @@
 namespace Sdl
 {
 
-Window::Window(int16_t width, int16_t height, uint32_t flags, const char * caption) :
-    screen{SDL_SetVideoMode(width, height, 0, flags)}
+Window::Window(int16_t width, int16_t height, const char * caption) :
+    screen{SDL_SetVideoMode(width, height, 0, SDL_HWSURFACE|SDL_DOUBLEBUF)}
 {
     if(caption)
         SDL_WM_SetCaption(caption, caption);
@@ -71,7 +71,6 @@ void Window::ShowDialog()
                         break;
                     }
                 }
-
                 break;
             }
 

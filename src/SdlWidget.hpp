@@ -3,6 +3,7 @@
 
 #include "Sdl.hpp"
 #include "SdlEvent.hpp"
+#include "Property.hpp"
 
 namespace Sdl
 {
@@ -21,13 +22,39 @@ class Widget
 {
 protected:
     Point location;
-    Size size;
+    Size _size;
+
+    Size getsize() const
+    {
+        return _size;
+    }
+    void setsize(Size const& s)
+    {
+        _size = s;
+        // TODO: UPDATE EVENT
+    }
+
+    Point getLocation() const
+    {
+        return location;
+    }
+    void setLocation(Point const& p)
+    {
+        location = p;
+        // TODO: UPDATE EVENT
+    }
+
 
 public:
 
+    PROPERTY(Widget, Size, size);
+    PROPERTY(Widget, Point, Location);
+
     Widget(Point p, Size s) :
         location{p},
-        size{s}
+        _size{s},
+        size{*this},
+        Location{*this}
     { }
 
     virtual bool IsClicked(Point p);
@@ -43,27 +70,40 @@ public:
 
 class Button : public Widget
 {
-    std::wstring Text;
+    std::wstring text;
 
     static Size defsize;
     static Point defloc;
 
+    std::wstring getText() const
+    {
+        return text;
+    }
+    void setText(std::wstring const& t)
+    {
+        text = t;
+        // TODO: UPDATE EVENT
+    }
+
 public:
+
+    PROPERTY(Button, std::wstring, Text);
 
     Button(std::wstring text) :
         Widget{defloc, defsize},
-        Text{text}
+        text{text},
+        Text{*this}
     { }
 
     virtual void Paint(Surface& screen, bool down = false) override
     {
         Widget::Paint(screen, down);
 
-        Surface textsurf = WindowFont.Render(Text, gombfeliratszin, Font::Blended);
+        Surface textsurf = WindowFont.Render(text, gombfeliratszin, Font::Blended);
 
         Rect sp;
-        sp.x = defloc.x + (size.w - textsurf.width ()) / 2;
-        sp.y = defloc.y + (size.h - textsurf.height()) / 2;
+        sp.x = location.x + (_size.w - textsurf.width ()) / 2;
+        sp.y = location.y + (_size.h - textsurf.height()) / 2;
 
         screen.Blit(textsurf, sp);
     }

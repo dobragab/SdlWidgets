@@ -46,6 +46,7 @@
 			<Add library="SDL_mixer" />
 			<Add directory="$(#sdl.lib)" />
 		</Linker>
+		<Unit filename="src/Property.hpp" />
 		<Unit filename="src/Sdl.cpp" />
 		<Unit filename="src/Sdl.hpp" />
 		<Unit filename="src/SdlEvent.cpp" />
