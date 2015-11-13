@@ -2,7 +2,7 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="fuggveny" />
+		<Option title="SdlWidget" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
@@ -46,15 +46,15 @@
 			<Add library="SDL_mixer" />
 			<Add directory="$(#sdl.lib)" />
 		</Linker>
-		<Unit filename="Sdl.cpp" />
-		<Unit filename="Sdl.hpp" />
-		<Unit filename="SdlEvent.cpp" />
-		<Unit filename="SdlEvent.hpp" />
-		<Unit filename="SdlWidget.cpp" />
-		<Unit filename="SdlWidget.hpp" />
-		<Unit filename="SdlWindow.cpp" />
-		<Unit filename="SdlWindow.hpp" />
-		<Unit filename="main.cpp" />
+		<Unit filename="src/Sdl.cpp" />
+		<Unit filename="src/Sdl.hpp" />
+		<Unit filename="src/SdlEvent.cpp" />
+		<Unit filename="src/SdlEvent.hpp" />
+		<Unit filename="src/SdlWidget.cpp" />
+		<Unit filename="src/SdlWidget.hpp" />
+		<Unit filename="src/SdlWindow.cpp" />
+		<Unit filename="src/SdlWindow.hpp" />
+		<Unit filename="src/main.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
