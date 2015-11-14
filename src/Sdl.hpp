@@ -12,14 +12,15 @@ typedef struct _TTF_Font TTF_Font;
 
 namespace Sdl {
 
+void Init();
+void PushEvent(uint8_t type, void * data1 = nullptr, void * data2 = nullptr);
+
 struct exception : std::runtime_error
 {
     using std::runtime_error::runtime_error;
 
     exception();
 };
-
-void Init();
 
 struct Point
 {

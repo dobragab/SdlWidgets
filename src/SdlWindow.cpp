@@ -31,7 +31,7 @@ void Window::Redraw()
     screen.Fill(hatter);
 
     for(auto item : Items)
-        item.w->Paint(screen, false);
+        item.w->Paint(screen);
 
     screen.Flip();
 }
@@ -43,12 +43,12 @@ void Window::ShowDialog()
     SDL_Event ev;
     bool quit = false;
 
-    Widget * focused = nullptr;
-    bool pressed = false;
+    bool to_redraw = false;
 
     while(!quit)
     {
         SDL_WaitEvent(&ev);
+        to_redraw = true;
 
         switch(ev.type)
         {
@@ -57,54 +57,41 @@ void Window::ShowDialog()
                 break;
 
             case SDL_MOUSEBUTTONDOWN:
-            {
-                MouseClickEvent e(ev.button.button, ev.button.state, ev.button.x, ev.button.y);
-                pressed = false;
-
-                for(auto item : Items)
-                {
-                    item.w->MouseClick(screen, e);
-                    if (e.IsDone())
-                    {
-                        focused = item.w;
-                        pressed = true;
-                        break;
-                    }
-                }
-                break;
-            }
-
             case SDL_MOUSEBUTTONUP:
             {
                 MouseClickEvent e(ev.button.button, ev.button.state, ev.button.x, ev.button.y);
-                if(pressed)
-                {
-                    focused->MouseClick(screen, e);
-                    pressed = false;
-                }
+                for (int i = Items.size() - 1; i >= 0; --i)
+                    Items[i].w->MouseClick(screen, e);
+
                 break;
             }
 
             case SDL_MOUSEMOTION:
             {
                 MouseMoveEvent e(ev.motion.state, ev.motion.x, ev.motion.y, ev.motion.xrel, ev.motion.yrel);
-                if(pressed)
-                    focused->MouseMove(screen, e);
+                for (int i = Items.size() - 1; i >= 0; --i)
+                    Items[i].w->MouseMove(screen, e);
+
                 break;
             }
 
             case SDL_KEYDOWN:
             {
                 KeyboardEvent e(ev.key.keysym.mod, ev.key.keysym.sym, ev.key.keysym.unicode);
-                if(focused)
-                    focused->KeyPress(screen, e);
+                for (int i = Items.size() - 1; i >= 0; --i)
+                    Items[i].w->KeyPress(screen, e);
+
                 break;
             }
 
             default:
+                to_redraw = false;
                 break;
 
         }
+
+        if (to_redraw)
+            Redraw();
 
         screen.Flip();
     }

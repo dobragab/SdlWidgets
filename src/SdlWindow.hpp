@@ -32,11 +32,6 @@ public:
 
     ~Window();
 
-    static void SetFont(Font&& f)
-    {
-        WindowFont = std::move(f);
-    }
-
     void Add(Widget * w)
     {
         Items.push_back(Item{w, true});

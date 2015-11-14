@@ -17,6 +17,12 @@ uint32_t const csuszkaszin = 0x00FFFF50;
 uint32_t const feliratszin = 0x00C0F0FF;
 
 extern Font WindowFont;
+void SetFont(Font&& f);
+
+class Widget;
+typedef void (*MouseClickedHandler)(Widget& sender, MouseClickEvent& ev);
+typedef void (*MouseMovedHandler)(Widget& sender, MouseMoveEvent& ev);
+typedef void (*KeyPressHandler)(Widget& sender, KeyboardEvent& ev);
 
 class Widget
 {
@@ -31,7 +37,6 @@ protected:
     void setsize(Size const& s)
     {
         _size = s;
-        // TODO: UPDATE EVENT
     }
 
     Point getLocation() const
@@ -41,7 +46,6 @@ protected:
     void setLocation(Point const& p)
     {
         location = p;
-        // TODO: UPDATE EVENT
     }
 
 
@@ -63,7 +67,7 @@ public:
     virtual void MouseMove(Surface& sender, MouseMoveEvent& ev) = 0;
     virtual void KeyPress(Surface& sender, KeyboardEvent& ev) = 0;
 
-    virtual void Paint(Surface& screen, bool down = false);
+    virtual void Paint(Surface& screen);
 
     virtual ~Widget() {}
 };
@@ -74,6 +78,9 @@ class Button : public Widget
 
     static Size defsize;
     static Point defloc;
+    static Color default_color;
+
+    bool down = false;
 
     std::wstring getText() const
     {
@@ -82,39 +89,28 @@ class Button : public Widget
     void setText(std::wstring const& t)
     {
         text = t;
-        // TODO: UPDATE EVENT
     }
 
 public:
 
     PROPERTY(Button, std::wstring, Text);
+    bool Enabled = true;
+    bool Visible = true;
 
-    Button(std::wstring text) :
+    Button(std::wstring text = L"Button") :
         Widget{defloc, defsize},
         text{text},
         Text{*this}
     { }
 
-    virtual void Paint(Surface& screen, bool down = false) override
-    {
-        Widget::Paint(screen, down);
-
-        Surface textsurf = WindowFont.Render(text, gombfeliratszin, Font::Blended);
-
-        Rect sp;
-        sp.x = location.x + (_size.w - textsurf.width ()) / 2;
-        sp.y = location.y + (_size.h - textsurf.height()) / 2;
-
-        screen.Blit(textsurf, sp);
-    }
+    virtual void Paint(Surface& screen) override;
 
     virtual void MouseClick(Surface& sender, MouseClickEvent& ev);
+    virtual void MouseMove (Surface& sender, MouseMoveEvent & ev) { }
+    virtual void KeyPress  (Surface& sender, KeyboardEvent  & ev) { }
 
-    virtual void MouseMove(Surface& sender, MouseMoveEvent& ev)
-    { }
+    MouseClickedHandler MouseClicked = nullptr;
 
-    virtual void KeyPress(Surface& sender, KeyboardEvent& ev)
-    { }
 
 };
 
