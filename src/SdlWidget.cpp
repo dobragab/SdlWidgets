@@ -41,8 +41,23 @@ bool Widget::IsClicked(Point p)
             p.y <= location.y + _size.h;
 }
 
+void Label::Paint(Surface& screen)
+{
+    Surface textsurf = WindowFont.Render(text, gombfeliratszin, Font::Blended);
+
+    Rect sp;
+    sp.x = location.x;
+    sp.y = location.y;
+
+    screen.Blit(textsurf, sp);
+}
+
 Size Button::defsize = Size(75, 23);
-Point Button::defloc = Point(0, 0);
+Size Label::defsize = Size(0, 0);
+Size Slider::defsize = Size(100, 23);
+Point Widget::defloc = Point(0, 0);
+Color Widget::default_main_color = Color(0x00C0F0FF);
+Color Slider::default_color = Color(0x00DDFF50);
 
 void Button::MouseClick(Surface& sender, MouseClickEvent& ev)
 {
@@ -59,10 +74,10 @@ void Button::MouseClick(Surface& sender, MouseClickEvent& ev)
     }
     else
     {
-        down = false;
-
-        if (IsClicked(ev.p) && MouseClicked)
+        if (down && MouseClicked && IsClicked(ev.p))
             MouseClicked(*this, ev);
+
+        down = false;
     }
 
 }
@@ -96,5 +111,65 @@ void Button::Paint(Surface& screen)
     screen.Blit(textsurf, sp);
 }
 
+void Slider::Paint(Surface& screen)
+{
+    if (!Visible)
+        return;
+
+    Widget::Paint(screen);
+
+    boxColor(screen, location.x, location.y, location.x+((_size.w-1)*(value - minvalue)/(maxvalue - minvalue)), location.y+_size.h-1, (uint32_t)color);
+}
+
+void Slider::MouseClick(Surface& sender, MouseClickEvent& ev)
+{
+    if (!Visible || ev.button != SDL_BUTTON_LEFT || ev.IsDone())
+        return;
+
+    if (ev.down)
+    {
+        if(IsClicked(ev.p))
+        {
+            down = true;
+
+            // copy-paste
+            if (ev.p.x <= location.x)
+                Value = minvalue;
+            else if (ev.p.x >= location.x + _size.w)
+                Value = maxvalue;
+            else
+            {
+                Value = minvalue + (maxvalue - minvalue) * (ev.p.x-location.x-1)/(_size.w);
+            }
+            // /copy-paste
+
+            ev.Done();
+        }
+    }
+    else
+    {
+//        if (down && MouseClicked && IsClicked(ev.p))
+//            MouseClicked(*this, ev);
+
+        down = false;
+    }
+
+}
+
+void Slider::MouseMove (Surface& sender, MouseMoveEvent & ev)
+{
+    if (!down || ev.IsDone())
+        return;
+
+    ev.Done();
+    if (ev.p.x <= location.x)
+        Value = minvalue;
+    else if (ev.p.x >= location.x + _size.w)
+        Value = maxvalue;
+    else
+    {
+        Value = minvalue + (maxvalue - minvalue) * (ev.p.x-location.x-1)/(_size.w);
+    }
+}
 
 }

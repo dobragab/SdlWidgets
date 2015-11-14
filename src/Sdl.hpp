@@ -80,6 +80,15 @@ struct Color
         a((c & 0x000000FF) >> 0)
     { }
 
+    explicit operator uint32_t() const
+    {
+        return  r << 24 |
+                g << 16 |
+                b << 8  |
+                a;
+    }
+
+
 };
 
 class Surface

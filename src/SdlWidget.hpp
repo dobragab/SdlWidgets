@@ -23,33 +23,27 @@ class Widget;
 typedef void (*MouseClickedHandler)(Widget& sender, MouseClickEvent& ev);
 typedef void (*MouseMovedHandler)(Widget& sender, MouseMoveEvent& ev);
 typedef void (*KeyPressHandler)(Widget& sender, KeyboardEvent& ev);
+typedef void (*ValueChangedHandler)(Widget& sender);
 
 class Widget
 {
 protected:
+
+    static Color default_main_color;
+    static Point defloc;
+
     Point location;
     Size _size;
+    Color maincolor = default_main_color;
 
-    Size getsize() const
-    {
-        return _size;
-    }
-    void setsize(Size const& s)
-    {
-        _size = s;
-    }
-
-    Point getLocation() const
-    {
-        return location;
-    }
-    void setLocation(Point const& p)
-    {
-        location = p;
-    }
-
+    GETTERSETTER(_size, Size, size)
+    GETTERSETTER(location, Point, Location)
+    GETTERSETTER(maincolor, Color, MainColor)
 
 public:
+
+    bool Enabled = true;
+    bool Visible = true;
 
     PROPERTY(Widget, Size, size);
     PROPERTY(Widget, Point, Location);
@@ -72,13 +66,84 @@ public:
     virtual ~Widget() {}
 };
 
+class Slider : public Widget
+{
+    static Size defsize;
+    static Color default_color;
+
+    int minvalue = 0, maxvalue = 100;
+    int value = 0;
+    Color color = default_color;
+
+
+    bool down = false;
+
+
+    GETTERSETTER(minvalue, int, Minimum)
+    GETTERSETTER(maxvalue, int, Maximum)
+    GETTERSETTER(color, Color, BoxColor)
+
+    GETTER(value, int, Value)
+    void setValue(int const& val)
+    {
+        value = val;
+        if (ValueChanged)
+            ValueChanged(*this);
+    }
+
+public:
+
+    Slider() :
+        Widget{defloc, defsize},
+        Minimum{*this},
+        Maximum{*this},
+        Value{*this}
+    { }
+
+    PROPERTY(Slider, int, Minimum);
+    PROPERTY(Slider, int, Maximum);
+    PROPERTY(Slider, int, Value);
+
+    ValueChangedHandler ValueChanged = nullptr;
+
+    virtual void Paint(Surface& screen) override;
+
+    virtual void MouseClick(Surface& sender, MouseClickEvent& ev);
+    virtual void MouseMove (Surface& sender, MouseMoveEvent & ev);
+    virtual void KeyPress  (Surface& sender, KeyboardEvent  & ev) { }
+
+};
+
+class Label : public Widget
+{
+    static Size defsize;
+
+    std::wstring text;
+    GETTERSETTER(text, std::wstring, Text)
+
+public:
+
+    PROPERTY(Label, std::wstring, Text);
+
+    Label(std::wstring text = L"Button") :
+        Widget{defloc, defsize},
+        text{text},
+        Text{*this}
+    { }
+
+    virtual void Paint(Surface& screen) override;
+
+    virtual void MouseClick(Surface& sender, MouseClickEvent& ev) { }
+    virtual void MouseMove (Surface& sender, MouseMoveEvent & ev) { }
+    virtual void KeyPress  (Surface& sender, KeyboardEvent  & ev) { }
+
+};
+
 class Button : public Widget
 {
     std::wstring text;
 
     static Size defsize;
-    static Point defloc;
-    static Color default_color;
 
     bool down = false;
 
@@ -91,11 +156,10 @@ class Button : public Widget
         text = t;
     }
 
+
 public:
 
     PROPERTY(Button, std::wstring, Text);
-    bool Enabled = true;
-    bool Visible = true;
 
     Button(std::wstring text = L"Button") :
         Widget{defloc, defsize},

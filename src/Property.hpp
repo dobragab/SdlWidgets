@@ -5,6 +5,14 @@
 
 #define PROPERTY(parent, return_type, name) Property<parent, return_type, (& parent :: set##name), (& parent :: get##name)> name
 
+#define GETTER(value, return_type, name) \
+    return_type get##name() const \
+    {   return value; }
+#define SETTER(value, return_type, name) \
+    void set##name(return_type const& value_setter) \
+    {   value = value_setter; }
+#define GETTERSETTER(value, return_type, name) GETTER(value, return_type, name) SETTER(value, return_type, name)
+
 /* property: milyen CLASS-hoz, milyen T típusú adattag,
  * melyik SETTERPTR tagfüggvény a setter, melyik GETTERPTR tagfüggvény a getter */
 template <typename CLASS, typename T,
