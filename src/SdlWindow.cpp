@@ -48,7 +48,7 @@ void Window::ShowDialog()
     while(!quit)
     {
         SDL_WaitEvent(&ev);
-        to_redraw = true;
+        to_redraw = false;
 
         switch(ev.type)
         {
@@ -63,6 +63,7 @@ void Window::ShowDialog()
                 for (int i = Items.size() - 1; i >= 0; --i)
                     Items[i].w->MouseClick(screen, e);
 
+                to_redraw = e.IsDone();
                 break;
             }
 
@@ -72,6 +73,7 @@ void Window::ShowDialog()
                 for (int i = Items.size() - 1; i >= 0; --i)
                     Items[i].w->MouseMove(screen, e);
 
+                to_redraw = e.IsDone();
                 break;
             }
 
@@ -81,6 +83,7 @@ void Window::ShowDialog()
                 for (int i = Items.size() - 1; i >= 0; --i)
                     Items[i].w->KeyPress(screen, e);
 
+                to_redraw = e.IsDone();
                 break;
             }
 
@@ -91,7 +94,12 @@ void Window::ShowDialog()
         }
 
         if (to_redraw)
+        {
             Redraw();
+#ifdef DEBUG
+            puts("Had to redraw...");
+#endif
+        }
 
         screen.Flip();
     }

@@ -216,6 +216,11 @@ void Init()
 
     atexit(SDL_Quit);
 
+#if defined(__WIN32__) && defined(DEBUG)
+    freopen("CON", "w", stdout);
+    freopen("CON", "w", stderr);
+#endif
+
     TTF_Init();
     SDL_EnableUNICODE(true);
     SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);

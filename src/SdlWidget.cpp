@@ -77,6 +77,9 @@ void Button::MouseClick(Surface& sender, MouseClickEvent& ev)
         if (down && MouseClicked && IsClicked(ev.p))
             MouseClicked(*this, ev);
 
+        if(down)
+            ev.Done();
+
         down = false;
     }
 
@@ -131,29 +134,16 @@ void Slider::MouseClick(Surface& sender, MouseClickEvent& ev)
         if(IsClicked(ev.p))
         {
             down = true;
-
-            // copy-paste
-            if (ev.p.x <= location.x)
-                Value = minvalue;
-            else if (ev.p.x >= location.x + _size.w)
-                Value = maxvalue;
-            else
-            {
-                Value = minvalue + (maxvalue - minvalue) * (ev.p.x-location.x-1)/(_size.w);
-            }
-            // /copy-paste
-
+            setval(ev.p.x);
             ev.Done();
         }
     }
     else
     {
-//        if (down && MouseClicked && IsClicked(ev.p))
-//            MouseClicked(*this, ev);
-
+        if(down)
+            ev.Done();
         down = false;
     }
-
 }
 
 void Slider::MouseMove (Surface& sender, MouseMoveEvent & ev)
@@ -161,15 +151,19 @@ void Slider::MouseMove (Surface& sender, MouseMoveEvent & ev)
     if (!down || ev.IsDone())
         return;
 
+    setval(ev.p.x);
     ev.Done();
-    if (ev.p.x <= location.x)
+}
+
+void Slider::setval(int16_t x)
+{
+    if (x <= location.x)
         Value = minvalue;
-    else if (ev.p.x >= location.x + _size.w)
+    else if (x > location.x + _size.w)
         Value = maxvalue;
     else
-    {
-        Value = minvalue + (maxvalue - minvalue) * (ev.p.x-location.x-1)/(_size.w);
-    }
+        Value = minvalue + (maxvalue - minvalue) * (x-location.x-1)/(_size.w);
 }
+
 
 }

@@ -91,6 +91,8 @@ class Slider : public Widget
             ValueChanged(*this);
     }
 
+    void setval(int16_t x);
+
 public:
 
     Slider() :
