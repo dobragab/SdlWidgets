@@ -55,9 +55,11 @@ void Label::Paint(Surface& screen)
 Size Button::defsize = Size(75, 23);
 Size Label::defsize = Size(0, 0);
 Size Slider::defsize = Size(100, 23);
+Size ColorBox::defsize = Size(128, 32);
 Point Widget::defloc = Point(0, 0);
 Color Widget::default_main_color = Color(0x00C0F0FF);
 Color Slider::default_color = Color(0x00DDFF50);
+Color ColorBox::default_color = Color(0x000000FF);
 
 void Button::MouseClick(Surface& sender, MouseClickEvent& ev)
 {
@@ -165,5 +167,13 @@ void Slider::setval(int16_t x)
         Value = minvalue + (maxvalue - minvalue) * (x-location.x-1)/(_size.w);
 }
 
+void ColorBox::Paint(Surface& screen)
+{
+    roundedRectangleColor(screen, location.x-1, location.y-1, location.x+_size.w, location.y+_size.h, 2, keret);
+    boxColor(screen, location.x, location.y, location.x+_size.w-1, location.y+_size.h-1, alapszin);
+    rectangleColor(screen, location.x, location.y, location.x+_size.w-1, location.y+_size.h-1, keretvilagos);
+    boxColor(screen, location.x, location.y, location.x+_size.w-1, location.y+_size.h-1, (uint32_t)color);
+
+}
 
 }

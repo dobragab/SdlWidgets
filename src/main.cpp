@@ -27,6 +27,7 @@ Sdl::Button button2;
 Sdl::Label label1;
 Sdl::Label label2;
 Sdl::Slider slider1;
+Sdl::ColorBox box;
 
 void button1_MouseClicked(Sdl::Widget& sender, Sdl::MouseClickEvent& ev)
 {
@@ -42,6 +43,7 @@ void slider_ValueChanged(Sdl::Widget& sender)
 {
     Sdl::Slider& slider = dynamic_cast<Sdl::Slider&>(sender);
     label2.Text = ToWString(slider.Value);
+    box.DisplayedColor = Sdl::Color(slider1.Value, 0, 0 );
 }
 
 
@@ -65,21 +67,25 @@ try
 
     slider1.Location = Sdl::Point(100, 150);
     slider1.size = Sdl::Size(100, 23);
-    slider1.Value = 0;
+    slider1.Value = 255;
     slider1.Maximum = 255;
     slider1.ValueChanged = slider_ValueChanged;
 
-    label1.Text = L"Felirat";
+    label1.Text = L"Árvíztűrő tükörfúrógép";
     label1.Location = Sdl::Point(100, 80);
 
     label2.Text = L" ";
     label2.Location = Sdl::Point(210, 150);
+
+    box.Location = Sdl::Point(100, 250);
+    box.DisplayedColor = Sdl::Color(slider1.Value, 0, 0);
 
     screen.Add(button1);
     screen.Add(button2);
     screen.Add(label1);
     screen.Add(slider1);
     screen.Add(label2);
+    screen.Add(box);
 
     screen.ShowDialog();
 }

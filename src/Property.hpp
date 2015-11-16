@@ -3,7 +3,7 @@
 
 /* mire jó: getter és setter helyettesítése egy publikus, fiktív adattaggal. */
 
-#define PROPERTY(parent, return_type, name) Property<parent, return_type, (& parent :: set##name), (& parent :: get##name)> name
+#define PROPERTY(parent, return_type, name) Property<parent, return_type, (& parent :: set##name), (& parent :: get##name)> name{*this}
 
 #define GETTER(value, return_type, name) \
     return_type get##name() const \

@@ -50,9 +50,7 @@ public:
 
     Widget(Point p, Size s) :
         location{p},
-        _size{s},
-        size{*this},
-        Location{*this}
+        _size{s}
     { }
 
     virtual bool IsClicked(Point p);
@@ -96,10 +94,7 @@ class Slider : public Widget
 public:
 
     Slider() :
-        Widget{defloc, defsize},
-        Minimum{*this},
-        Maximum{*this},
-        Value{*this}
+        Widget{defloc, defsize}
     { }
 
     PROPERTY(Slider, int, Minimum);
@@ -129,8 +124,7 @@ public:
 
     Label(std::wstring text = L"Button") :
         Widget{defloc, defsize},
-        text{text},
-        Text{*this}
+        text{text}
     { }
 
     virtual void Paint(Surface& screen) override;
@@ -149,15 +143,7 @@ class Button : public Widget
 
     bool down = false;
 
-    std::wstring getText() const
-    {
-        return text;
-    }
-    void setText(std::wstring const& t)
-    {
-        text = t;
-    }
-
+    GETTERSETTER(text, std::wstring, Text)
 
 public:
 
@@ -165,8 +151,7 @@ public:
 
     Button(std::wstring text = L"Button") :
         Widget{defloc, defsize},
-        text{text},
-        Text{*this}
+        text{text}
     { }
 
     virtual void Paint(Surface& screen) override;
@@ -176,7 +161,31 @@ public:
     virtual void KeyPress  (Surface& sender, KeyboardEvent  & ev) { }
 
     MouseClickedHandler MouseClicked = nullptr;
+};
 
+class ColorBox : public Widget
+{
+    static Color default_color;
+    static Size defsize;
+
+    Color color;
+
+    GETTERSETTER(color, Color, DisplayedColor)
+
+public:
+
+    PROPERTY(ColorBox, Color, DisplayedColor);
+
+    ColorBox(Color c = default_color) :
+        Widget{defloc, defsize},
+        color{c}
+    { }
+
+    virtual void Paint(Surface& screen) override;
+
+    virtual void MouseClick(Surface& sender, MouseClickEvent& ev) { }
+    virtual void MouseMove (Surface& sender, MouseMoveEvent & ev) { }
+    virtual void KeyPress  (Surface& sender, KeyboardEvent  & ev) { }
 
 };
 
