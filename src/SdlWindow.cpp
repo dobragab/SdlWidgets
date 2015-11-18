@@ -95,10 +95,7 @@ void Window::ShowDialog()
                     if (Items[i].w == ev.user.data1)
                         Items[i].w->TimerTick(screen, e);
 
-<<<<<<< HEAD
                 to_redraw = e.IsDone();
-=======
->>>>>>> 39486f12a9bfb6959780a21d7d3ff0e5dfe64a17
                 break;
             }
             default:
