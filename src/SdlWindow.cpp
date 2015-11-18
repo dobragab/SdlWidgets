@@ -8,6 +8,7 @@
 #include <SDL_image.h>
 #include <SDL_mixer.h>
 #include <SDL_gfxPrimitives.h>
+#include "SDL_custom.hpp"
 
 namespace Sdl
 {
@@ -87,6 +88,16 @@ void Window::ShowDialog()
                 break;
             }
 
+            case SDL_TICK:
+            {
+                TimerEvent e(ev.user.code, ev.user.data1, ev.user.data2);
+                for (int i = Items.size() - 1; i >= 0; --i)
+                    if (Items[i].w == ev.user.data1)
+                        Items[i].w->TimerTick(screen, e);
+
+                to_redraw = e.IsDone();
+                break;
+            }
             default:
                 to_redraw = false;
                 break;
