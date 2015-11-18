@@ -14,6 +14,7 @@ void PushEvent(uint8_t type, void * data1, void * data2)
 {
     SDL_Event ev;
     ev.type = type;
+    ev.user.code = 0;
     ev.user.data1 = data1;
     ev.user.data2 = data2;
 

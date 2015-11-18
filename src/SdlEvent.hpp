@@ -76,6 +76,19 @@ struct MouseMoveEvent : public Event
 
 };
 
+struct TimerEvent : public Event
+{
+    int code;
+    void * data1;
+    void * data2;
+
+    TimerEvent(int code, void * data1, void * data2) :
+        code{code},
+        data1{data1},
+        data2{data2}
+    { }
+};
+
 }
 
 #endif // SDLEVENT_HPP_INCLUDED

@@ -58,6 +58,7 @@ public:
     virtual void MouseClick(Surface& sender, MouseClickEvent& ev) = 0;
     virtual void MouseMove(Surface& sender, MouseMoveEvent& ev) = 0;
     virtual void KeyPress(Surface& sender, KeyboardEvent& ev) = 0;
+    virtual void TimerTick(Surface& sender, TimerEvent& ev) = 0;
 
     virtual void Paint(Surface& screen);
 
@@ -108,6 +109,7 @@ public:
     virtual void MouseClick(Surface& sender, MouseClickEvent& ev);
     virtual void MouseMove (Surface& sender, MouseMoveEvent & ev);
     virtual void KeyPress  (Surface& sender, KeyboardEvent  & ev) { }
+    virtual void TimerTick (Surface& sender, TimerEvent     & ev) { }
 
 };
 
@@ -132,6 +134,7 @@ public:
     virtual void MouseClick(Surface& sender, MouseClickEvent& ev) { }
     virtual void MouseMove (Surface& sender, MouseMoveEvent & ev) { }
     virtual void KeyPress  (Surface& sender, KeyboardEvent  & ev) { }
+    virtual void TimerTick (Surface& sender, TimerEvent     & ev) { }
 
 };
 
@@ -159,6 +162,7 @@ public:
     virtual void MouseClick(Surface& sender, MouseClickEvent& ev);
     virtual void MouseMove (Surface& sender, MouseMoveEvent & ev) { }
     virtual void KeyPress  (Surface& sender, KeyboardEvent  & ev) { }
+    virtual void TimerTick (Surface& sender, TimerEvent     & ev) { }
 
     MouseClickedHandler MouseClicked = nullptr;
 };
@@ -186,6 +190,7 @@ public:
     virtual void MouseClick(Surface& sender, MouseClickEvent& ev) { }
     virtual void MouseMove (Surface& sender, MouseMoveEvent & ev) { }
     virtual void KeyPress  (Surface& sender, KeyboardEvent  & ev) { }
+    virtual void TimerTick (Surface& sender, TimerEvent     & ev) { }
 
 };
 
