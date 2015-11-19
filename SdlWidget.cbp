@@ -106,12 +106,12 @@
 			<Option target="Debug" />
 			<Option target="Release" />
 		</Unit>
-		<Unit filename="src/SdlTimer.cpp" />
-		<Unit filename="src/SdlTimer.hpp" />
 		<Unit filename="src/SdlFont.cpp" />
 		<Unit filename="src/SdlFont.hpp" />
 		<Unit filename="src/SdlSurface.cpp" />
 		<Unit filename="src/SdlSurface.hpp" />
+		<Unit filename="src/SdlTimer.cpp" />
+		<Unit filename="src/SdlTimer.hpp" />
 		<Unit filename="src/SdlWidget.cpp">
 			<Option target="Debug" />
 			<Option target="Release" />
@@ -136,7 +136,8 @@
 		<Unit filename="src/WidgetLabel.cpp" />
 		<Unit filename="src/WidgetLabel.hpp" />
 		<Unit filename="src/WidgetSlider.cpp">
-			<Option target="&lt;{~None~}&gt;" />
+			<Option target="Debug" />
+			<Option target="Release" />
 		</Unit>
 		<Unit filename="src/WidgetSlider.hpp" />
 		<Unit filename="src/main.cpp">
