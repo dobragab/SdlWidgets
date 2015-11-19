@@ -6,3 +6,4 @@ obj/*
 *.layout
 *.zip
 *.txt
+SdlWidget
