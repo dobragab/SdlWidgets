@@ -3,10 +3,12 @@
 	<FileVersion major="1" minor="6" />
 	<Project>
 		<Option title="SdlWidget" />
+		<Option makefile_is_custom="1" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
+				<Option platforms="Windows;" />
 				<Option output="bin/Debug/fuggveny" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
@@ -17,16 +19,45 @@
 				</Compiler>
 			</Target>
 			<Target title="Release">
+				<Option platforms="Windows;" />
 				<Option output="bin/Release/fuggveny" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
-					<Add option="-O2" />
+					<Add option="-O3" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
 				</Linker>
+			</Target>
+			<Target title="Linux">
+				<Option platforms="Unix;" />
+				<Option output="SdlWidget" prefix_auto="1" extension_auto="1" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<MakeCommands>
+					<Build command="$make -f $makefile $target" />
+					<CompileFile command="$make -f $makefile $file" />
+					<Clean command="$make -f $makefile clean" />
+					<DistClean command="$make -f $makefile distclean$target" />
+					<AskRebuildNeeded command="$make -q -f $makefile $target" />
+					<SilentBuild command="$make -f $makefile $target &gt; $(CMD_NULL)" />
+				</MakeCommands>
+			</Target>
+			<Target title="LinuxDebug">
+				<Option platforms="Unix;" />
+				<Option output="SdlWidget" prefix_auto="1" extension_auto="1" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<MakeCommands>
+					<Build command="$make -f $makefile $target" />
+					<CompileFile command="$make -f $makefile $file" />
+					<Clean command="$make -f $makefile clean" />
+					<DistClean command="$make -f $makefile distclean$target" />
+					<AskRebuildNeeded command="$make -q -f $makefile $target" />
+					<SilentBuild command="$make -f $makefile $target &gt; $(CMD_NULL)" />
+				</MakeCommands>
 			</Target>
 		</Build>
 		<Compiler>
@@ -47,18 +78,55 @@
 			<Add library="SDL_mixer" />
 			<Add directory="$(#sdl.lib)" />
 		</Linker>
-		<Unit filename="src/Property.hpp" />
-		<Unit filename="src/SDL_custom.cpp" />
-		<Unit filename="src/SDL_custom.hpp" />
-		<Unit filename="src/Sdl.cpp" />
-		<Unit filename="src/Sdl.hpp" />
-		<Unit filename="src/SdlEvent.cpp" />
-		<Unit filename="src/SdlEvent.hpp" />
-		<Unit filename="src/SdlWidget.cpp" />
-		<Unit filename="src/SdlWidget.hpp" />
-		<Unit filename="src/SdlWindow.cpp" />
-		<Unit filename="src/SdlWindow.hpp" />
-		<Unit filename="src/main.cpp" />
+		<Unit filename="Makefile" />
+		<Unit filename="src/Property.hpp">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="src/SDL_custom.cpp">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="src/SDL_custom.hpp">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="src/Sdl.cpp">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="src/Sdl.hpp">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="src/SdlEvent.cpp">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="src/SdlEvent.hpp">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="src/SdlWidget.cpp">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="src/SdlWidget.hpp">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="src/SdlWindow.cpp">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="src/SdlWindow.hpp">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="src/main.cpp">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
 		<Extensions>
 			<code_completion />
 			<envvars />

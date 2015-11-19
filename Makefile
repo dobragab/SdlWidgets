@@ -5,6 +5,7 @@ OBJDIR   = obj
 BINDIR   = .
 
 RM       = rm -f
+MAKEDIR  = mkdir -p
 
 WARNINGS = -Wall -Wdeprecated -pedantic -Wfloat-equal -Wunreachable-code -Wnon-virtual-dtor
 
@@ -18,7 +19,7 @@ CFLAGS = -std=c99 -O3 $(WARNINGS) $(SDL_CONFIG)
 
 CXX = g++
 CXXFLAGS = -std=c++11 -O3 $(WARNINGS) $(SDL_CONFIG)
-LDFLAGS = $(SDL_LIBS) -lm
+LDFLAGS = -s $(SDL_LIBS) -lm
 
 
 SOURCES := $(wildcard $(SRCDIR)/*.c) $(wildcard $(SRCDIR)/*.cpp) $(wildcard $(SRCDIR)/*.cc) $(wildcard $(SRCDIR)/*.cxx)
@@ -30,13 +31,24 @@ OBJECTS_CC := $(OBJECTS_CPP:$(SRCDIR)/%.cc=$(OBJDIR)/%.o)
 OBJECTS := $(OBJECTS_CC:$(SRCDIR)/%.cxx=$(OBJDIR)/%.o)
 
 
-.PHONY: clean all
+.PHONY: clean all dirs Linux LinuxDebug
 
-all: $(BINDIR)/$(BINARY)
+all: dirs $(BINDIR)/$(BINARY)
+
+Linux: all
+
+LinuxDebug: all
+LinuxDebug: CFLAGS += -DDEBUG -g
+LinuxDebug: CXXFLAGS += -DDEBUG -g
+LinuxDebug: LDFLAGS += -g
 
 clean:
 	$(RM) $(OBJDIR)/*.o
 	$(RM) $(BINDIR)/$(BINARY)
+
+dirs:
+	$(MAKEDIR) $(BINDIR)
+	$(MAKEDIR) $(OBJDIR)
 
 
 $(BINDIR)/$(BINARY): $(OBJECTS)
