@@ -106,6 +106,8 @@
 			<Option target="Debug" />
 			<Option target="Release" />
 		</Unit>
+		<Unit filename="src/SdlTimer.cpp" />
+		<Unit filename="src/SdlTimer.hpp" />
 		<Unit filename="src/SdlWidget.cpp">
 			<Option target="Debug" />
 			<Option target="Release" />
