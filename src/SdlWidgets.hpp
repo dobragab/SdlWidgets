@@ -5,6 +5,7 @@
 #include "SdlSurface.hpp"
 #include "SdlFont.hpp"
 #include "SdlEvent.hpp"
+//#include "SdlTimer.hpp"
 #include "SdlWidget.hpp"
 #include "SdlWindow.hpp"
 
