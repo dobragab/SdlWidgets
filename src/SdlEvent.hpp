@@ -6,7 +6,6 @@
 namespace Sdl
 {
 
-
 class Event
 {
     bool handled = false;
