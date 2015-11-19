@@ -106,6 +106,10 @@
 			<Option target="Debug" />
 			<Option target="Release" />
 		</Unit>
+		<Unit filename="src/SdlFont.cpp" />
+		<Unit filename="src/SdlFont.hpp" />
+		<Unit filename="src/SdlSurface.cpp" />
+		<Unit filename="src/SdlSurface.hpp" />
 		<Unit filename="src/SdlWidget.cpp">
 			<Option target="Debug" />
 			<Option target="Release" />
@@ -114,6 +118,7 @@
 			<Option target="Debug" />
 			<Option target="Release" />
 		</Unit>
+		<Unit filename="src/SdlWidgets.hpp" />
 		<Unit filename="src/SdlWindow.cpp">
 			<Option target="Debug" />
 			<Option target="Release" />
@@ -122,6 +127,16 @@
 			<Option target="Debug" />
 			<Option target="Release" />
 		</Unit>
+		<Unit filename="src/WidgetButton.cpp" />
+		<Unit filename="src/WidgetButton.hpp" />
+		<Unit filename="src/WidgetColorBox.cpp" />
+		<Unit filename="src/WidgetColorBox.hpp" />
+		<Unit filename="src/WidgetLabel.cpp" />
+		<Unit filename="src/WidgetLabel.hpp" />
+		<Unit filename="src/WidgetSlider.cpp">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="src/WidgetSlider.hpp" />
 		<Unit filename="src/main.cpp">
 			<Option target="Debug" />
 			<Option target="Release" />

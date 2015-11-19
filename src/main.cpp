@@ -1,9 +1,7 @@
 #include <cstdio>
 #include <sstream>
 
-#include "Sdl.hpp"
-#include "SdlWidget.hpp"
-#include "SdlWindow.hpp"
+#include "SdlWidgets.hpp"
 
 template<typename T>
 std::string ToString(T const& val)
