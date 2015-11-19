@@ -30,10 +30,10 @@ public:
 
     virtual void Paint(Surface& screen) override;
 
-    virtual void MouseClick(Surface& sender, MouseClickEvent& ev);
-    virtual void MouseMove (Surface& sender, MouseMoveEvent & ev) { }
-    virtual void KeyPress  (Surface& sender, KeyboardEvent  & ev) { }
-    virtual void TimerTick (Surface& sender, TimerEvent     & ev) { }
+    virtual void MouseClick(Surface& sender, MouseClickEvent& ev) override;
+    virtual void MouseMove (Surface& sender, MouseMoveEvent & ev) override { }
+    virtual void KeyPress  (Surface& sender, KeyboardEvent  & ev) override { }
+    virtual void TimerTick (Surface& sender, TimerEvent     & ev) override { }
 
     MouseClickedHandler MouseClicked = nullptr;
 };
