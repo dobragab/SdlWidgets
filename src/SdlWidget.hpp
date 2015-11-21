@@ -2,7 +2,7 @@
 #define SDLWIDGET_HPP_INCLUDED
 
 #include "Sdl.hpp"
-#include "SdlSurface.hpp"
+#include "SdlRenderer.hpp"
 #include "SdlFont.hpp"
 #include "SdlEvent.hpp"
 #include "Property.hpp"
@@ -57,12 +57,12 @@ public:
 
     virtual bool IsClicked(Point p);
 
-    virtual void MouseClick(Surface& sender, MouseClickEvent& ev) = 0;
-    virtual void MouseMove(Surface& sender, MouseMoveEvent& ev) = 0;
-    virtual void KeyPress(Surface& sender, KeyboardEvent& ev) = 0;
-    virtual void TimerTick(Surface& sender, TimerEvent& ev) = 0;
+    virtual void MouseClick(Renderer& sender, MouseClickEvent& ev) = 0;
+    virtual void MouseMove(Renderer& sender, MouseMoveEvent& ev) = 0;
+    virtual void KeyPress(Renderer& sender, KeyboardEvent& ev) = 0;
+    virtual void TimerTick(Renderer& sender, TimerEvent& ev) = 0;
 
-    virtual void Paint(Surface& screen);
+    virtual void Paint(Renderer& screen);
 
     virtual ~Widget() {}
 };

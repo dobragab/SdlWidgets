@@ -5,7 +5,7 @@
 namespace Sdl
 {
 
-void Button::MouseClick(Surface& sender, MouseClickEvent& ev)
+void Button::MouseClick(Renderer& sender, MouseClickEvent& ev)
 {
     if (!Visible || ev.button != SDL_BUTTON_LEFT || ev.IsDone())
         return;
@@ -31,7 +31,7 @@ void Button::MouseClick(Surface& sender, MouseClickEvent& ev)
 
 }
 
-void Button::Paint(Surface& screen)
+void Button::Paint(Renderer& screen)
 {
     if (!Visible)
         return;
@@ -51,7 +51,7 @@ void Button::Paint(Surface& screen)
     rectangleColor(screen, location.x, location.y, location.x+_size.w-1, location.y+_size.h-1, keretvilagos);
 
 
-    Surface textsurf = WindowFont.Render(text, gombfeliratszin, Font::Blended);
+    Renderer textsurf = WindowFont.Render(text, gombfeliratszin, Font::Blended);
 
     Rect sp;
     sp.x = location.x + (_size.w - textsurf.width ()) / 2;

@@ -5,7 +5,7 @@
 namespace Sdl
 {
 
-void ColorBox::Paint(Surface& screen)
+void ColorBox::Paint(Renderer& screen)
 {
     if (!Visible)
         return;

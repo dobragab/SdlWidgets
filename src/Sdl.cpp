@@ -36,8 +36,6 @@ void Init()
 #endif
 
     TTF_Init();
-    SDL_EnableUNICODE(true);
-    SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
 }
 
 }

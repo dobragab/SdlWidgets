@@ -12,7 +12,7 @@ void SetFont(Font&& f)
     WindowFont = std::move(f);
 }
 
-void Widget::Paint(Surface& screen)
+void Widget::Paint(Renderer& screen)
 {
     int stripes = 20;
 

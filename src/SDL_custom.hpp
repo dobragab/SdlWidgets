@@ -1,12 +1,17 @@
 #ifndef SDL_CUSTOM_H_INCLUDED
 #define SDL_CUSTOM_H_INCLUDED
 
-#include <SDL.h>
-#include <SDL_ttf.h>
-#include <SDL_timer.h>
-#include <SDL_image.h>
-#include <SDL_mixer.h>
-#include <SDL_gfxPrimitives.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_timer.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_mixer.h>
+#include <SDL2/SDL_surface.h>
+#include <SDL2_gfxPrimitives.h>
+
+#if SDL_MAJOR_VERSION != 2
+#error SDL version is old!
+#endif
 
 enum
 {

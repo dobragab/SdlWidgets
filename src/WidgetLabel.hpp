@@ -25,12 +25,12 @@ public:
         text{text}
     { }
 
-    virtual void Paint(Surface& screen) override;
+    virtual void Paint(Renderer& screen) override;
 
-    virtual void MouseClick(Surface& sender, MouseClickEvent& ev) override { }
-    virtual void MouseMove (Surface& sender, MouseMoveEvent & ev) override { }
-    virtual void KeyPress  (Surface& sender, KeyboardEvent  & ev) override { }
-    virtual void TimerTick (Surface& sender, TimerEvent     & ev) override { }
+    virtual void MouseClick(Renderer& sender, MouseClickEvent& ev) override { }
+    virtual void MouseMove (Renderer& sender, MouseMoveEvent & ev) override { }
+    virtual void KeyPress  (Renderer& sender, KeyboardEvent  & ev) override { }
+    virtual void TimerTick (Renderer& sender, TimerEvent     & ev) override { }
 
 };
 

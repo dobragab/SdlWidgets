@@ -23,12 +23,13 @@ class Window
         { }
     };
 
-    Surface screen;
+    SDL_Window * window = nullptr;
+    Renderer screen;
 
     std::vector<Item> Items;
 
 public:
-    Window(int16_t width, int16_t height, const char * caption = nullptr);
+    Window(int16_t width, int16_t height, const char * caption = "");
 
     ~Window();
 

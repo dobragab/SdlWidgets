@@ -9,9 +9,9 @@ MAKEDIR  = mkdir -p
 
 WARNINGS = -Wall -Wdeprecated -pedantic -Wfloat-equal -Wunreachable-code -Wnon-virtual-dtor
 
-SDL_CONFIG = `sdl-config --cflags`
+SDL_CONFIG = `sdl2-config --cflags`
 
-SDL_LIBS = `sdl-config --libs` -lSDL_gfx -lSDL_ttf -lSDL_image -lSDL_mixer
+SDL_LIBS = `sdl2-config --libs` -lSDL2_gfx -lSDL2_ttf -lSDL2_image -lSDL2_mixer
 
 
 CC = gcc

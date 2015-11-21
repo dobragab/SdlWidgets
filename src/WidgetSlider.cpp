@@ -5,7 +5,7 @@
 namespace Sdl
 {
 
-void Slider::Paint(Surface& screen)
+void Slider::Paint(Renderer& screen)
 {
     if (!Visible)
         return;
@@ -15,7 +15,7 @@ void Slider::Paint(Surface& screen)
     boxColor(screen, location.x, location.y, location.x+((_size.w-1)*(value - minvalue)/(maxvalue - minvalue)), location.y+_size.h-1, (uint32_t)color);
 }
 
-void Slider::MouseClick(Surface& sender, MouseClickEvent& ev)
+void Slider::MouseClick(Renderer& sender, MouseClickEvent& ev)
 {
     if (!Visible || ev.button != SDL_BUTTON_LEFT || ev.IsDone())
         return;
@@ -37,7 +37,7 @@ void Slider::MouseClick(Surface& sender, MouseClickEvent& ev)
     }
 }
 
-void Slider::MouseMove (Surface& sender, MouseMoveEvent & ev)
+void Slider::MouseMove (Renderer& sender, MouseMoveEvent & ev)
 {
     if (!down || ev.IsDone())
         return;

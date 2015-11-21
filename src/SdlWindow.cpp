@@ -8,17 +8,22 @@ namespace Sdl
 {
 
 Window::Window(int16_t width, int16_t height, const char * caption) :
-    screen{SDL_SetVideoMode(width, height, 0, SDL_HWSURFACE|SDL_DOUBLEBUF)}
-{
-    if(caption)
-        SDL_WM_SetCaption(caption, caption);
-}
+    window{SDL_CreateWindow(caption,
+                            SDL_WINDOWPOS_CENTERED,
+                            SDL_WINDOWPOS_CENTERED,
+                            width,
+                            height,
+                            SDL_WINDOW_OPENGL)},
+    screen{SDL_CreateRenderer(window, -1, 0)}
+{ }
 
 Window::~Window()
 {
     for(unsigned i = 0; i < Items.size(); ++i)
         if(Items[i].owner)
             delete Items[i].w;
+
+    SDL_DestroyWindow(window);
 }
 
 void Window::Redraw()
@@ -74,7 +79,7 @@ void Window::ShowDialog()
 
             case SDL_KEYDOWN:
             {
-                KeyboardEvent e(ev.key.keysym.mod, ev.key.keysym.sym, ev.key.keysym.unicode);
+                KeyboardEvent e(ev.key.keysym.mod, ev.key.keysym.sym);
                 for (int i = Items.size() - 1; i >= 0; --i)
                     Items[i].w->KeyPress(screen, e);
 

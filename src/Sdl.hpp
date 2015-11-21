@@ -6,8 +6,10 @@
 #include <string>
 
 struct SDL_Rect;
-struct SDL_Surface;
+struct SDL_Window;
+struct SDL_Renderer;
 struct SDL_PixelFormat;
+struct SDL_Texture;
 typedef struct _TTF_Font TTF_Font;
 
 namespace Sdl {
@@ -58,6 +60,11 @@ struct Rect
     operator SDL_Rect*()  // FUCK YOU SDL_RECT
     {
         return reinterpret_cast<SDL_Rect*>(this);
+    }
+
+    operator const SDL_Rect*() const  // FUCK YOU SDL_RECT
+    {
+        return reinterpret_cast<const SDL_Rect*>(this);
     }
 };
 

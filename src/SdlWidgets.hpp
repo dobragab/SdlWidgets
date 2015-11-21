@@ -3,6 +3,7 @@
 
 #include "Sdl.hpp"
 #include "SdlSurface.hpp"
+#include "SdlTexture.hpp"
 #include "SdlFont.hpp"
 #include "SdlEvent.hpp"
 #include "SdlTimer.hpp"

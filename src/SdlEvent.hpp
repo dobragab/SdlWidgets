@@ -25,12 +25,10 @@ struct KeyboardEvent : public Event
 {
     uint16_t modifiers; // SDLMod
     uint16_t keysym;    // SDLKey
-    uint16_t unicode;
 
-    KeyboardEvent(uint16_t modifiers, uint16_t keysym, uint16_t unicode) :
+    KeyboardEvent(uint16_t modifiers, uint16_t keysym) :
         modifiers{modifiers},
-        keysym{keysym},
-        unicode{unicode}
+        keysym{keysym}
     { }
 };
 

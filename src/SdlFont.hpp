@@ -2,7 +2,7 @@
 #define SDLFONT_HPP_INCLUDED
 
 #include "Sdl.hpp"
-#include "SdlSurface.hpp"
+#include "SdlRenderer.hpp"
 
 namespace Sdl
 {
@@ -34,7 +34,7 @@ public:
 
     ~Font();
 
-    Surface Render(std::wstring text, Color color, RenderMode mode = Blended, Color bgnd_color = Color{}) const;
+    Texture Render(std::wstring text, Color color, RenderMode mode = Blended, Color bgnd_color = Color{}) const;
 
 };
 

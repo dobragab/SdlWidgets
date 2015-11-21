@@ -36,9 +36,9 @@ Font::~Font()
 
 static constexpr bool wunicode = (sizeof(wchar_t) == sizeof(uint16_t));
 
-Surface Font::Render(std::wstring text, Color color, Font::RenderMode mode, Color bgnd_color) const
+Texture Font::Render(std::wstring text, Color color, Font::RenderMode mode, Color bgnd_color) const
 {
-    SDL_Surface * surf = nullptr;
+    SDL_Screen * surf = nullptr;
     SDL_Color c = ConvertColor(color);
 
     const uint16_t * utext = nullptr;
@@ -77,7 +77,10 @@ Surface Font::Render(std::wstring text, Color color, Font::RenderMode mode, Colo
     if (!surf)
         throw Sdl::exception();
 
-    return Surface{surf};
+    SDL_Texture * txt;
+    SDL_CreateTextureFromSurface()
+
+    return Texture{surf};
 }
 
 }

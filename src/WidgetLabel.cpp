@@ -5,16 +5,16 @@
 namespace Sdl
 {
 
-void Label::Paint(Surface& screen)
+void Label::Paint(Renderer& screen)
 {
     if (!Visible)
         return;
 
-    Surface textsurf = WindowFont.Render(text, gombfeliratszin, Font::Blended);
+    Texture textsurf = WindowFont.Render(text, gombfeliratszin, Font::Blended);
 
-    Rect sp{location.x, location.y};
+    Rect sp{location.x, location.y, textsurf->width(), textsurf->height()};
 
-    screen.Blit(textsurf, sp);
+    screen.Blit(textsurf, sp, true);
 }
 
 }

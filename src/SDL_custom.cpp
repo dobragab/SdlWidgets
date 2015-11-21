@@ -12,7 +12,7 @@ SDL_Color ConvertColor(Color c)
     result.r = c.r;
     result.g = c.g;
     result.b = c.b;
-    result.unused = c.a;
+    result.a = c.a;
 
     return result;
 }
