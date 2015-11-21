@@ -16,6 +16,7 @@ void Widget::Paint(Renderer& screen)
 {
     int stripes = 20;
 
+
     roundedRectangleColor(screen, location.x-1, location.y-1, location.x+_size.w, location.y+_size.h, 2, keret);
     boxColor(screen, location.x, location.y, location.x+_size.w-1, location.y+_size.h-1, alapszin);
 

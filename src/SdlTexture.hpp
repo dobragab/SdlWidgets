@@ -10,7 +10,7 @@ class Texture
 
   public:
 
-    Texture(SDL_Texture * txt);
+    explicit Texture(SDL_Texture * txt);
     Texture(Texture&& old);
     Texture& operator=(Texture&& old);
 
@@ -19,10 +19,12 @@ class Texture
 
     ~Texture();
 
-    explicit operator SDL_Texture*()
+    explicit operator SDL_Texture*() const
     {
         return txt;
     }
+
+    Size size() const;
 };
 
 //Texture LoadImage(std::string filename);

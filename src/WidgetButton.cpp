@@ -51,13 +51,17 @@ void Button::Paint(Renderer& screen)
     rectangleColor(screen, location.x, location.y, location.x+_size.w-1, location.y+_size.h-1, keretvilagos);
 
 
-    Renderer textsurf = WindowFont.Render(text, gombfeliratszin, Font::Blended);
+    Texture textsurf = WindowFont.Render(screen, text, gombfeliratszin, Font::Blended);
 
+    Size textsize = textsurf.size();
     Rect sp;
-    sp.x = location.x + (_size.w - textsurf.width ()) / 2;
-    sp.y = location.y + (_size.h - textsurf.height()) / 2;
 
-    screen.Blit(textsurf, sp);
+    sp.x = location.x + (_size.w - textsize.w) / 2;
+    sp.y = location.y + (_size.h - textsize.h) / 2;
+    sp.w = textsize.w;
+    sp.h = textsize.h;
+
+    screen.Blit(textsurf, sp, true);
 }
 
 }

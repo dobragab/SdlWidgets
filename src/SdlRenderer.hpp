@@ -2,6 +2,7 @@
 #define SDLRENDERER_HPP_INCLUDED
 
 #include "Sdl.hpp"
+#include "SdlTexture.hpp"
 
 namespace Sdl
 {
@@ -14,7 +15,7 @@ protected:
 public:
 
     Renderer();
-    Renderer(SDL_Renderer * renderer);
+    explicit Renderer(SDL_Renderer * renderer);
 
     Renderer(const Renderer& old) = delete;
     Renderer& operator=(const Renderer& old) = delete;
@@ -30,10 +31,6 @@ public:
 
     void Fill(Rect area, Color c);
     void Fill(Color c);
-
-    int16_t width() const;
-    int16_t height() const;
-    SDL_PixelFormat * format() const;
 
     operator SDL_Renderer*();
 

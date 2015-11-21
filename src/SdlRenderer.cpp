@@ -67,31 +67,20 @@ void Renderer::Fill(Rect area, Color c)
 {
     SDL_SetRenderDrawColor(renderer, c.r, c.g, c.b, c.a);
     SDL_RenderFillRect(renderer, area);
-    SDL_RenderPresent();
+    SDL_RenderPresent(renderer);
 }
 
 void Renderer::Fill(Color c)
 {
     SDL_SetRenderDrawColor(renderer, c.r, c.g, c.b, c.a);
     SDL_RenderClear(renderer);
-    SDL_RenderPresent();
+    SDL_RenderPresent(renderer);
 }
 
 void Renderer::Flip()
 {
-    int result = SDL_RenderPresent(renderer);
-
-    if(result != 0)
-        throw Sdl::exception();
+    SDL_RenderPresent(renderer);
 }
-int16_t Renderer::width() const
-{   return renderer->w; }
-
-int16_t Renderer::height() const
-{   return renderer->h; }
-
-SDL_PixelFormat * Renderer::format() const
-{   return renderer->format; }
 
 Renderer::operator SDL_Renderer*()
 {   return renderer; }

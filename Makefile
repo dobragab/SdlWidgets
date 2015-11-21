@@ -19,7 +19,7 @@ CFLAGS = -std=c99 -O3 $(WARNINGS) $(SDL_CONFIG)
 
 CXX = g++
 CXXFLAGS = -std=c++11 -O3 $(WARNINGS) $(SDL_CONFIG)
-LDFLAGS = -s $(SDL_LIBS) -lm
+LDFLAGS = $(SDL_LIBS) -lm -lz
 
 
 SOURCES := $(wildcard $(SRCDIR)/*.c) $(wildcard $(SRCDIR)/*.cpp) $(wildcard $(SRCDIR)/*.cc) $(wildcard $(SRCDIR)/*.cxx)
@@ -38,8 +38,8 @@ all: dirs $(BINDIR)/$(BINARY)
 Linux: all
 
 LinuxDebug: all
-LinuxDebug: CFLAGS += -DDEBUG -g
-LinuxDebug: CXXFLAGS += -DDEBUG -g
+LinuxDebug: CFLAGS += -DDEBUG -g -O0
+LinuxDebug: CXXFLAGS += -DDEBUG -g -O0
 LinuxDebug: LDFLAGS += -g
 
 clean:
@@ -52,7 +52,7 @@ dirs:
 
 
 $(BINDIR)/$(BINARY): $(OBJECTS)
-	$(CXX) $(LDFLAGS) $(OBJECTS) -o $@
+	$(CXX) $(OBJECTS) $(LDFLAGS) -o $@
 
 $(OBJDIR)/%.o : $(SRCDIR)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@

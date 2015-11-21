@@ -10,9 +10,10 @@ void Label::Paint(Renderer& screen)
     if (!Visible)
         return;
 
-    Texture textsurf = WindowFont.Render(text, gombfeliratszin, Font::Blended);
+    Texture textsurf = WindowFont.Render(screen, text, gombfeliratszin, Font::Blended);
 
-    Rect sp{location.x, location.y, textsurf->width(), textsurf->height()};
+    Size textsize = textsurf.size();
+    Rect sp{location.x, location.y, textsize.w, textsize.h};
 
     screen.Blit(textsurf, sp, true);
 }

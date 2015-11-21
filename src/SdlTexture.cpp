@@ -35,9 +35,23 @@ Texture::~Texture()
 }
 
 
+Size Texture::size() const
+{
+    int w, h;
+    int access;
+    uint32_t format;
+
+    int result = SDL_QueryTexture(txt, &format, &access, &w, &h);
+
+    if(result != 0)
+        throw Sdl::exception();
+
+    return Size(w, h);
+}
+
 //Texture LoadImage(std::string filename)
 //{
-//    return Texture{SDL_LoadTexture(filename.c_str())};
+//    return Texture{IMG_LoadTexture(renderer, filename.c_str())};
 //}
 
 }
