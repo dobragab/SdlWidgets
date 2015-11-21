@@ -140,7 +140,8 @@
 		<Unit filename="src/WidgetLabel.cpp" />
 		<Unit filename="src/WidgetLabel.hpp" />
 		<Unit filename="src/WidgetSlider.cpp">
-			<Option target="&lt;{~None~}&gt;" />
+			<Option target="Debug" />
+			<Option target="Release" />
 		</Unit>
 		<Unit filename="src/WidgetSlider.hpp" />
 		<Unit filename="src/main.cpp">
