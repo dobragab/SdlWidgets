@@ -65,16 +65,16 @@
 		</Compiler>
 		<Linker>
 			<Add library="mingw32" />
-			<Add library="SDLmain" />
-			<Add library="SDL.dll" />
+			<Add library="SDL2main" />
+			<Add library="SDL2" />
 			<Add library="user32" />
 			<Add library="gdi32" />
 			<Add library="winmm" />
 			<Add library="dxguid" />
-			<Add library="SDL_gfx" />
-			<Add library="SDL_ttf" />
-			<Add library="SDL_image" />
-			<Add library="SDL_mixer" />
+			<Add library="SDL2_gfx" />
+			<Add library="SDL2_ttf" />
+			<Add library="SDL2_image" />
+			<Add library="SDL2_mixer" />
 			<Add directory="$(#sdl.lib)" />
 		</Linker>
 		<Unit filename="Makefile" />

@@ -106,9 +106,6 @@ void Window::ShowDialog()
         if (to_redraw)
         {
             Redraw();
-#ifdef DEBUG
-            puts("Had to redraw...");
-#endif
         }
 
         screen.Flip();

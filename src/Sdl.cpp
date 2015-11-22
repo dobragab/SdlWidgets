@@ -1,3 +1,5 @@
+#include <cstdio>
+
 #include "Sdl.hpp"
 
 #include "SDL_custom.hpp"
