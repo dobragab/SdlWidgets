@@ -21,15 +21,21 @@ CXX = g++
 CXXFLAGS = -std=c++11 -O3 $(WARNINGS) $(SDL_CONFIG)
 LDFLAGS = $(SDL_LIBS) -lm -lz
 
+HEADERS := $(wildcard $(SRCDIR)/*.h) $(wildcard $(SRCDIR)/*.hpp) $(wildcard $(SRCDIR)/*.hh) $(wildcard $(SRCDIR)/*.hxx)
 
-SOURCES := $(wildcard $(SRCDIR)/*.c) $(wildcard $(SRCDIR)/*.cpp) $(wildcard $(SRCDIR)/*.cc) $(wildcard $(SRCDIR)/*.cxx)
-INCLUDES := $(wildcard $(SRCDIR)/*.h) $(wildcard $(SRCDIR)/*.hpp) $(wildcard $(SRCDIR)/*.hh) $(wildcard $(SRCDIR)/*.hxx)
+SOURCES_C := $(wildcard $(SRCDIR)/*.c)
+SOURCES_CPP := $(wildcard $(SRCDIR)/*.cpp)
+SOURCES_CC := $(wildcard $(SRCDIR)/*.cc)
+SOURCES_CXX := $(wildcard $(SRCDIR)/*.cxx)
 
-OBJECTS_C := $(SOURCES:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
-OBJECTS_CPP := $(OBJECTS_C:$(SRCDIR)/%.cpp=$(OBJDIR)/%.o)
-OBJECTS_CC := $(OBJECTS_CPP:$(SRCDIR)/%.cc=$(OBJDIR)/%.o)
-OBJECTS := $(OBJECTS_CC:$(SRCDIR)/%.cxx=$(OBJDIR)/%.o)
+SOURCES = $(SOURCES_C) $(SOURCES_CPP) $(SOURCES_CC) $(SOURCES_CXX)
 
+OBJECTS_C   := $(SOURCES_C:$(SRCDIR)/%.c=$(OBJDIR)/%.c.o)
+OBJECTS_CPP := $(SOURCES_CPP:$(SRCDIR)/%.cpp=$(OBJDIR)/%.cpp.o)
+OBJECTS_CC  := $(SOURCES_CC:$(SRCDIR)/%.cc=$(OBJDIR)/%.cc.o)
+OBJECTS_CXX := $(SOURCES_CXX:$(SRCDIR)/%.cxx=$(OBJDIR)/%.cxx.o)
+
+OBJECTS = $(OBJECTS_C) $(OBJECTS_CPP) $(OBJECTS_CC) $(OBJECTS_CXX)
 
 .PHONY: clean all dirs Linux LinuxDebug
 
@@ -43,25 +49,26 @@ LinuxDebug: CXXFLAGS += -DDEBUG -g -O0
 LinuxDebug: LDFLAGS += -g
 
 clean:
-	$(RM) $(OBJDIR)/*.o
-	$(RM) $(BINDIR)/$(BINARY)
+	@$(RM) $(OBJDIR)/*.o
+	@$(RM) $(BINDIR)/$(BINARY)
+	@echo Cleaned successfully.
 
 dirs:
-	$(MAKEDIR) $(BINDIR)
-	$(MAKEDIR) $(OBJDIR)
+	@$(MAKEDIR) $(BINDIR)
+	@$(MAKEDIR) $(OBJDIR)
 
 
 $(BINDIR)/$(BINARY): $(OBJECTS)
 	$(CXX) $(OBJECTS) $(LDFLAGS) -o $@
 
-$(OBJDIR)/%.o : $(SRCDIR)/%.c
+$(OBJDIR)/%.c.o : $(SRCDIR)/%.c $(HEADERS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(OBJDIR)/%.o : $(SRCDIR)/%.cpp
+$(OBJDIR)/%.cpp.o : $(SRCDIR)/%.cpp $(HEADERS)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-$(OBJDIR)/%.o : $(SRCDIR)/%.cc
+$(OBJDIR)/%.cc.o : $(SRCDIR)/%.cc $(HEADERS)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-$(OBJDIR)/%.o : $(SRCDIR)/%.cxx
+$(OBJDIR)/%.cxx.o : $(SRCDIR)/%.cxx $(HEADERS)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
