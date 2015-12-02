@@ -21,14 +21,29 @@ class Slider : public Widget
 
     bool down = false;
 
-
-    GETTERSETTER(minvalue, int, Minimum)
-    GETTERSETTER(maxvalue, int, Maximum)
     GETTERSETTER(color, Color, BoxColor)
 
+    GETTER(minvalue, int, Minimum)
+    GETTER(maxvalue, int, Maximum)
     GETTER(value, int, Value)
+
+    void setMaximum(int const& val)
+    {
+        maxvalue = val;
+        if (value < val)
+            Value = val;
+    }
+    void setMinimum(int const& val)
+    {
+        minvalue = val;
+        if (value > val)
+            Value = val;
+    }
     void setValue(int const& val)
     {
+        if (val == value || val > maxvalue || val < minvalue)
+            return;
+
         int oldval = value;
         value = val;
         if (ValueChanged)
