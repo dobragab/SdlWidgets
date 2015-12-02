@@ -40,7 +40,7 @@ public:
     virtual void KeyPress  (KeyboardEvent  & ev) override { }
     virtual void TimerTick (TimerEvent     & ev) override;
 
-    MouseClickedHandler MouseClicked = nullptr;
+    MouseClickEvent::Handler MouseClicked = nullptr;
 };
 
 }

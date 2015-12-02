@@ -38,7 +38,7 @@ void button2_MouseClicked(Sdl::Widget& sender, Sdl::MouseClickEvent& ev)
     button1.Visible = !button1.Visible;
 }
 
-void slider_ValueChanged(Sdl::Widget& sender)
+void slider_ValueChanged(Sdl::Widget& sender, Sdl::ValueChangedEvent<int>& ev)
 {
     Sdl::Slider& slider = dynamic_cast<Sdl::Slider&>(sender);
     label2.Text = Tou16string(slider.Value);

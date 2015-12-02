@@ -29,9 +29,13 @@ class Slider : public Widget
     GETTER(value, int, Value)
     void setValue(int const& val)
     {
+        int oldval = value;
         value = val;
         if (ValueChanged)
-            ValueChanged(*this);
+        {
+            ValueChangedEvent<int> ev{oldval};
+            ValueChanged(*this, ev);
+        }
     }
 
     void setval(int16_t x);
@@ -46,7 +50,7 @@ public:
     PROPERTY(Slider, int, Maximum);
     PROPERTY(Slider, int, Value);
 
-    ValueChangedHandler ValueChanged = nullptr;
+    typename ValueChangedEvent<int>::Handler ValueChanged = nullptr;
 
     virtual void Paint(Renderer& screen) override;
 

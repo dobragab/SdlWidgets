@@ -21,12 +21,6 @@ uint32_t const feliratszin = 0x00C0F0FF;
 extern Font WindowFont;
 void SetFont(Font&& f);
 
-class Widget;
-using MouseClickedHandler = void (*)(Widget& sender, MouseClickEvent& ev);
-using MouseMovedHandler   = void (*)(Widget& sender, MouseMoveEvent& ev);
-using KeyPressHandler     = void (*)(Widget& sender, KeyboardEvent& ev);
-using ValueChangedHandler = void (*)(Widget& sender);
-
 class Widget
 {
 protected:
