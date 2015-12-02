@@ -104,11 +104,7 @@ void Window::ShowDialog()
         }
 
         if (to_redraw)
-        {
             Redraw();
-        }
-
-        screen.Flip();
     }
 }
 

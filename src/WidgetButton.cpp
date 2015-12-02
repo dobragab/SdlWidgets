@@ -68,4 +68,10 @@ void Button::Paint(Renderer& screen)
     screen.Blit(textsurf, sp, true);
 }
 
+void Button::TimerTick (Renderer& sender, TimerEvent     & ev)
+{
+    Visible = !Visible;
+    ev.Done();
+}
+
 }

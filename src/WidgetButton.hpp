@@ -17,6 +17,8 @@ class Button : public Widget
 
     bool down = false;
 
+    Timer timer;
+
     GETTERSETTER(text, std::wstring, Text)
 
 public:
@@ -25,15 +27,18 @@ public:
 
     Button(std::wstring text = L"Button") :
         Widget{defloc, defsize},
-        text{text}
-    { }
+        text{text},
+        timer{500, this}
+    {
+        timer.Start();
+    }
 
     virtual void Paint(Renderer& screen) override;
 
     virtual void MouseClick(Renderer& sender, MouseClickEvent& ev) override;
     virtual void MouseMove (Renderer& sender, MouseMoveEvent & ev) override { }
     virtual void KeyPress  (Renderer& sender, KeyboardEvent  & ev) override { }
-    virtual void TimerTick (Renderer& sender, TimerEvent     & ev) override { }
+    virtual void TimerTick (Renderer& sender, TimerEvent     & ev) override;
 
     MouseClickedHandler MouseClicked = nullptr;
 };

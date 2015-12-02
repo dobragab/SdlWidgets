@@ -6,35 +6,32 @@
 namespace Sdl
 {
 
-typedef struct _SDL_TimerID *SDL_TimerID;
-typedef uint32_t (*TimerCallback)(uint32_t interval, void *param);
+typedef int SDL_TimerID;
+
+uint32_t TimerCallback(uint32_t interval, void *param);
 
 class Timer
 {
     SDL_TimerID id;
-    void * param;
     uint32_t interval;
-    TimerCallback callback;
+    void * param;
 
 public:
-    Timer(uint32_t interval, TimerCallback callback, void * param = nullptr) :
-        id{nullptr},
-        param{param},
-        interval{interval},
-        callback{callback}
-    { }
+    Timer(uint32_t interval, void * param);
+
+    Timer(Timer&& old);
+    Timer& operator=(Timer&& old);
+
+    Timer(const Timer& old) = delete;
+    Timer& operator=(const Timer& old) = delete;
+
+    ~Timer();
 
     void Start();
-
     void Finish();
 
-
+    bool IsRunning();
 };
-
-
-
-
-
 
 }
 
