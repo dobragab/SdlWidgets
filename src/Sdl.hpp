@@ -46,23 +46,23 @@ struct Size
 struct Rect
 {
     // DO NOT CHANGE, KEEP MEMORY LAYOUT OF SDL_Rect!
-    int16_t x, y;
-    uint16_t w, h;
+    int x, y;
+    int w, h;
 
     Rect() :
         x(0), y(0), w(0), h(0)
     { }
 
-    Rect(int16_t x, int16_t y, uint16_t w = 0, uint16_t h = 0) :
+    Rect(int x, int y, int w = 0, int h = 0) :
         x(x), y(y), w(w), h(h)
     { }
 
-    operator SDL_Rect*()  // FUCK YOU SDL_RECT
+    operator SDL_Rect*()  // FUCK YOU SDL_RECT. TWICE.
     {
         return reinterpret_cast<SDL_Rect*>(this);
     }
 
-    operator const SDL_Rect*() const  // FUCK YOU SDL_RECT
+    operator const SDL_Rect*() const  // FUCK YOU SDL_RECT. TWICE.
     {
         return reinterpret_cast<const SDL_Rect*>(this);
     }

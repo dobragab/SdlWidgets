@@ -55,9 +55,9 @@ void Renderer::Blit(Texture const& src, Rect rect, bool dst)
 {
     int result;
     if (dst)
-        result = SDL_RenderCopy(renderer, (SDL_Texture*)src, rect, nullptr);
-    else
         result = SDL_RenderCopy(renderer, (SDL_Texture*)src, nullptr, rect);
+    else
+        result = SDL_RenderCopy(renderer, (SDL_Texture*)src, rect, nullptr);
 
     if(result != 0)
         throw Sdl::exception();
