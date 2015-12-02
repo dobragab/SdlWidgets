@@ -34,23 +34,12 @@ Font::~Font()
     TTF_CloseFont(font);
 }
 
-static constexpr bool wunicode = (sizeof(wchar_t) == sizeof(uint16_t));
-
-Texture Font::Render(Renderer& renderer, std::wstring text, Color color, Font::RenderMode mode, Color bgnd_color) const
+Texture Font::Render(Renderer& renderer, std::u16string text, Color color, Font::RenderMode mode, Color bgnd_color) const
 {
     SDL_Surface * surf = nullptr;
     SDL_Color c = ConvertColor(color);
 
-    const uint16_t * utext = nullptr;
-    std::basic_string<uint16_t> * ustr = nullptr;
-
-    if(wunicode)
-        utext = reinterpret_cast<const uint16_t*>(text.c_str());
-    else
-    {
-        ustr = new std::basic_string<uint16_t>{text.begin(), text.end()};
-        utext = ustr->c_str();
-    }
+    const uint16_t * utext = reinterpret_cast<const uint16_t*>(text.c_str());
 
     switch(mode)
     {
@@ -70,9 +59,6 @@ Texture Font::Render(Renderer& renderer, std::wstring text, Color color, Font::R
         default:
             break;
     }
-
-    if (!wunicode)
-        free(ustr);
 
     if (!surf)
         throw Sdl::exception();

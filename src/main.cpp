@@ -12,11 +12,12 @@ std::string ToString(T const& val)
 }
 
 template<typename T>
-std::wstring ToWString(T const& val)
+std::u16string Tou16string(T const& val)
 {
-    std::wostringstream oss;
+    std::wstringstream oss;
     oss << val;
-    return oss.str();
+    std::wstring ws = oss.str();
+    return std::u16string{ws.begin(), ws.end()};
 }
 
 
@@ -40,7 +41,7 @@ void button2_MouseClicked(Sdl::Widget& sender, Sdl::MouseClickEvent& ev)
 void slider_ValueChanged(Sdl::Widget& sender)
 {
     Sdl::Slider& slider = dynamic_cast<Sdl::Slider&>(sender);
-    label2.Text = ToWString(slider.Value);
+    label2.Text = Tou16string(slider.Value);
     box.DisplayedColor = Sdl::Color(slider1.Value, 0, 0 );
 }
 
@@ -53,12 +54,12 @@ try
     Sdl::SetFont(Sdl::Font{"micross.ttf", 16});
     Sdl::Window screen(640, 480, "Sdl::Trial");
 
-    button1.Text = L"Gomb";
+    button1.Text = u"Gomb";
     button1.size = Sdl::Size(75, 40);
     button1.Location = Sdl::Point(100, 100);
     button1.MouseClicked = button1_MouseClicked;
 
-    button2.Text = L"Csere";
+    button2.Text = u"Csere";
     button2.size = Sdl::Size(75, 40);
     button2.Location = Sdl::Point(150, 100);
     button2.MouseClicked = button2_MouseClicked;
@@ -69,10 +70,10 @@ try
     slider1.Maximum = 255;
     slider1.ValueChanged = slider_ValueChanged;
 
-    label1.Text = L"Árvíztűrő tükörfúrógép";
+    label1.Text = u"Árvíztűrő tükörfúrógép";
     label1.Location = Sdl::Point(100, 80);
 
-    label2.Text = L" ";
+    label2.Text = u" ";
     label2.Location = Sdl::Point(210, 150);
 
     box.Location = Sdl::Point(100, 250);

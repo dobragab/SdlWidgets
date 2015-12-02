@@ -34,7 +34,7 @@ public:
 
     ~Font();
 
-    Texture Render(Renderer& renderer, std::wstring text, Color color, Font::RenderMode mode, Color bgnd_color = Color{}) const;
+    Texture Render(Renderer& renderer, std::u16string text, Color color, Font::RenderMode mode, Color bgnd_color = Color{}) const;
 
 };
 
