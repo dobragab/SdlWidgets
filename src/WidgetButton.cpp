@@ -39,29 +39,29 @@ void Button::Paint(Renderer& screen)
     int stripes = 20;
 
     Color ckeret{keret};
-    roundedRectangleRGBA((SDL_Renderer*)screen, location.x-1, location.y-1, location.x+_size.w, location.y+_size.h, 2, ckeret.r, ckeret.g, ckeret.b, ckeret.a);
+    roundedRectangleRGBA((SDL_Renderer*)screen, location.x-1, location.y-1, location.x+size.w, location.y+size.h, 2, ckeret.r, ckeret.g, ckeret.b, ckeret.a);
 
     Color calapszin{alapszin};
-    boxRGBA((SDL_Renderer*)screen, location.x, location.y, location.x+_size.w-1, location.y+_size.h-1, calapszin.r, calapszin.g, calapszin.b, calapszin.a);
+    boxRGBA((SDL_Renderer*)screen, location.x, location.y, location.x+size.w-1, location.y+size.h-1, calapszin.r, calapszin.g, calapszin.b, calapszin.a);
 
     if(down)
         for (int y=0; y<stripes; ++y)
-            boxRGBA((SDL_Renderer*)screen, location.x, location.y+y*_size.h/stripes, location.x+_size.w-1, location.y+(y+1)*_size.h/stripes-1, 255, 255, 255, (y)*3);
+            boxRGBA((SDL_Renderer*)screen, location.x, location.y+y*size.h/stripes, location.x+size.w-1, location.y+(y+1)*size.h/stripes-1, 255, 255, 255, (y)*3);
     else
         for (int y=0; y<stripes; ++y)
-            boxRGBA((SDL_Renderer*)screen, location.x, location.y+y*_size.h/stripes, location.x+_size.w-1, location.y+(y+1)*_size.h/stripes-1, 255, 255, 255, (stripes-1-y)*3);
+            boxRGBA((SDL_Renderer*)screen, location.x, location.y+y*size.h/stripes, location.x+size.w-1, location.y+(y+1)*size.h/stripes-1, 255, 255, 255, (stripes-1-y)*3);
 
     Color ckeretv{keretvilagos};
-    rectangleRGBA((SDL_Renderer*)screen, location.x, location.y, location.x+_size.w, location.y+_size.h, ckeretv.r, ckeretv.g, ckeretv.b, ckeretv.a);
+    rectangleRGBA((SDL_Renderer*)screen, location.x, location.y, location.x+size.w, location.y+size.h, ckeretv.r, ckeretv.g, ckeretv.b, ckeretv.a);
 
 
     Texture textsurf = WindowFont.Render(screen, text, (Color)gombfeliratszin, Font::Blended);
 
-    Size textsize = textsurf.size();
+    Dimension textsize = textsurf.size();
     Rect sp;
 
-    sp.x = location.x + (_size.w - textsize.w) / 2;
-    sp.y = location.y + (_size.h - textsize.h) / 2;
+    sp.x = location.x + (size.w - textsize.w) / 2;
+    sp.y = location.y + (size.h - textsize.h) / 2;
     sp.w = textsize.w;
     sp.h = textsize.h;
 

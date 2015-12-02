@@ -11,7 +11,7 @@ namespace Sdl
 
 class Label : public Widget
 {
-    static Size defsize;
+    static Dimension defsize;
 
     std::u16string text;
     GETTERSETTER(text, std::u16string, Text)

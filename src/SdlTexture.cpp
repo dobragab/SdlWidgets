@@ -35,7 +35,7 @@ Texture::~Texture()
 }
 
 
-Size Texture::size() const
+Dimension Texture::size() const
 {
     int w, h;
     int access;
@@ -46,7 +46,7 @@ Size Texture::size() const
     if(result != 0)
         throw Sdl::exception();
 
-    return Size(w, h);
+    return Dimension(w, h);
 }
 
 //Texture LoadImage(std::string filename)

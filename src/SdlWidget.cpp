@@ -17,30 +17,30 @@ void Widget::Paint(Renderer& screen)
     int stripes = 20;
 
     Color ckeret{keret};
-    roundedRectangleRGBA((SDL_Renderer*)screen, location.x-1, location.y-1, location.x+_size.w, location.y+_size.h, 2, ckeret.r, ckeret.g, ckeret.b, ckeret.a);
+    roundedRectangleRGBA((SDL_Renderer*)screen, location.x-1, location.y-1, location.x+size.w, location.y+size.h, 2, ckeret.r, ckeret.g, ckeret.b, ckeret.a);
 
     Color calapszin{alapszin};
-    boxRGBA((SDL_Renderer*)screen, location.x, location.y, location.x+_size.w-1, location.y+_size.h-1, calapszin.r, calapszin.g, calapszin.b, calapszin.a);
+    boxRGBA((SDL_Renderer*)screen, location.x, location.y, location.x+size.w-1, location.y+size.h-1, calapszin.r, calapszin.g, calapszin.b, calapszin.a);
 
     for (int y=0; y<stripes; ++y)
-        boxRGBA((SDL_Renderer*)screen, location.x, location.y+y*_size.h/stripes, location.x+_size.w-1, location.y+(y+1)*_size.h/stripes-1, 255, 255, 255, (stripes-1-y)*3);
+        boxRGBA((SDL_Renderer*)screen, location.x, location.y+y*size.h/stripes, location.x+size.w-1, location.y+(y+1)*size.h/stripes-1, 255, 255, 255, (stripes-1-y)*3);
 
     Color ckeretv{keretvilagos};
-    rectangleRGBA((SDL_Renderer*)screen, location.x, location.y, location.x+_size.w, location.y+_size.h, ckeretv.r, ckeretv.g, ckeretv.b, ckeretv.a);
+    rectangleRGBA((SDL_Renderer*)screen, location.x, location.y, location.x+size.w, location.y+size.h, ckeretv.r, ckeretv.g, ckeretv.b, ckeretv.a);
 }
 
 bool Widget::IsClicked(Point p)
 {
     return  p.x >= location.x &&
-            p.x <= location.x + _size.w &&
+            p.x <= location.x + size.w &&
             p.y >= location.y &&
-            p.y <= location.y + _size.h;
+            p.y <= location.y + size.h;
 }
 
-Size Button::defsize = Size(75, 23);
-Size Label::defsize = Size(0, 0);
-Size Slider::defsize = Size(100, 23);
-Size ColorBox::defsize = Size(128, 32);
+Dimension Button::defsize = Dimension(75, 23);
+Dimension Label::defsize = Dimension(0, 0);
+Dimension Slider::defsize = Dimension(100, 23);
+Dimension ColorBox::defsize = Dimension(128, 32);
 Point Widget::defloc = Point(0, 0);
 Color Widget::default_main_color = Color(0x00C0F0FF);
 Color Slider::default_color = Color(0x00DDFF50);

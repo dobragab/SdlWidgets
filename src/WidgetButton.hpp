@@ -13,7 +13,7 @@ class Button : public Widget
 {
     std::u16string text;
 
-    static Size defsize;
+    static Dimension defsize;
 
     bool down = false;
 

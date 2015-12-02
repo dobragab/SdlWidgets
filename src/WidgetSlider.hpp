@@ -11,7 +11,7 @@ namespace Sdl
 
 class Slider : public Widget
 {
-    static Size defsize;
+    static Dimension defsize;
     static Color default_color;
 
     int minvalue = 0, maxvalue = 100;

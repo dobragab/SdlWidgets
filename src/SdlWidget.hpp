@@ -35,10 +35,10 @@ protected:
     static Point defloc;
 
     Point location;
-    Size _size;
+    Dimension size;
     Color maincolor = default_main_color;
 
-    GETTERSETTER(_size, Size, size)
+    GETTERSETTER(size, Dimension, Size)
     GETTERSETTER(location, Point, Location)
     GETTERSETTER(maincolor, Color, MainColor)
 
@@ -47,12 +47,12 @@ public:
     bool Enabled = true;
     bool Visible = true;
 
-    PROPERTY(Widget, Size, size);
+    PROPERTY(Widget, Dimension, Size);
     PROPERTY(Widget, Point, Location);
 
-    Widget(Point p, Size s) :
+    Widget(Point p, Dimension s) :
         location{p},
-        _size{s}
+        size{s}
     { }
 
     virtual bool IsClicked(Point p);

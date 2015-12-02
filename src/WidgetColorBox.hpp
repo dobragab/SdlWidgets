@@ -12,7 +12,7 @@ namespace Sdl
 class ColorBox : public Widget
 {
     static Color default_color;
-    static Size defsize;
+    static Dimension defsize;
 
     Color color;
 

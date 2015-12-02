@@ -34,10 +34,10 @@ struct Point
     { }
 };
 
-struct Size
+struct Dimension
 {
     uint16_t w = 0, h = 0;
-    Size(uint16_t w, uint16_t h) :
+    Dimension(uint16_t w, uint16_t h) :
         w(w),
         h(h)
     { }

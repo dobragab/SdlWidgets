@@ -12,7 +12,7 @@ void Slider::Paint(Renderer& screen)
 
     Widget::Paint(screen);
 
-    boxRGBA((SDL_Renderer*)screen, location.x, location.y, location.x+((_size.w-1)*(value - minvalue)/(maxvalue - minvalue)), location.y+_size.h-1, color.r, color.g, color.b, color.a);
+    boxRGBA((SDL_Renderer*)screen, location.x, location.y, location.x+((size.w-1)*(value - minvalue)/(maxvalue - minvalue)), location.y+size.h-1, color.r, color.g, color.b, color.a);
 }
 
 void Slider::MouseClick(MouseClickEvent& ev)
@@ -50,10 +50,10 @@ void Slider::setval(int16_t x)
 {
     if (x <= location.x)
         Value = minvalue;
-    else if (x > location.x + _size.w)
+    else if (x > location.x + size.w)
         Value = maxvalue;
     else
-        Value = minvalue + (maxvalue - minvalue) * (x-location.x-1)/(_size.w);
+        Value = minvalue + (maxvalue - minvalue) * (x-location.x-1)/(size.w);
 }
 
 }

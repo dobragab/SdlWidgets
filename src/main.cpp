@@ -55,17 +55,17 @@ try
     Sdl::Window screen(640, 480, "Sdl::Trial");
 
     button1.Text = u"Gomb";
-    button1.size = Sdl::Size(75, 40);
+    button1.Size = Sdl::Dimension(75, 40);
     button1.Location = Sdl::Point(100, 100);
     button1.MouseClicked = button1_MouseClicked;
 
     button2.Text = u"Csere";
-    button2.size = Sdl::Size(75, 40);
+    button2.Size = Sdl::Dimension(75, 40);
     button2.Location = Sdl::Point(150, 100);
     button2.MouseClicked = button2_MouseClicked;
 
     slider1.Location = Sdl::Point(100, 150);
-    slider1.size = Sdl::Size(100, 23);
+    slider1.Size = Sdl::Dimension(100, 23);
     slider1.Value = 255;
     slider1.Maximum = 255;
     slider1.ValueChanged = slider_ValueChanged;

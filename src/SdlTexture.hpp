@@ -24,7 +24,7 @@ class Texture
         return txt;
     }
 
-    Size size() const;
+    Dimension size() const;
 };
 
 //Texture LoadImage(std::string filename);
