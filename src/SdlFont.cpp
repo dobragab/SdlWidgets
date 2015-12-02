@@ -77,7 +77,7 @@ Texture Font::Render(Renderer& renderer, std::wstring text, Color color, Font::R
     if (!surf)
         throw Sdl::exception();
 
-    SDL_Texture * txt = SDL_CreateTextureFromSurface(renderer, surf);
+    SDL_Texture * txt = SDL_CreateTextureFromSurface((SDL_Renderer*)renderer, surf);
 
     SDL_FreeSurface(surf);
 

@@ -32,7 +32,7 @@ public:
     void Fill(Rect area, Color c);
     void Fill(Color c);
 
-    operator SDL_Renderer*();
+    explicit operator SDL_Renderer*();
 
     void Flip();
 

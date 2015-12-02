@@ -39,14 +39,14 @@ Renderer::~Renderer()
 
 void Renderer::Blit(Texture const& src)
 {
-    int result = SDL_RenderCopy(renderer, (SDL_Texture*)src, nullptr, nullptr);
+    int result = SDL_RenderCopy((SDL_Renderer*)renderer, (SDL_Texture*)src, nullptr, nullptr);
     if(result != 0)
         throw Sdl::exception();
 }
 
 void Renderer::Blit(Texture const& src, Rect srcrect, Rect dstrect)
 {
-    int result = SDL_RenderCopy(renderer, (SDL_Texture*)src, srcrect, dstrect);
+    int result = SDL_RenderCopy((SDL_Renderer*)renderer, (SDL_Texture*)src, (SDL_Rect*)srcrect, (SDL_Rect*)dstrect);
     if(result != 0)
         throw Sdl::exception();
 }
@@ -55,9 +55,9 @@ void Renderer::Blit(Texture const& src, Rect rect, bool dst)
 {
     int result;
     if (dst)
-        result = SDL_RenderCopy(renderer, (SDL_Texture*)src, nullptr, rect);
+        result = SDL_RenderCopy(renderer, (SDL_Texture*)src, nullptr, (SDL_Rect*)rect);
     else
-        result = SDL_RenderCopy(renderer, (SDL_Texture*)src, rect, nullptr);
+        result = SDL_RenderCopy(renderer, (SDL_Texture*)src, (SDL_Rect*)rect, nullptr);
 
     if(result != 0)
         throw Sdl::exception();
@@ -66,7 +66,7 @@ void Renderer::Blit(Texture const& src, Rect rect, bool dst)
 void Renderer::Fill(Rect area, Color c)
 {
     SDL_SetRenderDrawColor(renderer, c.r, c.g, c.b, c.a);
-    SDL_RenderFillRect(renderer, area);
+    SDL_RenderFillRect(renderer, (SDL_Rect*)area);
 }
 
 void Renderer::Fill(Color c)

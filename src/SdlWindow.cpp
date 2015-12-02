@@ -28,7 +28,7 @@ Window::~Window()
 
 void Window::Redraw()
 {
-    screen.Fill(hatter);
+    screen.Fill((Color)hatter);
 
     for(auto item : Items)
         item.w->Paint(screen);
