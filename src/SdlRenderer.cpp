@@ -67,14 +67,12 @@ void Renderer::Fill(Rect area, Color c)
 {
     SDL_SetRenderDrawColor(renderer, c.r, c.g, c.b, c.a);
     SDL_RenderFillRect(renderer, area);
-    SDL_RenderPresent(renderer);
 }
 
 void Renderer::Fill(Color c)
 {
     SDL_SetRenderDrawColor(renderer, c.r, c.g, c.b, c.a);
     SDL_RenderClear(renderer);
-    SDL_RenderPresent(renderer);
 }
 
 void Renderer::Flip()
