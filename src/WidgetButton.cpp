@@ -38,8 +38,11 @@ void Button::Paint(Renderer& screen)
 
     int stripes = 20;
 
-    roundedRectangleColor(screen, location.x-1, location.y-1, location.x+_size.w, location.y+_size.h, 2, keret);
-    boxColor(screen, location.x, location.y, location.x+_size.w-1, location.y+_size.h-1, alapszin);
+    Color ckeret{keret};
+    roundedRectangleRGBA(screen, location.x-1, location.y-1, location.x+_size.w, location.y+_size.h, 2, ckeret.r, ckeret.g, ckeret.b, ckeret.a);
+
+    Color calapszin{alapszin};
+    boxRGBA(screen, location.x, location.y, location.x+_size.w-1, location.y+_size.h-1, calapszin.r, calapszin.g, calapszin.b, calapszin.a);
 
     if(down)
         for (int y=0; y<stripes; ++y)
@@ -48,7 +51,8 @@ void Button::Paint(Renderer& screen)
         for (int y=0; y<stripes; ++y)
             boxRGBA(screen, location.x, location.y+y*_size.h/stripes, location.x+_size.w-1, location.y+(y+1)*_size.h/stripes-1, 255, 255, 255, (stripes-1-y)*3);
 
-    rectangleColor(screen, location.x, location.y, location.x+_size.w-1, location.y+_size.h-1, keretvilagos);
+    Color ckeretv{keretvilagos};
+    rectangleRGBA(screen, location.x, location.y, location.x+_size.w, location.y+_size.h, ckeretv.r, ckeretv.g, ckeretv.b, ckeretv.a);
 
 
     Texture textsurf = WindowFont.Render(screen, text, gombfeliratszin, Font::Blended);
