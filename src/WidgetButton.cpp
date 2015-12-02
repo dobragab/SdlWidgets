@@ -55,7 +55,7 @@ void Button::Paint(Renderer& screen)
     rectangleRGBA((SDL_Renderer*)screen, location.x, location.y, location.x+size.w, location.y+size.h, ckeretv.r, ckeretv.g, ckeretv.b, ckeretv.a);
 
 
-    Texture textsurf = WindowFont.Render(screen, text, (Color)gombfeliratszin, Font::Blended);
+    Texture textsurf = WindowFont.Render(screen, text, default_font_size, (Color)gombfeliratszin, Font::Blended);
 
     Dimension textsize = textsurf.size();
     Rect sp;

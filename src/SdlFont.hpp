@@ -4,12 +4,19 @@
 #include "Sdl.hpp"
 #include "SdlRenderer.hpp"
 
+#include <map>
+
 namespace Sdl
 {
 
 class Font final
 {
-    TTF_Font * font = nullptr;
+    void * membuffer;
+    SDL_RWops * memcontent;
+
+    mutable std::map<int, TTF_Font*> font_sizes;
+
+    TTF_Font * get_font_by_size(int fontsize) const;
 
 public:
 
@@ -20,10 +27,12 @@ public:
         Blended = 3,
     };
 
-    Font() : font{nullptr}
+    Font() :
+        membuffer{nullptr},
+        memcontent{nullptr}
     { }
 
-    Font(std::string filename, int size);
+    Font(std::string filename);
 
     Font(Font const& old) = delete;
     Font& operator=(Font const& old) = delete;
@@ -34,7 +43,7 @@ public:
 
     ~Font();
 
-    Texture Render(Renderer& renderer, std::u16string text, Color color, Font::RenderMode mode, Color bgnd_color = Color{}) const;
+    Texture Render(Renderer& renderer, std::u16string text, int fontsize, Color color, Font::RenderMode mode, Color bgnd_color = Color{}) const;
 
 };
 

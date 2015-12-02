@@ -16,7 +16,7 @@
 
 #define SDL2_GFX_ERROR \
 #error SDL2_GFX is buggy, Color versions do not work properly. Please use RGBA equivalents instead.
-
+// FUCK YOU SDL2_GFX
 #define pixelColor                  SDL2_GFX_ERROR
 #define hlineColor                  SDL2_GFX_ERROR
 #define vlineColor                  SDL2_GFX_ERROR
@@ -57,6 +57,8 @@ namespace Sdl
 {
 
 SDL_Color ConvertColor(Color c);
+
+SDL_RWops * SDL_RWFromFileToMemory(const char * filename, const char * mode, void *& bytebuffer);
 
 }
 

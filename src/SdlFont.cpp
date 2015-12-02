@@ -5,39 +5,66 @@
 namespace Sdl
 {
 
-Font::Font(std::string filename, int size) :
-    font{TTF_OpenFont(filename.c_str(), size)}
+Font::Font(std::string filename) :
+    membuffer{nullptr},
+    memcontent{SDL_RWFromFileToMemory(filename.c_str(), "rb", membuffer)}
 {
-    if(!font)
+    if(!memcontent)
         throw Sdl::exception();
 }
 
 Font::Font(Font&& old) :
-    font{old.font}
+    membuffer{old.membuffer},
+    memcontent{old.memcontent},
+    font_sizes{std::move(old.font_sizes)}
 {
-    old.font = nullptr;
+    old.membuffer = nullptr;
+    old.memcontent = nullptr;
 }
 
 Font& Font::operator=(Font&& old)
 {
     if (&old != this)
     {
-        TTF_CloseFont(font);
-        font = old.Font::font;
-        old.font = nullptr;
+        if (memcontent != nullptr)
+            SDL_RWclose(memcontent);
+        free(membuffer);
+
+        membuffer = old.membuffer;
+        memcontent = old.memcontent;
+        font_sizes = std::move(old.font_sizes);
+
+        old.membuffer = nullptr;
+        old.memcontent = nullptr;
     }
     return *this;
 }
 
 Font::~Font()
 {
-    TTF_CloseFont(font);
+    if (memcontent != nullptr)
+        SDL_RWclose(memcontent);
+    free(membuffer);
 }
 
-Texture Font::Render(Renderer& renderer, std::u16string text, Color color, Font::RenderMode mode, Color bgnd_color) const
+TTF_Font * Font::get_font_by_size(int fontsize) const
+{
+    auto it = font_sizes.find(fontsize);
+    if (it != font_sizes.end())
+        return it->second;
+
+    TTF_Font * font = TTF_OpenFontRW(memcontent, false, fontsize);
+
+    font_sizes[fontsize] = font;
+
+    return font;
+}
+
+Texture Font::Render(Renderer& renderer, std::u16string text, int fontsize, Color color, Font::RenderMode mode, Color bgnd_color) const
 {
     SDL_Surface * surf = nullptr;
     SDL_Color c = ConvertColor(color);
+    TTF_Font * font = get_font_by_size(fontsize);
 
     const uint16_t * utext = reinterpret_cast<const uint16_t*>(text.c_str());
 

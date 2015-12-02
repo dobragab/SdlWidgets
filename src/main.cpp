@@ -51,7 +51,7 @@ int main(int argc, char **argv)
 try
 {
     Sdl::Init();
-    Sdl::SetFont(Sdl::Font{"micross.ttf", 16});
+    Sdl::SetFont(Sdl::Font{"micross.ttf"});
     Sdl::Window screen(640, 480, "Sdl::Trial");
 
     button1.Text = u"Gomb";

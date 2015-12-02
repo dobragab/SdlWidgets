@@ -27,6 +27,7 @@ protected:
 
     static Color default_main_color;
     static Point defloc;
+    static int default_font_size;
 
     Point location;
     Dimension size;

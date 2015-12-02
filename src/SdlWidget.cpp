@@ -46,4 +46,6 @@ Color Widget::default_main_color = Color(0x00C0F0FF);
 Color Slider::default_color = Color(0x00DDFF50);
 Color ColorBox::default_color = Color(0x000000FF);
 
+int Widget::default_font_size = 16;
+
 }
