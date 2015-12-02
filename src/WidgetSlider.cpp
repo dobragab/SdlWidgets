@@ -15,9 +15,9 @@ void Slider::Paint(Renderer& screen)
     boxRGBA((SDL_Renderer*)screen, location.x, location.y, location.x+((_size.w-1)*(value - minvalue)/(maxvalue - minvalue)), location.y+_size.h-1, color.r, color.g, color.b, color.a);
 }
 
-void Slider::MouseClick(Renderer& sender, MouseClickEvent& ev)
+void Slider::MouseClick(MouseClickEvent& ev)
 {
-    if (!Visible || ev.button != SDL_BUTTON_LEFT || ev.IsDone())
+    if (!Visible || ev.button != SDL_BUTTON_LEFT || ev.NeedsRedraw())
         return;
 
     if (ev.down)
@@ -26,24 +26,24 @@ void Slider::MouseClick(Renderer& sender, MouseClickEvent& ev)
         {
             down = true;
             setval(ev.p.x);
-            ev.Done();
+            ev.Redraw();
         }
     }
     else
     {
         if(down)
-            ev.Done();
+            ev.Redraw();
         down = false;
     }
 }
 
-void Slider::MouseMove (Renderer& sender, MouseMoveEvent & ev)
+void Slider::MouseMove (MouseMoveEvent & ev)
 {
-    if (!down || ev.IsDone())
+    if (!down || ev.NeedsRedraw())
         return;
 
     setval(ev.p.x);
-    ev.Done();
+    ev.Redraw();
 }
 
 void Slider::setval(int16_t x)

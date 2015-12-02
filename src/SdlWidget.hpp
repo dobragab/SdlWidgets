@@ -22,10 +22,10 @@ extern Font WindowFont;
 void SetFont(Font&& f);
 
 class Widget;
-typedef void (*MouseClickedHandler)(Widget& sender, MouseClickEvent& ev);
-typedef void (*MouseMovedHandler)(Widget& sender, MouseMoveEvent& ev);
-typedef void (*KeyPressHandler)(Widget& sender, KeyboardEvent& ev);
-typedef void (*ValueChangedHandler)(Widget& sender);
+using MouseClickedHandler = void (*)(Widget& sender, MouseClickEvent& ev);
+using MouseMovedHandler   = void (*)(Widget& sender, MouseMoveEvent& ev);
+using KeyPressHandler     = void (*)(Widget& sender, KeyboardEvent& ev);
+using ValueChangedHandler = void (*)(Widget& sender);
 
 class Widget
 {
@@ -57,10 +57,10 @@ public:
 
     virtual bool IsClicked(Point p);
 
-    virtual void MouseClick(Renderer& sender, MouseClickEvent& ev) = 0;
-    virtual void MouseMove(Renderer& sender, MouseMoveEvent& ev) = 0;
-    virtual void KeyPress(Renderer& sender, KeyboardEvent& ev) = 0;
-    virtual void TimerTick(Renderer& sender, TimerEvent& ev) = 0;
+    virtual void MouseClick(MouseClickEvent& ev) = 0;
+    virtual void MouseMove(MouseMoveEvent& ev) = 0;
+    virtual void KeyPress(KeyboardEvent& ev) = 0;
+    virtual void TimerTick(TimerEvent& ev) = 0;
 
     virtual void Paint(Renderer& screen);
 

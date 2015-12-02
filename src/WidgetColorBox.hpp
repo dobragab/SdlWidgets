@@ -29,10 +29,10 @@ public:
 
     virtual void Paint(Renderer& screen) override;
 
-    virtual void MouseClick(Renderer& sender, MouseClickEvent& ev) override { }
-    virtual void MouseMove (Renderer& sender, MouseMoveEvent & ev) override { }
-    virtual void KeyPress  (Renderer& sender, KeyboardEvent  & ev) override { }
-    virtual void TimerTick (Renderer& sender, TimerEvent     & ev) override { }
+    virtual void MouseClick(MouseClickEvent& ev) override { }
+    virtual void MouseMove (MouseMoveEvent & ev) override { }
+    virtual void KeyPress  (KeyboardEvent  & ev) override { }
+    virtual void TimerTick (TimerEvent     & ev) override { }
 
 };
 

@@ -5,9 +5,9 @@
 namespace Sdl
 {
 
-void Button::MouseClick(Renderer& sender, MouseClickEvent& ev)
+void Button::MouseClick(MouseClickEvent& ev)
 {
-    if (!Visible || ev.button != SDL_BUTTON_LEFT || ev.IsDone())
+    if (!Visible || ev.button != SDL_BUTTON_LEFT || ev.NeedsRedraw())
         return;
 
     if (ev.down)
@@ -15,7 +15,7 @@ void Button::MouseClick(Renderer& sender, MouseClickEvent& ev)
         if(IsClicked(ev.p))
         {
             down = true;
-            ev.Done();
+            ev.Redraw();
         }
     }
     else
@@ -24,7 +24,7 @@ void Button::MouseClick(Renderer& sender, MouseClickEvent& ev)
             MouseClicked(*this, ev);
 
         if(down)
-            ev.Done();
+            ev.Redraw();
 
         down = false;
     }
@@ -68,10 +68,10 @@ void Button::Paint(Renderer& screen)
     screen.Blit(textsurf, sp, true);
 }
 
-void Button::TimerTick (Renderer& sender, TimerEvent     & ev)
+void Button::TimerTick (TimerEvent& ev)
 {
     Visible = !Visible;
-    ev.Done();
+    ev.Redraw();
 }
 
 }

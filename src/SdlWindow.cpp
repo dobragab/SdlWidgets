@@ -60,41 +60,41 @@ void Window::ShowDialog()
             case SDL_MOUSEBUTTONUP:
             {
                 MouseClickEvent e(ev.button.button, ev.button.state, ev.button.x, ev.button.y);
-                for (int i = Items.size() - 1; i >= 0; --i)
-                    Items[i].w->MouseClick(screen, e);
+                for (int i = Items.size() - 1; i >= 0 && !e.NeedsRedraw(); --i)
+                    Items[i].w->MouseClick(e);
 
-                to_redraw = e.IsDone();
+                to_redraw = e.NeedsRedraw();
                 break;
             }
 
             case SDL_MOUSEMOTION:
             {
                 MouseMoveEvent e(ev.motion.state, ev.motion.x, ev.motion.y, ev.motion.xrel, ev.motion.yrel);
-                for (int i = Items.size() - 1; i >= 0; --i)
-                    Items[i].w->MouseMove(screen, e);
+                for (int i = Items.size() - 1; i >= 0 && !e.NeedsRedraw(); --i)
+                    Items[i].w->MouseMove(e);
 
-                to_redraw = e.IsDone();
+                to_redraw = e.NeedsRedraw();
                 break;
             }
 
             case SDL_KEYDOWN:
             {
                 KeyboardEvent e(ev.key.keysym.mod, ev.key.keysym.sym);
-                for (int i = Items.size() - 1; i >= 0; --i)
-                    Items[i].w->KeyPress(screen, e);
+                for (int i = Items.size() - 1; i >= 0 && !e.NeedsRedraw(); --i)
+                    Items[i].w->KeyPress(e);
 
-                to_redraw = e.IsDone();
+                to_redraw = e.NeedsRedraw();
                 break;
             }
 
             case SDL_TICK:
             {
                 TimerEvent e(ev.user.code, ev.user.data1, ev.user.data2);
-                for (int i = Items.size() - 1; i >= 0; --i)
+                for (int i = Items.size() - 1; i >= 0 && !e.NeedsRedraw(); --i)
                     if (Items[i].w == ev.user.data1)
-                        Items[i].w->TimerTick(screen, e);
+                        Items[i].w->TimerTick(e);
 
-                to_redraw = e.IsDone();
+                to_redraw = e.NeedsRedraw();
                 break;
             }
             default:

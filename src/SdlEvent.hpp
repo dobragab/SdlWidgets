@@ -8,16 +8,16 @@ namespace Sdl
 
 class Event
 {
-    bool handled = false;
+    bool redraw = false;
 
 public:
-    inline void Done()
+    inline void Redraw()
     {
-        handled = true;
+        redraw = true;
     }
-    inline bool IsDone()
+    inline bool NeedsRedraw()
     {
-        return handled;
+        return redraw;
     }
 };
 

@@ -6,7 +6,7 @@
 namespace Sdl
 {
 
-typedef int SDL_TimerID;
+using SDL_TimerID = int;
 
 uint32_t TimerCallback(uint32_t interval, void *param);
 
