@@ -22,22 +22,30 @@ exception::exception() :
     std::runtime_error(SDL_GetError())
 { }
 
+static void Quit()
+{
+    SDL_Quit();
+    TTF_Quit();
+    IMG_Quit();
+}
 
 void Init()
 {
-    int result = SDL_Init(SDL_INIT_EVERYTHING);
+    bool result =
+        SDL_Init(SDL_INIT_EVERYTHING) == 0 &&
+        TTF_Init() == 0 &&
+        IMG_Init(IMG_INIT_EVERYTHING) == IMG_INIT_EVERYTHING;
 
-    if (result < 0)
+    if (!result)
         throw Sdl::exception();
 
-    atexit(SDL_Quit);
+    atexit(Quit);
 
 #if defined(__WIN32__) && defined(DEBUG)
     freopen("CON", "w", stdout);
     freopen("CON", "w", stderr);
 #endif
 
-    TTF_Init();
 }
 
 }

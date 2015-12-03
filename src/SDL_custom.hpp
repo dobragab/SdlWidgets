@@ -5,7 +5,6 @@
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_image.h>
-#include <SDL2/SDL_mixer.h>
 #include <SDL2/SDL_surface.h>
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL2_gfxPrimitives.h>
@@ -13,6 +12,8 @@
 #if SDL_MAJOR_VERSION != 2
 #error SDL version is old!
 #endif
+
+constexpr int IMG_INIT_EVERYTHING = IMG_INIT_JPG | IMG_INIT_PNG | IMG_INIT_TIF |IMG_INIT_WEBP;
 
 #define SDL2_GFX_ERROR \
 #error SDL2_GFX is buggy, Color versions do not work properly. Please use RGBA equivalents instead.
