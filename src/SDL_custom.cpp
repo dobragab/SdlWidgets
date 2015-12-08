@@ -53,7 +53,6 @@ Rect ConvertRect(SDL_Rect r)
 SDL_RWops * SDL_RWFromFileToMemory(const char * filename, const char * mode, void *& bytebuffer)
 {
     char * membuf = nullptr;
-    char * buffer = nullptr;
     SDL_RWops * memoryrw = nullptr;
     int64_t filesize = 0;
 
@@ -69,32 +68,19 @@ SDL_RWops * SDL_RWFromFileToMemory(const char * filename, const char * mode, voi
     if (membuf == nullptr)
         goto fail2;
 
+    if (SDL_RWread(filerw, membuf,  filesize, 1) == 0)
+        goto fail3;
+
     memoryrw = SDL_RWFromMem(membuf, filesize);
     if (memoryrw == nullptr)
         goto fail3;
 
-    buffer = (char*) malloc(filesize);
-    if (buffer == nullptr)
-        goto fail4;
-
-    if (SDL_RWread(filerw, buffer,  filesize, 1) == 0)
-        goto fail5;
-
-    if (SDL_RWwrite(memoryrw, buffer, filesize, 1) == 0)
-        goto fail5;
-
-    if (SDL_RWseek(memoryrw, RW_SEEK_SET, 0) == -1)
-        goto fail5;
-
     bytebuffer = membuf;
 
-    delete[] buffer;
     SDL_RWclose(filerw);
     return memoryrw;
 
-fail5:  delete[] buffer;
-fail4:  SDL_RWclose(memoryrw);
-fail3:  delete[] membuf;
+fail3:  free(membuf);
 fail2:  SDL_RWclose(filerw);
 fail1:  return nullptr;
 }
