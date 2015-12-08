@@ -23,9 +23,9 @@ LDFLAGS = $(SDL_LIBS) -lm -lz
 
 HEADERS := $(wildcard $(SRCDIR)/*.h) $(wildcard $(SRCDIR)/*.hpp) $(wildcard $(SRCDIR)/*.hh) $(wildcard $(SRCDIR)/*.hxx)
 
-SOURCES_C := $(wildcard $(SRCDIR)/*.c)
+SOURCES_C   := $(wildcard $(SRCDIR)/*.c)
 SOURCES_CPP := $(wildcard $(SRCDIR)/*.cpp)
-SOURCES_CC := $(wildcard $(SRCDIR)/*.cc)
+SOURCES_CC  := $(wildcard $(SRCDIR)/*.cc)
 SOURCES_CXX := $(wildcard $(SRCDIR)/*.cxx)
 
 SOURCES = $(SOURCES_C) $(SOURCES_CPP) $(SOURCES_CC) $(SOURCES_CXX)
@@ -36,10 +36,11 @@ OBJECTS_CC  := $(SOURCES_CC:$(SRCDIR)/%.cc=$(OBJDIR)/%.cc.o)
 OBJECTS_CXX := $(SOURCES_CXX:$(SRCDIR)/%.cxx=$(OBJDIR)/%.cxx.o)
 
 OBJECTS = $(OBJECTS_C) $(OBJECTS_CPP) $(OBJECTS_CC) $(OBJECTS_CXX)
+OBJECTS += $(OBJDIR)/SDL_gfx/SDL_gfxBlitFunc.cpp.o $(OBJDIR)/SDL_gfx/SDL_gfxPrimitives.cpp.o
 
 .PHONY: clean all dirs Linux LinuxDebug
 
-all: dirs $(BINDIR)/$(BINARY)
+all: dirs SDL_gfx $(BINDIR)/$(BINARY)
 
 Linux: all
 
@@ -48,14 +49,24 @@ LinuxDebug: CFLAGS += -DDEBUG -g -O0
 LinuxDebug: CXXFLAGS += -DDEBUG -g -O0
 LinuxDebug: LDFLAGS += -g
 
+SDL_gfx: $(OBJDIR)/SDL_gfx/SDL_gfxBlitFunc.cpp.o $(OBJDIR)/SDL_gfx/SDL_gfxPrimitives.cpp.o
+
+$(OBJDIR)/SDL_gfx/SDL_gfxBlitFunc.cpp.o: $(SRCDIR)/SDL_gfx/SDL_gfxBlitFunc.cpp $(HEADERS)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+$(OBJDIR)/SDL_gfx/SDL_gfxPrimitives.cpp.o: $(SRCDIR)/SDL_gfx/SDL_gfxPrimitives.cpp $(HEADERS)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
 clean:
 	@$(RM) $(OBJDIR)/*.o
+	@$(RM) $(OBJDIR)/SDL_gfx/*.o
 	@$(RM) $(BINDIR)/$(BINARY)
 	@echo Cleaned successfully.
 
 dirs:
 	@$(MAKEDIR) $(BINDIR)
 	@$(MAKEDIR) $(OBJDIR)
+	@$(MAKEDIR) $(OBJDIR)/SDL_gfx
 
 
 $(BINDIR)/$(BINARY): $(OBJECTS)

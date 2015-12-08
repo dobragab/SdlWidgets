@@ -16,7 +16,7 @@
 #error Do not include SDL_gfx or SDL2_gfx here! They could get confused!
 #endif
 
-constexpr int IMG_INIT_EVERYTHING = IMG_INIT_JPG | IMG_INIT_PNG | IMG_INIT_TIF |IMG_INIT_WEBP;
+constexpr int IMG_INIT_EVERYTHING = IMG_INIT_JPG | IMG_INIT_PNG | IMG_INIT_TIF;
 
 enum
 {
