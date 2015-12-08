@@ -38,22 +38,23 @@ void Button::Paint(Renderer& screen)
 
     int stripes = 20;
 
-    Color ckeret{keret};
-    roundedRectangleRGBA((SDL_Renderer*)screen, location.x-1, location.y-1, location.x+size.w, location.y+size.h, 2, ckeret.r, ckeret.g, ckeret.b, ckeret.a);
+    Surface temp{size.w, size.h};
 
-    Color calapszin{alapszin};
-    boxRGBA((SDL_Renderer*)screen, location.x, location.y, location.x+size.w-1, location.y+size.h-1, calapszin.r, calapszin.g, calapszin.b, calapszin.a);
+    temp.draw_rounded_rectangle(0, 0, size.w-1, size.h-1, 2, Color(keret));
+    temp.draw_box(1, 1, size.w-2, size.h-2, Color(alapszin));
 
-    if(down)
-        for (int y=0; y<stripes; ++y)
-            boxRGBA((SDL_Renderer*)screen, location.x, location.y+y*size.h/stripes, location.x+size.w-1, location.y+(y+1)*size.h/stripes-1, 255, 255, 255, (y)*3);
-    else
-        for (int y=0; y<stripes; ++y)
-            boxRGBA((SDL_Renderer*)screen, location.x, location.y+y*size.h/stripes, location.x+size.w-1, location.y+(y+1)*size.h/stripes-1, 255, 255, 255, (stripes-1-y)*3);
+    for (int y=0; y<stripes; ++y)
+    {
+        Color c(255, 255, 255, down ? y*3 : (stripes-1-y)*3);
+        temp.draw_box(1, 1+y*size.h/stripes, size.w-2, (y+1)*size.h/stripes, c);
+    }
 
-    Color ckeretv{keretvilagos};
-    rectangleRGBA((SDL_Renderer*)screen, location.x, location.y, location.x+size.w, location.y+size.h, ckeretv.r, ckeretv.g, ckeretv.b, ckeretv.a);
+    temp.draw_rectangle(1, 1, size.w-2, size.h-2, Color(keretvilagos));
 
+    Texture cache{screen, temp};
+    Rect dstrect(location.x-1, location.y-1, size.w, size.h);
+
+    screen.Blit(cache, dstrect, true);
 
     Texture textsurf = WindowFont.Render(screen, text, default_font_size, (Color)gombfeliratszin, Font::Blended);
 
@@ -70,7 +71,7 @@ void Button::Paint(Renderer& screen)
 
 void Button::TimerTick (TimerEvent& ev)
 {
-    Visible = !Visible;
+    //Visible = !Visible;
     ev.Redraw();
 }
 

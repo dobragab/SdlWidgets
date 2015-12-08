@@ -4,11 +4,16 @@
 namespace Sdl
 {
 
+class Renderer;
+class Surface;
+
 class Texture
 {
     SDL_Texture * txt;
 
   public:
+
+    Texture(Renderer& renderer, Surface& surface);
 
     explicit Texture(SDL_Texture * txt);
     Texture(Texture&& old);
@@ -26,8 +31,6 @@ class Texture
 
     Dimension size() const;
 };
-
-//Texture LoadImage(std::string filename);
 
 }
 

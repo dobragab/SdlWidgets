@@ -10,17 +10,17 @@ void ColorBox::Paint(Renderer& screen)
     if (!Visible)
         return;
 
-    Color ckeret{keret};
-    roundedRectangleRGBA((SDL_Renderer*)screen, location.x-1, location.y-1, location.x+size.w, location.y+size.h, 2, ckeret.r, ckeret.g, ckeret.b, ckeret.a);
+    Surface temp{size.w, size.h};
 
-    Color calapszin{alapszin};
-    boxRGBA((SDL_Renderer*)screen, location.x, location.y, location.x+size.w-1, location.y+size.h-1, calapszin.r, calapszin.g, calapszin.b, calapszin.a);
+    temp.draw_rounded_rectangle(0, 0, size.w-1, size.h-1, 2, Color(keret));
+    temp.draw_box(1, 1, size.w-2, size.h-2, Color(alapszin));
+    temp.draw_rectangle(1, 1, size.w-2, size.h-2, Color(keretvilagos));
+    temp.draw_box(1, 1, size.w-2, size.h-2, color);
 
-    Color ckeretv{keretvilagos};
-    rectangleRGBA((SDL_Renderer*)screen, location.x, location.y, location.x+size.w, location.y+size.h, ckeretv.r, ckeretv.g, ckeretv.b, ckeretv.a);
+    Texture cache{screen, temp};
+    Rect dstrect(location.x, location.y, size.w, size.h);
 
-    boxRGBA((SDL_Renderer*)screen, location.x, location.y, location.x+size.w-1, location.y+size.h-1, color.r, color.g, color.b, color.a);
-
+    screen.Blit(cache, dstrect, true);
 }
 
 }

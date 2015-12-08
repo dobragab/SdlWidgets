@@ -10,6 +10,7 @@ struct SDL_Window;
 struct SDL_Renderer;
 struct SDL_PixelFormat;
 struct SDL_Texture;
+struct SDL_Surface;
 struct SDL_RWops;
 using TTF_Font = struct _TTF_Font ;
 

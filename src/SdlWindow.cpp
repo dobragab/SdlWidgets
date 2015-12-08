@@ -1,4 +1,5 @@
 #include "Sdl.hpp"
+#include "SdlSurface.hpp"
 #include "SdlWidget.hpp"
 #include "SdlWindow.hpp"
 
@@ -15,7 +16,10 @@ Window::Window(int16_t width, int16_t height, const char * caption) :
                             height,
                             SDL_WINDOW_OPENGL)},
     screen{SDL_CreateRenderer(window, -1, 0)}
-{ }
+{
+    if (window == nullptr)
+        throw Sdl::exception();
+}
 
 Window::~Window()
 {

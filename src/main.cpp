@@ -66,14 +66,14 @@ try
 
     slider1.Location = Sdl::Point(100, 150);
     slider1.Size = Sdl::Dimension(100, 23);
-    slider1.Value = 255;
+    slider1.Value = 0;
     slider1.Maximum = 255;
     slider1.ValueChanged = slider_ValueChanged;
 
     label1.Text = u"Árvíztűrő tükörfúrógép";
     label1.Location = Sdl::Point(100, 80);
 
-    label2.Text = u" ";
+    label2.Text = Tou16string(slider1.Value);
     label2.Location = Sdl::Point(210, 150);
 
     box.Location = Sdl::Point(100, 250);

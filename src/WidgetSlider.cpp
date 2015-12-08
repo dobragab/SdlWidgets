@@ -12,7 +12,14 @@ void Slider::Paint(Renderer& screen)
 
     Widget::Paint(screen);
 
-    boxRGBA((SDL_Renderer*)screen, location.x, location.y, location.x+((size.w-1)*(value - minvalue)/(maxvalue - minvalue)), location.y+size.h-1, color.r, color.g, color.b, color.a);
+    Surface temp{size.w, size.h};
+
+    temp.draw_box(1, 1, ((size.w-2)*(value - minvalue - 1)/(maxvalue - minvalue) + 1), size.h-2, color);
+
+    Texture cache{screen, temp};
+    Rect dstrect(location.x, location.y, size.w, size.h);
+
+    screen.Blit(cache, dstrect, true);
 }
 
 void Slider::MouseClick(MouseClickEvent& ev)
@@ -48,12 +55,12 @@ void Slider::MouseMove (MouseMoveEvent & ev)
 
 void Slider::setval(int16_t x)
 {
-    if (x <= location.x)
+    if (x <= location.x+1)
         Value = minvalue;
-    else if (x > location.x + size.w)
+    else if (x > location.x + size.w - 2)
         Value = maxvalue;
     else
-        Value = minvalue + (maxvalue - minvalue) * (x-location.x-1)/(size.w);
+        Value = minvalue + (maxvalue - minvalue) * (x-location.x)/(size.w-2);
 }
 
 }

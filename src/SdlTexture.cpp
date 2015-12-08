@@ -5,6 +5,13 @@
 namespace Sdl
 {
 
+Texture::Texture(Renderer& renderer, Surface& surface) :
+    txt{SDL_CreateTextureFromSurface((SDL_Renderer*)renderer, (SDL_Surface*)surface)}
+{
+    if (txt == nullptr)
+        throw Sdl::exception();
+}
+
 Texture::Texture(SDL_Texture * txt) :
     txt{txt}
 {
@@ -48,10 +55,5 @@ Dimension Texture::size() const
 
     return Dimension(w, h);
 }
-
-//Texture LoadImage(std::string filename)
-//{
-//    return Texture{IMG_LoadTexture(renderer, filename.c_str())};
-//}
 
 }

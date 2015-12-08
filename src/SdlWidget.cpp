@@ -16,17 +16,23 @@ void Widget::Paint(Renderer& screen)
 {
     int stripes = 20;
 
-    Color ckeret{keret};
-    roundedRectangleRGBA((SDL_Renderer*)screen, location.x-1, location.y-1, location.x+size.w, location.y+size.h, 2, ckeret.r, ckeret.g, ckeret.b, ckeret.a);
+    Surface temp{size.w, size.h};
 
-    Color calapszin{alapszin};
-    boxRGBA((SDL_Renderer*)screen, location.x, location.y, location.x+size.w-1, location.y+size.h-1, calapszin.r, calapszin.g, calapszin.b, calapszin.a);
+    temp.draw_rounded_rectangle(0, 0, size.w-1, size.h-1, 2, Color(keret));
+    temp.draw_box(1, 1, size.w-2, size.h-2, Color(alapszin));
 
     for (int y=0; y<stripes; ++y)
-        boxRGBA((SDL_Renderer*)screen, location.x, location.y+y*size.h/stripes, location.x+size.w-1, location.y+(y+1)*size.h/stripes-1, 255, 255, 255, (stripes-1-y)*3);
+    {
+        Color c(255, 255, 255, (stripes-1-y)*3);
+        temp.draw_box(1, 1+y*size.h/stripes, size.w-2, (y+1)*size.h/stripes, c);
+    }
 
-    Color ckeretv{keretvilagos};
-    rectangleRGBA((SDL_Renderer*)screen, location.x, location.y, location.x+size.w, location.y+size.h, ckeretv.r, ckeretv.g, ckeretv.b, ckeretv.a);
+    temp.draw_rectangle(1, 1, size.w-2, size.h-2, Color(keretvilagos));
+
+    Texture cache{screen, temp};
+    Rect dstrect(location.x, location.y, size.w, size.h);
+
+    screen.Blit(cache, dstrect, true);
 }
 
 bool Widget::IsClicked(Point p)
@@ -43,7 +49,7 @@ Dimension Slider::defsize = Dimension(100, 23);
 Dimension ColorBox::defsize = Dimension(128, 32);
 Point Widget::defloc = Point(0, 0);
 Color Widget::default_main_color = Color(0x00C0F0FF);
-Color Slider::default_color = Color(0x00DDFF50);
+Color Slider::default_color = Color(0x00CCFF75);
 Color ColorBox::default_color = Color(0x000000FF);
 
 int Widget::default_font_size = 16;
