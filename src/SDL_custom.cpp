@@ -16,6 +16,39 @@ SDL_Color ConvertColor(Color c)
 
     return result;
 }
+Color ConvertColor(SDL_Color c)
+{
+    Color result;
+
+    result.r = c.r;
+    result.g = c.g;
+    result.b = c.b;
+    result.a = c.a;
+
+    return result;
+}
+SDL_Rect ConvertRect(Rect r)
+{
+    SDL_Rect result;
+
+    result.x = r.x;
+    result.y = r.y;
+    result.w = r.w;
+    result.h = r.h;
+
+    return result;
+}
+Rect ConvertRect(SDL_Rect r)
+{
+    Rect result;
+
+    result.x = r.x;
+    result.y = r.y;
+    result.w = r.w;
+    result.h = r.h;
+
+    return result;
+}
 
 SDL_RWops * SDL_RWFromFileToMemory(const char * filename, const char * mode, void *& bytebuffer)
 {

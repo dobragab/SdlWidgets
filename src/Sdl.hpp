@@ -58,16 +58,6 @@ struct Rect
     Rect(int x, int y, int w = 0, int h = 0) :
         x(x), y(y), w(w), h(h)
     { }
-
-    explicit operator SDL_Rect*()  // FUCK YOU SDL_RECT. TWICE.
-    {
-        return reinterpret_cast<SDL_Rect*>(this);
-    }
-
-    explicit operator const SDL_Rect*() const  // FUCK YOU SDL_RECT. TWICE.
-    {
-        return reinterpret_cast<const SDL_Rect*>(this);
-    }
 };
 
 struct Color

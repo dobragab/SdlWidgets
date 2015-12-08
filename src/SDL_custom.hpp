@@ -29,6 +29,10 @@ namespace Sdl
 {
 
 SDL_Color ConvertColor(Color c);
+Color ConvertColor(SDL_Color c);
+
+SDL_Rect ConvertRect(Rect r);
+Rect ConvertRect(SDL_Rect r);
 
 SDL_RWops * SDL_RWFromFileToMemory(const char * filename, const char * mode, void *& bytebuffer);
 
