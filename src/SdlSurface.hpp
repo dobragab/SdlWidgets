@@ -2,6 +2,8 @@
 #define SDLSURFACE_HPP_INCLUDED
 
 #include "Sdl.hpp"
+#include "Property.hpp"
+#include "PropertyNull.hpp"
 
 namespace Sdl
 {
@@ -10,7 +12,25 @@ class Surface
 {
     SDL_Surface * surf;
 
+    Rect getClipRect() const;
+    void setClipRect(Rect const&);
+    void setClipRect(std::nullptr_t);
+
+    uint8_t getAlphaMod() const;
+    void setAlphaMod(uint8_t const&);
+
+    BlendMode getBlend() const;
+    void setBlend(BlendMode const&);
+
+    Color getColorMod() const;
+    void setColorMod(Color const&);
+
 public:
+
+    PROPERTYNULL(Surface, Rect, ClipRect);
+    PROPERTY(Surface, uint8_t, AlphaMod);
+    PROPERTY(Surface, BlendMode, Blend);
+    PROPERTY(Surface, Color, ColorMod);
 
     explicit Surface(SDL_Surface * surf);
     Surface(int width, int height);
@@ -25,6 +45,19 @@ public:
 
     int Width() const;
     int Height() const;
+    Dimension Size() const;
+
+    void Blit(Surface const& src, Point srcrect, Rect dstrect);
+    void Blit(Surface const& src, Point srcrect);
+    void Blit(Surface const& src, Rect  dstrect);
+    void Blit(Surface const& src);
+
+    void Stretch(Surface const& src);
+    void Stretch(Surface const& src, Rect srcrect, Rect dstrect);
+    void Stretch(Surface const& src, Rect rect, bool dst);
+
+    void Fill(Rect area, Color c);
+    void Fill(Color c);
 
     explicit operator SDL_Surface*() const;
 

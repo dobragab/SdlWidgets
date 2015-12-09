@@ -82,6 +82,7 @@
 			<Option target="Debug" />
 			<Option target="Release" />
 		</Unit>
+		<Unit filename="src/PropertyNull.hpp" />
 		<Unit filename="src/SDL_custom.cpp">
 			<Option target="Debug" />
 			<Option target="Release" />

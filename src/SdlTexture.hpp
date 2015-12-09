@@ -29,7 +29,7 @@ class Texture
         return txt;
     }
 
-    Dimension size() const;
+    Dimension Size() const;
 };
 
 }
