@@ -52,9 +52,10 @@ public:
     void Blit(Surface const& src, Rect  dstrect);
     void Blit(Surface const& src);
 
-    void Stretch(Surface const& src);
+    void Stretch(Surface const& src, std::nullptr_t = nullptr, std::nullptr_t = nullptr);
+    void Stretch(Surface const& src, Rect srcrect, std::nullptr_t = nullptr);
+    void Stretch(Surface const& src, std::nullptr_t, Rect dstrect);
     void Stretch(Surface const& src, Rect srcrect, Rect dstrect);
-    void Stretch(Surface const& src, Rect rect, bool dst);
 
     void Fill(Rect area, Color c);
     void Fill(Color c);

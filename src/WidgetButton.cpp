@@ -66,7 +66,7 @@ void Button::Paint(Renderer& screen)
     Texture cache{screen, temp};
     Rect dstrect(location.x-1, location.y-1, size.w, size.h);
 
-    screen.Blit(cache, dstrect, true);
+    screen.Blit(cache, nullptr, dstrect);
 }
 
 void Button::TimerTick (TimerEvent& ev)

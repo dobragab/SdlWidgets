@@ -173,9 +173,29 @@ void Surface::Blit(Surface const& src)
         throw Sdl::exception();
 }
 
-void Surface::Stretch(Surface const& src)
+void Surface::Stretch(Surface const& src, std::nullptr_t, std::nullptr_t)
 {
     int result = SDL_UpperBlitScaled(surf, nullptr, src.surf, nullptr);
+    if(result != 0)
+        throw Sdl::exception();
+}
+
+void Surface::Stretch(Surface const& src, Rect srcrect, std::nullptr_t)
+{
+    SDL_Rect r1 = ConvertRect(srcrect);
+
+    int result = SDL_UpperBlitScaled(surf, &r1, src.surf, nullptr);
+
+    if(result != 0)
+        throw Sdl::exception();
+}
+
+void Surface::Stretch(Surface const& src, std::nullptr_t, Rect dstrect)
+{
+    SDL_Rect r1 = ConvertRect(dstrect);
+
+    int result = SDL_UpperBlitScaled(surf, nullptr, src.surf, &r1);
+
     if(result != 0)
         throw Sdl::exception();
 }
@@ -189,21 +209,6 @@ void Surface::Stretch(Surface const& src, Rect srcrect, Rect dstrect)
     if(result != 0)
         throw Sdl::exception();
 }
-
-void Surface::Stretch(Surface const& src, Rect rect, bool dst)
-{
-    SDL_Rect r1 = ConvertRect(rect);
-
-    int result;
-    if (dst)
-        result = SDL_UpperBlitScaled(surf, nullptr, src.surf, &r1);
-    else
-        result = SDL_UpperBlitScaled(surf, &r1, src.surf, nullptr);
-
-    if(result != 0)
-        throw Sdl::exception();
-}
-
 
 void Surface::Fill(Rect area, Color c)
 {

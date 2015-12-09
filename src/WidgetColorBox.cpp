@@ -20,7 +20,7 @@ void ColorBox::Paint(Renderer& screen)
     Texture cache{screen, temp};
     Rect dstrect(location.x, location.y, size.w, size.h);
 
-    screen.Blit(cache, dstrect, true);
+    screen.Blit(cache, nullptr, dstrect);
 }
 
 }

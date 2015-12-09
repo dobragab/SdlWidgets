@@ -15,7 +15,7 @@ void Label::Paint(Renderer& screen)
     Dimension textsize = textsurf.Size();
     Rect sp{location.x, location.y, textsize.w, textsize.h};
 
-    screen.Blit(textsurf, sp, true);
+    screen.Blit(textsurf, nullptr, sp);
 }
 
 }

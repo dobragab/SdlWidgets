@@ -38,9 +38,9 @@ Renderer::~Renderer()
     SDL_DestroyRenderer(renderer);
 }
 
-void Renderer::Blit(Texture const& src)
+void Renderer::Blit(Texture const& src, std::nullptr_t, std::nullptr_t)
 {
-    int result = SDL_RenderCopy((SDL_Renderer*)renderer, (SDL_Texture*)src, nullptr, nullptr);
+    int result = SDL_RenderCopy(renderer, (SDL_Texture*)src, nullptr, nullptr);
     if(result != 0)
         throw Sdl::exception();
 }
@@ -50,20 +50,26 @@ void Renderer::Blit(Texture const& src, Rect srcrect, Rect dstrect)
     SDL_Rect r1 = ConvertRect(srcrect);
     SDL_Rect r2 = ConvertRect(dstrect);
 
-    int result = SDL_RenderCopy((SDL_Renderer*)renderer, (SDL_Texture*)src, &r1, &r2);
+    int result = SDL_RenderCopy(renderer, (SDL_Texture*)src, &r1, &r2);
     if(result != 0)
         throw Sdl::exception();
 }
 
-void Renderer::Blit(Texture const& src, Rect rect, bool dst)
+void Renderer::Blit(Texture const& src, std::nullptr_t, Rect dstrect)
 {
-    SDL_Rect r1 = ConvertRect(rect);
+    SDL_Rect r1 = ConvertRect(dstrect);
 
-    int result;
-    if (dst)
-        result = SDL_RenderCopy(renderer, (SDL_Texture*)src, nullptr, &r1);
-    else
-        result = SDL_RenderCopy(renderer, (SDL_Texture*)src, &r1, nullptr);
+    int result = SDL_RenderCopy(renderer, (SDL_Texture*)src, nullptr, &r1);
+
+    if(result != 0)
+        throw Sdl::exception();
+}
+
+void Renderer::Blit(Texture const& src, Rect srcrect, std::nullptr_t)
+{
+    SDL_Rect r1 = ConvertRect(srcrect);
+
+    int result = SDL_RenderCopy(renderer, (SDL_Texture*)src, &r1, nullptr);
 
     if(result != 0)
         throw Sdl::exception();
