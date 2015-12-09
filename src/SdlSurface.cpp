@@ -15,10 +15,7 @@ Surface::Surface(SDL_Surface * surf) :
 
 Surface::Surface(int width, int height) :
 #if SDL_BYTEORDER == SDL_LIL_ENDIAN
-    surf{SDL_CreateRGBSurface(0, width, height, 32, 0x00FF0000,
-                                        0x0000FF00,
-                                        0x000000FF,
-                                        0xFF000000)}
+    surf{SDL_CreateRGBSurface(0, width, height, 32, 0x000000FF, 0x0000FF00, 0x00FF0000, 0xFF000000)}
 #else
     surf{SDL_CreateRGBSurface(0, width, height, 32, 0xFF000000, 0x00FF0000, 0x0000FF00, 0x000000FF)}
 #endif
@@ -59,6 +56,169 @@ int Surface::Width() const
 int Surface::Height() const
 {
     return surf->h;
+}
+
+Dimension Surface::Size() const
+{
+    return Dimension(surf->w, surf->h);
+}
+
+
+uint8_t Surface::getAlphaMod() const
+{
+    uint8_t result;
+    int res = SDL_GetSurfaceAlphaMod(surf, &result);
+    if (res != 0)
+        throw Sdl::exception();
+    return result;
+}
+
+void Surface::setAlphaMod(uint8_t const& value)
+{
+    int res = SDL_SetSurfaceAlphaMod(surf, value);
+    if (res != 0)
+        throw Sdl::exception();
+}
+
+BlendMode Surface::getBlend() const
+{
+    SDL_BlendMode result;
+    int res = SDL_GetSurfaceBlendMode(surf, &result);
+
+    if (res != 0)
+        throw Sdl::exception();
+
+    return (BlendMode)result;
+}
+
+void Surface::setBlend(BlendMode const& value)
+{
+    SDL_BlendMode val = (SDL_BlendMode)value;
+    int res = SDL_SetSurfaceBlendMode(surf, val);
+
+    if (res != 0)
+        throw Sdl::exception();
+}
+
+Color Surface::getColorMod() const
+{
+    Color c;
+    int res = SDL_GetSurfaceColorMod(surf, &c.r, &c.g, &c.b);
+    if (res != 0)
+        throw Sdl::exception();
+    return c;
+}
+
+void Surface::setColorMod(Color const& value)
+{
+    int res = SDL_SetSurfaceColorMod(surf, value.r, value.g, value.b);
+    if (res != 0)
+        throw Sdl::exception();
+}
+
+Rect Surface::getClipRect() const
+{
+    SDL_Rect result;
+    SDL_GetClipRect(surf, &result);
+
+    return ConvertRect(result);
+}
+
+void Surface::setClipRect(Rect const& value)
+{
+    SDL_Rect val = ConvertRect(value);
+    int res = SDL_SetClipRect(surf, &val);
+    if (res != 0)
+        throw Sdl::exception();
+}
+
+void Surface::setClipRect(std::nullptr_t)
+{
+    int res = SDL_SetClipRect(surf, nullptr);
+    if (res != 0)
+        throw Sdl::exception();
+}
+
+
+void Surface::Blit(Surface const& src, Point srcrect, Rect dstrect)
+{
+    SDL_Rect srcr{srcrect.x, srcrect.y, 0, 0};
+    SDL_Rect dstr = ConvertRect(dstrect);
+    int result = SDL_UpperBlit(src.surf, &srcr, surf, &dstr);
+
+    if(result != 0)
+        throw Sdl::exception();
+}
+void Surface::Blit(Surface const& src, Point srcrect)
+{
+    SDL_Rect srcr{srcrect.x, srcrect.y, 0, 0};
+    int result = SDL_UpperBlit(src.surf, &srcr, surf, nullptr);
+
+    if(result != 0)
+        throw Sdl::exception();
+}
+void Surface::Blit(Surface const& src, Rect dstrect)
+{
+    SDL_Rect dstr = ConvertRect(dstrect);
+    int result = SDL_UpperBlit(src.surf, nullptr, surf, &dstr);
+
+    if(result != 0)
+        throw Sdl::exception();
+}
+void Surface::Blit(Surface const& src)
+{
+    int result = SDL_UpperBlit(src.surf, nullptr, surf, nullptr);
+
+    if(result != 0)
+        throw Sdl::exception();
+}
+
+void Surface::Stretch(Surface const& src)
+{
+    int result = SDL_UpperBlitScaled(surf, nullptr, src.surf, nullptr);
+    if(result != 0)
+        throw Sdl::exception();
+}
+
+void Surface::Stretch(Surface const& src, Rect srcrect, Rect dstrect)
+{
+    SDL_Rect r1 = ConvertRect(srcrect);
+    SDL_Rect r2 = ConvertRect(dstrect);
+
+    int result = SDL_UpperBlitScaled(surf, &r1, src.surf, &r2);
+    if(result != 0)
+        throw Sdl::exception();
+}
+
+void Surface::Stretch(Surface const& src, Rect rect, bool dst)
+{
+    SDL_Rect r1 = ConvertRect(rect);
+
+    int result;
+    if (dst)
+        result = SDL_UpperBlitScaled(surf, nullptr, src.surf, &r1);
+    else
+        result = SDL_UpperBlitScaled(surf, &r1, src.surf, nullptr);
+
+    if(result != 0)
+        throw Sdl::exception();
+}
+
+
+void Surface::Fill(Rect area, Color c)
+{
+    SDL_Rect a = ConvertRect(area);
+    int result = SDL_FillRect(surf, &a, SDL_MapRGBA(surf->format, c.r, c.g, c.b, c.a));
+
+    if(result != 0)
+        throw Sdl::exception();
+}
+void Surface::Fill(Color c)
+{
+    int result = SDL_FillRect(surf, nullptr, SDL_MapRGBA(surf->format, c.r, c.g, c.b, c.a));
+
+    if(result != 0)
+        throw Sdl::exception();
 }
 
 Surface::operator SDL_Surface*() const

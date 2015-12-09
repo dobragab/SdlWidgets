@@ -60,7 +60,7 @@ TTF_Font * Font::get_font_by_size(int fontsize) const
     return font;
 }
 
-Texture Font::Render(Renderer& renderer, std::u16string text, int fontsize, Color color, Font::RenderMode mode, Color bgnd_color) const
+Surface Font::Render(std::u16string text, int fontsize, Color color, Font::RenderMode mode, Color bgnd_color) const
 {
     SDL_Surface * surf = nullptr;
     SDL_Color c = ConvertColor(color);
@@ -87,17 +87,15 @@ Texture Font::Render(Renderer& renderer, std::u16string text, int fontsize, Colo
             break;
     }
 
-    if (!surf)
-        throw Sdl::exception();
+    return Surface{surf};
+}
 
-    SDL_Texture * txt = SDL_CreateTextureFromSurface((SDL_Renderer*)renderer, surf);
 
-    SDL_FreeSurface(surf);
+Texture Font::Render(Renderer& renderer, std::u16string text, int fontsize, Color color, Font::RenderMode mode, Color bgnd_color) const
+{
+    Surface surf = Render(text, fontsize, color, mode, bgnd_color);
 
-    if (!txt)
-        throw Sdl::exception();
-
-    return Texture{txt};
+    return Texture{renderer, surf};
 }
 
 }

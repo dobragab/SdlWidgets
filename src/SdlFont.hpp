@@ -38,11 +38,11 @@ public:
     Font& operator=(Font const& old) = delete;
 
     Font(Font&& old);
-
     Font& operator=(Font&& old);
 
     ~Font();
 
+    Surface Render(std::u16string text, int fontsize, Color color, Font::RenderMode mode, Color bgnd_color = Color{}) const;
     Texture Render(Renderer& renderer, std::u16string text, int fontsize, Color color, Font::RenderMode mode, Color bgnd_color = Color{}) const;
 
 };

@@ -90,6 +90,14 @@ struct Color
 
 };
 
+enum class BlendMode
+{
+    None  = 0x00000000, // SDL_BLENDMODE_NONE
+    Blend = 0x00000001, // SDL_BLENDMODE_BLEND
+    Add   = 0x00000002, // SDL_BLENDMODE_ADD
+    Mod   = 0x00000004, // SDL_BLENDMODE_MOD
+};
+
 }
 
 #endif // SDL_HPP_INCLUDED

@@ -42,7 +42,7 @@ Texture::~Texture()
 }
 
 
-Dimension Texture::size() const
+Dimension Texture::Size() const
 {
     int w, h;
     int access;
