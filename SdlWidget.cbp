@@ -78,40 +78,19 @@
 			<Add directory="$(#sdl.lib)" />
 		</Linker>
 		<Unit filename="Makefile" />
-		<Unit filename="src/Property.hpp">
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
+		<Unit filename="src/Property.hpp" />
 		<Unit filename="src/PropertyNull.hpp" />
-		<Unit filename="src/SDL_custom.cpp">
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="src/SDL_custom.hpp">
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
+		<Unit filename="src/SDL_custom.cpp" />
+		<Unit filename="src/SDL_custom.hpp" />
 		<Unit filename="src/SDL_gfx/SDL_gfxBlitFunc.cpp" />
 		<Unit filename="src/SDL_gfx/SDL_gfxBlitFunc.h" />
 		<Unit filename="src/SDL_gfx/SDL_gfxPrimitives.cpp" />
 		<Unit filename="src/SDL_gfx/SDL_gfxPrimitives.h" />
 		<Unit filename="src/SDL_gfx/SDL_gfxPrimitives_font.h" />
-		<Unit filename="src/Sdl.cpp">
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="src/Sdl.hpp">
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="src/SdlEvent.cpp">
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="src/SdlEvent.hpp">
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
+		<Unit filename="src/Sdl.cpp" />
+		<Unit filename="src/Sdl.hpp" />
+		<Unit filename="src/SdlEvent.cpp" />
+		<Unit filename="src/SdlEvent.hpp" />
 		<Unit filename="src/SdlFont.cpp" />
 		<Unit filename="src/SdlFont.hpp" />
 		<Unit filename="src/SdlRenderer.cpp" />
@@ -122,38 +101,22 @@
 		<Unit filename="src/SdlTexture.hpp" />
 		<Unit filename="src/SdlTimer.cpp" />
 		<Unit filename="src/SdlTimer.hpp" />
-		<Unit filename="src/SdlWidget.cpp">
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="src/SdlWidget.hpp">
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
+		<Unit filename="src/SdlWidget.cpp" />
+		<Unit filename="src/SdlWidget.hpp" />
 		<Unit filename="src/SdlWidgets.hpp" />
-		<Unit filename="src/SdlWindow.cpp">
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="src/SdlWindow.hpp">
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
+		<Unit filename="src/SdlWindow.cpp" />
+		<Unit filename="src/SdlWindow.hpp" />
 		<Unit filename="src/WidgetButton.cpp" />
 		<Unit filename="src/WidgetButton.hpp" />
 		<Unit filename="src/WidgetColorBox.cpp" />
 		<Unit filename="src/WidgetColorBox.hpp" />
 		<Unit filename="src/WidgetLabel.cpp" />
 		<Unit filename="src/WidgetLabel.hpp" />
-		<Unit filename="src/WidgetSlider.cpp">
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
+		<Unit filename="src/WidgetSlider.cpp" />
 		<Unit filename="src/WidgetSlider.hpp" />
-		<Unit filename="src/main.cpp">
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
+		<Unit filename="src/WidgetTextBox.cpp" />
+		<Unit filename="src/WidgetTextBox.hpp" />
+		<Unit filename="src/main.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
