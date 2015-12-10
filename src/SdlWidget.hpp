@@ -55,6 +55,7 @@ public:
     virtual void MouseClick(MouseClickEvent& ev) = 0;
     virtual void MouseMove(MouseMoveEvent& ev) = 0;
     virtual void KeyPress(KeyboardEvent& ev) = 0;
+    virtual void TextInput(TextInputEvent& ev) = 0;
     virtual void TimerTick(TimerEvent& ev) = 0;
 
     virtual void Paint(Renderer& screen);

@@ -45,6 +45,8 @@ public:
     Surface Render(std::u16string text, int fontsize, Color color, Font::RenderMode mode, Color bgnd_color = Color{}) const;
     Texture Render(Renderer& renderer, std::u16string text, int fontsize, Color color, Font::RenderMode mode, Color bgnd_color = Color{}) const;
 
+    Point RenderSize(std::u16string text, int fontsize) const;
+
 };
 
 }

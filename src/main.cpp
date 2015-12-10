@@ -27,6 +27,7 @@ Sdl::Label label1;
 Sdl::Label label2;
 Sdl::Slider slider1;
 Sdl::ColorBox box;
+Sdl::TextBox textbox;
 
 void button1_MouseClicked(Sdl::Widget& sender, Sdl::MouseClickEvent& ev)
 {
@@ -79,12 +80,17 @@ try
     box.Location = Sdl::Point(100, 250);
     box.DisplayedColor = Sdl::Color(slider1.Value, 0, 0);
 
+    textbox.Location = Sdl::Point(100, 200);
+    textbox.Size = Sdl::Dimension(100, 23);
+    textbox.Text = u"Default";
+
     screen.Add(button1);
     screen.Add(button2);
     screen.Add(label1);
     screen.Add(slider1);
     screen.Add(label2);
     screen.Add(box);
+    screen.Add(textbox);
 
     screen.ShowDialog();
 }

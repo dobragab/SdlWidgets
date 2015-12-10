@@ -1,5 +1,5 @@
-#ifndef WIDGETBUTTON_HPP_INCLUDED
-#define WIDGETBUTTON_HPP_INCLUDED
+#ifndef WIDGETTEXTBOX_HPP_INCLUDED
+#define WIDGETTEXTBOX_HPP_INCLUDED
 
 #include "Sdl.hpp"
 #include "SdlEvent.hpp"
@@ -9,23 +9,27 @@
 namespace Sdl
 {
 
-class Button : public Widget
+class TextBox : public Widget
 {
+    bool cursor_visible = false;
+
+    uint16_t cursor_position = 0;
+
     std::u16string text;
 
     static Dimension defsize;
 
-    bool down = false;
-
     Timer timer;
 
-    GETTERSETTER(text, std::u16string, Text)
+    GETTER(text, std::u16string, Text)
 
 public:
 
-    PROPERTY(Button, std::u16string, Text);
+    void setText(std::u16string const& value);
 
-    Button(std::u16string text = u"Button") :
+    PROPERTY(TextBox, std::u16string, Text);
+
+    TextBox(std::u16string text = u"TextBox") :
         Widget{defloc, defsize},
         text{text},
         timer{500, this}
@@ -37,8 +41,8 @@ public:
 
     virtual void MouseClick(MouseClickEvent& ev) override;
     virtual void MouseMove (MouseMoveEvent & ev) override { }
-    virtual void KeyPress  (KeyboardEvent  & ev) override { }
-    virtual void TextInput (TextInputEvent & ev) override { }
+    virtual void KeyPress  (KeyboardEvent  & ev) override;
+    virtual void TextInput (TextInputEvent & ev) override;
     virtual void TimerTick (TimerEvent     & ev) override;
 
     MouseClickEvent::Handler MouseClicked = nullptr;
@@ -46,4 +50,5 @@ public:
 
 }
 
-#endif // WIDGETBUTTON_HPP_INCLUDED
+
+#endif // WIDGETTEXTBOX_HPP_INCLUDED

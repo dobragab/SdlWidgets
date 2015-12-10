@@ -91,6 +91,16 @@ void Window::ShowDialog()
                 break;
             }
 
+            case SDL_TEXTINPUT:
+            {
+                TextInputEvent e(std::u16string{utf8_2_unicode((uint8_t*)ev.text.text)});
+                for (int i = Items.size() - 1; i >= 0 && !e.NeedsRedraw(); --i)
+                    Items[i].w->TextInput(e);
+
+                to_redraw = e.NeedsRedraw();
+                break;
+            }
+
             case SDL_TICK:
             {
                 TimerEvent e(ev.user.code, ev.user.data1, ev.user.data2);

@@ -47,6 +47,7 @@ Dimension Button::defsize = Dimension(75, 23);
 Dimension Label::defsize = Dimension(0, 0);
 Dimension Slider::defsize = Dimension(100, 23);
 Dimension ColorBox::defsize = Dimension(128, 32);
+Dimension TextBox::defsize = Dimension(128, 32);
 Point Widget::defloc = Point(0, 0);
 Color Widget::default_main_color = Color(0x00C0F0FF);
 Color Slider::default_color = Color(0x00CCFF75);

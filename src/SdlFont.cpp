@@ -62,6 +62,9 @@ TTF_Font * Font::get_font_by_size(int fontsize) const
 
 Surface Font::Render(std::u16string text, int fontsize, Color color, Font::RenderMode mode, Color bgnd_color) const
 {
+    if(text.length() == 0)
+        return Surface{0, 0};
+
     SDL_Surface * surf = nullptr;
     SDL_Color c = ConvertColor(color);
     TTF_Font * font = get_font_by_size(fontsize);
@@ -96,6 +99,19 @@ Texture Font::Render(Renderer& renderer, std::u16string text, int fontsize, Colo
     Surface surf = Render(text, fontsize, color, mode, bgnd_color);
 
     return Texture{renderer, surf};
+}
+
+Point Font::RenderSize(std::u16string text, int fontsize) const
+{
+    TTF_Font * font = get_font_by_size(fontsize);
+
+    int x, y;
+
+    const uint16_t * utext = reinterpret_cast<const uint16_t*>(text.c_str());
+
+    TTF_SizeUNICODE(font, utext, &x, &y);
+
+    return Point(x, y);
 }
 
 }

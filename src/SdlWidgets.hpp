@@ -14,5 +14,6 @@
 #include "WidgetColorBox.hpp"
 #include "WidgetLabel.hpp"
 #include "WidgetSlider.hpp"
+#include "WidgetTextBox.hpp"
 
 #endif // SDLWIDGETS_HPP_INCLUDED
