@@ -45,7 +45,7 @@ public:
     virtual void TextInput (TextInputEvent & ev) override;
     virtual void TimerTick (TimerEvent     & ev) override;
 
-    MouseClickEvent::Handler MouseClicked = nullptr;
+    TextInputEvent::Handler TextChanged = nullptr;
 };
 
 }

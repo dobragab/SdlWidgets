@@ -130,6 +130,8 @@ void TextBox::KeyPress (KeyboardEvent& ev) {
         {
             text = std::u16string{text.begin(), text.begin() + cursor_position - 1} + std::u16string{text.begin() + cursor_position, text.end()};
             --cursor_position;
+            if (TextChanged)
+                TextChanged(*this, ev);
             ev.Redraw();
         }
         break;
@@ -137,6 +139,8 @@ void TextBox::KeyPress (KeyboardEvent& ev) {
         if(cursor_position < text.length())
         {
             text = std::u16string{text.begin(), text.begin() + cursor_position} + std::u16string{text.begin() + cursor_position + 1, text.end()};
+            if (TextChanged)
+                TextChanged(*this, ev);
             ev.Redraw();
         }
         break;
@@ -157,6 +161,9 @@ void TextBox::TextInput (TextInputEvent& ev)
 {
     text = std::u16string{text.begin(), text.begin() + cursor_position} + ev.text + std::u16string{text.begin() + cursor_position, text.end()};
     ++cursor_position;
+    if (TextChanged)
+        TextChanged(*this, ev);
+
     timer.Finish();
     timer.Start();
     cursor_visible = true;

@@ -39,7 +39,7 @@ struct KeyboardEvent : public Event
 
 struct TextInputEvent : public Event
 {
-    using Handler = std::function<void(Widget& sender, KeyboardEvent& ev)>;
+    using Handler = std::function<void(Widget& sender, TextInputEvent& ev)>;
 
     std::u16string text;
 
