@@ -11,7 +11,7 @@ namespace Sdl
 
 class TextBox : public Widget
 {
-    bool cursor_visible = false;
+    bool cursor_visible = true;
 
     uint16_t cursor_position = 0;
 

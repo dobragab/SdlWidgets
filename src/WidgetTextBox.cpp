@@ -49,7 +49,14 @@ void TextBox::MouseClick(MouseClickEvent& ev)
             else
                 max = current - 1;
         }
-        cursor_position = current;
+
+        if (cursor_position != current)
+        {
+            cursor_visible = true;
+            timer.Finish();
+            timer.Start();
+            cursor_position = current;
+        }
         ev.Redraw();
     }
 
@@ -99,7 +106,9 @@ void TextBox::TimerTick (TimerEvent& ev)
 }
 
 void TextBox::KeyPress (KeyboardEvent& ev) {
-    bool read_char = false;
+
+    uint16_t old_pos = cursor_position;
+
     switch(ev.keysym)
     {
     case (uint16_t)SDLK_RIGHT:
@@ -131,13 +140,15 @@ void TextBox::KeyPress (KeyboardEvent& ev) {
             ev.Redraw();
         }
         break;
-    default: read_char = true;
+    default:
+        break;
     }
 
-    if(read_char)
+    if(cursor_position != old_pos)
     {
-
-
+        cursor_visible = true;
+        timer.Finish();
+        timer.Start();
     }
 }
 
@@ -146,6 +157,9 @@ void TextBox::TextInput (TextInputEvent& ev)
 {
     text = std::u16string{text.begin(), text.begin() + cursor_position} + ev.text + std::u16string{text.begin() + cursor_position, text.end()};
     ++cursor_position;
+    timer.Finish();
+    timer.Start();
+    cursor_visible = true;
     ev.Redraw();
 }
 
