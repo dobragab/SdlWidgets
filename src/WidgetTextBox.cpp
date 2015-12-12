@@ -9,8 +9,16 @@ namespace Sdl
 
 void TextBox::setText(std::u16string const& value)
 {
-    text = value;
+    set_text(value);
     cursor_position = text.length();
+}
+
+void TextBox::set_text(std::u16string const& value)
+{
+    TextChangedEvent ev{text};
+    text = value;
+    if (TextChanged)
+        TextChanged(*this, ev);
 }
 
 void TextBox::MouseClick(MouseClickEvent& ev)
@@ -128,19 +136,17 @@ void TextBox::KeyPress (KeyboardEvent& ev) {
     case (uint16_t)SDLK_BACKSPACE:
         if(0 < cursor_position)
         {
-            text = std::u16string{text.begin(), text.begin() + cursor_position - 1} + std::u16string{text.begin() + cursor_position, text.end()};
+            set_text(std::u16string{text.begin(), text.begin() + cursor_position - 1} +
+                     std::u16string{text.begin() + cursor_position, text.end()});
             --cursor_position;
-            if (TextChanged)
-                TextChanged(*this, ev);
             ev.Redraw();
         }
         break;
     case (uint16_t)SDLK_DELETE:
         if(cursor_position < text.length())
         {
-            text = std::u16string{text.begin(), text.begin() + cursor_position} + std::u16string{text.begin() + cursor_position + 1, text.end()};
-            if (TextChanged)
-                TextChanged(*this, ev);
+            set_text(std::u16string{text.begin(), text.begin() + cursor_position} +
+                     std::u16string{text.begin() + cursor_position + 1, text.end()});
             ev.Redraw();
         }
         break;
@@ -159,10 +165,10 @@ void TextBox::KeyPress (KeyboardEvent& ev) {
 
 void TextBox::TextInput (TextInputEvent& ev)
 {
-    text = std::u16string{text.begin(), text.begin() + cursor_position} + ev.text + std::u16string{text.begin() + cursor_position, text.end()};
+    set_text(std::u16string{text.begin(), text.begin() + cursor_position} +
+             ev.text +
+             std::u16string{text.begin() + cursor_position, text.end()});
     ++cursor_position;
-    if (TextChanged)
-        TextChanged(*this, ev);
 
     timer.Finish();
     timer.Start();

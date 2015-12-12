@@ -120,6 +120,8 @@ struct ValueChangedEvent : public Event
     { }
 };
 
+using TextChangedEvent = ValueChangedEvent<std::u16string>;
+
 }
 
 #endif // SDLEVENT_HPP_INCLUDED

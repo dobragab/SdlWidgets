@@ -22,6 +22,7 @@ class TextBox : public Widget
     Timer timer;
 
     GETTER(text, std::u16string, Text)
+    void set_text(std::u16string const& value);
 
 public:
 
@@ -45,7 +46,7 @@ public:
     virtual void TextInput (TextInputEvent & ev) override;
     virtual void TimerTick (TimerEvent     & ev) override;
 
-    TextInputEvent::Handler TextChanged = nullptr;
+    TextChangedEvent::Handler TextChanged = nullptr;
 };
 
 }

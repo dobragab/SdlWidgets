@@ -46,6 +46,11 @@ void slider_ValueChanged(Sdl::Widget& sender, Sdl::ValueChangedEvent<int>& ev)
     box.DisplayedColor = Sdl::Color(slider1.Value, 0, 0 );
 }
 
+void textbox_TextChanged(Sdl::Widget& sender, Sdl::TextChangedEvent& ev)
+{
+    label1.Text = textbox.Text;
+}
+
 
 int main(int argc, char **argv)
 {
@@ -83,6 +88,7 @@ try
     textbox.Location = Sdl::Point(100, 200);
     textbox.Size = Sdl::Dimension(100, 23);
     textbox.Text = u"Default";
+    textbox.TextChanged = textbox_TextChanged;
 
     screen.Add(button1);
     screen.Add(button2);
