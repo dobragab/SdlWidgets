@@ -35,39 +35,14 @@ public:
 
     ~Window();
 
-    void Add(Widget * w)
-    {
-        Items.push_back(Item{w, true});
-    }
+    void Add(Widget * w);
+    void Add(Widget& w);
 
-    void Add(Widget& w)
-    {
-        Items.push_back(Item{&w, false});
-        w.SetParent(this);
-    }
-
-    void SetFocus(Widget * w) {
-        if(focused != w)
-        {
-            if(focused)
-                focused->ReleaseFocus();
-
-            focused = w;
-            focused->SetFocus();
-        }
-    }
-
-    void ReleaseFocus(Widget * w) {
-        if(focused)
-        {
-            focused->ReleaseFocus();
-            focused = nullptr;
-        }
-    }
+    void SetFocus(Widget * w);
+    void ReleaseFocus();
 
     void Redraw();
     void ShowDialog();
-
 };
 
 }

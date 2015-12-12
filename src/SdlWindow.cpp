@@ -30,6 +30,38 @@ Window::~Window()
     SDL_DestroyWindow(window);
 }
 
+void Window::Add(Widget * w)
+{
+    Items.push_back(Item{w, true});
+}
+
+void Window::Add(Widget& w)
+{
+    Items.push_back(Item{&w, false});
+    w.SetParent(this);
+}
+
+void Window::SetFocus(Widget * w)
+{
+    if(focused != w)
+    {
+        if(focused)
+            focused->ReleaseFocus();
+
+        focused = w;
+        focused->SetFocus();
+    }
+}
+
+void Window::ReleaseFocus()
+{
+    if(focused)
+    {
+        focused->ReleaseFocus();
+        focused = nullptr;
+    }
+}
+
 void Window::Redraw()
 {
     screen.Fill((Color)hatter);
@@ -68,6 +100,10 @@ void Window::ShowDialog()
                     Items[i].w->MouseClick(e);
 
                 to_redraw = e.NeedsRedraw();
+
+                if (!to_redraw)
+                    ReleaseFocus();
+
                 break;
             }
 
@@ -86,9 +122,10 @@ void Window::ShowDialog()
                 KeyboardEvent e(ev.key.keysym.mod, ev.key.keysym.sym);
 
                 if(focused)
+                {
                     focused->KeyPress(e);
-
-                to_redraw = e.NeedsRedraw();
+                    to_redraw = e.NeedsRedraw();
+                }
                 break;
             }
 
@@ -97,9 +134,10 @@ void Window::ShowDialog()
                 TextInputEvent e(std::u16string{utf8_2_unicode((uint8_t*)ev.text.text)});
 
                 if(focused)
+                {
                     focused->TextInput(e);
-
-                to_redraw = e.NeedsRedraw();
+                    to_redraw = e.NeedsRedraw();
+                }
                 break;
             }
 
@@ -116,7 +154,6 @@ void Window::ShowDialog()
             default:
                 to_redraw = false;
                 break;
-
         }
 
         if (to_redraw)

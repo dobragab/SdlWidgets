@@ -10,6 +10,7 @@ namespace Sdl
 void TextBox::SetFocus()
 {
     Widget::SetFocus();
+    cursor_visible = true;
     timer.Start();
 }
 
