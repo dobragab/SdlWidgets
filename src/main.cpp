@@ -20,7 +20,7 @@ std::u16string Tou16string(T const& val)
     return std::u16string{ws.begin(), ws.end()};
 }
 
-
+Sdl::Window * screenptr;
 Sdl::Button button1;
 Sdl::Button button2;
 Sdl::Label label1;
@@ -28,10 +28,11 @@ Sdl::Label label2;
 Sdl::Slider slider1;
 Sdl::ColorBox box;
 Sdl::TextBox textbox;
+Sdl::TextBox textbox2;
 
 void button1_MouseClicked(Sdl::Widget& sender, Sdl::MouseClickEvent& ev)
 {
-    button2.Visible = !button2.Visible;
+    screenptr->SetFocus(&textbox);
 }
 
 void button2_MouseClicked(Sdl::Widget& sender, Sdl::MouseClickEvent& ev)
@@ -51,6 +52,11 @@ void textbox_TextChanged(Sdl::Widget& sender, Sdl::TextChangedEvent& ev)
     label1.Text = textbox.Text;
 }
 
+void textbox2_TextChanged(Sdl::Widget& sender, Sdl::TextChangedEvent& ev)
+{
+    label1.Text = textbox2.Text;
+}
+
 
 int main(int argc, char **argv)
 {
@@ -59,6 +65,7 @@ try
     Sdl::Init();
     Sdl::SetFont(Sdl::Font{"micross.ttf"});
     Sdl::Window screen(640, 480, "Sdl::Trial");
+    screenptr = &screen;
 
     button1.Text = u"Gomb";
     button1.Size = Sdl::Dimension(75, 40);
@@ -85,10 +92,15 @@ try
     box.Location = Sdl::Point(100, 250);
     box.DisplayedColor = Sdl::Color(slider1.Value, 0, 0);
 
-    textbox.Location = Sdl::Point(100, 200);
+    textbox.Location = Sdl::Point(100, 185);
     textbox.Size = Sdl::Dimension(100, 23);
     textbox.Text = u"Default";
     textbox.TextChanged = textbox_TextChanged;
+
+    textbox2.Location = Sdl::Point(100, 215);
+    textbox2.Size = Sdl::Dimension(100, 23);
+    textbox2.Text = u"Default2";
+    textbox2.TextChanged = textbox2_TextChanged;
 
     screen.Add(button1);
     screen.Add(button2);
@@ -97,6 +109,7 @@ try
     screen.Add(label2);
     screen.Add(box);
     screen.Add(textbox);
+    screen.Add(textbox2);
 
     screen.ShowDialog();
 }

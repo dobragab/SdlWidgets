@@ -21,6 +21,8 @@ uint32_t const feliratszin = 0x00C0F0FF;
 extern Font WindowFont;
 void SetFont(Font&& f);
 
+class Window;
+
 class Widget
 {
 protected:
@@ -32,6 +34,8 @@ protected:
     Point location;
     Dimension size;
     Color maincolor = default_main_color;
+    bool isfocused;
+    Window * parent = nullptr;
 
     GETTERSETTER(size, Dimension, Size)
     GETTERSETTER(location, Point, Location)
@@ -49,6 +53,21 @@ public:
         location{p},
         size{s}
     { }
+
+    virtual void SetParent(Window * parent)
+    {
+        this->parent = parent;
+    }
+
+    virtual void SetFocus()
+    {
+        isfocused = true;
+    }
+
+    virtual void ReleaseFocus()
+    {
+        isfocused = false;
+    }
 
     virtual bool IsClicked(Point p);
 

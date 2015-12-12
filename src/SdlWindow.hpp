@@ -28,6 +28,8 @@ class Window
 
     std::vector<Item> Items;
 
+    Widget * focused = nullptr;
+
 public:
     Window(int16_t width, int16_t height, const char * caption = "");
 
@@ -41,6 +43,26 @@ public:
     void Add(Widget& w)
     {
         Items.push_back(Item{&w, false});
+        w.SetParent(this);
+    }
+
+    void SetFocus(Widget * w) {
+        if(focused != w)
+        {
+            if(focused)
+                focused->ReleaseFocus();
+
+            focused = w;
+            focused->SetFocus();
+        }
+    }
+
+    void ReleaseFocus(Widget * w) {
+        if(focused)
+        {
+            focused->ReleaseFocus();
+            focused = nullptr;
+        }
     }
 
     void Redraw();

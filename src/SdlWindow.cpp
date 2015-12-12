@@ -84,8 +84,9 @@ void Window::ShowDialog()
             case SDL_KEYDOWN:
             {
                 KeyboardEvent e(ev.key.keysym.mod, ev.key.keysym.sym);
-                for (int i = Items.size() - 1; i >= 0 && !e.NeedsRedraw(); --i)
-                    Items[i].w->KeyPress(e);
+
+                if(focused)
+                    focused->KeyPress(e);
 
                 to_redraw = e.NeedsRedraw();
                 break;
@@ -94,8 +95,9 @@ void Window::ShowDialog()
             case SDL_TEXTINPUT:
             {
                 TextInputEvent e(std::u16string{utf8_2_unicode((uint8_t*)ev.text.text)});
-                for (int i = Items.size() - 1; i >= 0 && !e.NeedsRedraw(); --i)
-                    Items[i].w->TextInput(e);
+
+                if(focused)
+                    focused->TextInput(e);
 
                 to_redraw = e.NeedsRedraw();
                 break;

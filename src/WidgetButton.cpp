@@ -14,6 +14,7 @@ void Button::MouseClick(MouseClickEvent& ev)
     {
         if(IsClicked(ev.p))
         {
+            parent->SetFocus(this);
             down = true;
             ev.Redraw();
         }
@@ -21,7 +22,10 @@ void Button::MouseClick(MouseClickEvent& ev)
     else
     {
         if (down && MouseClicked && IsClicked(ev.p))
+        {
+            parent->SetFocus(this);
             MouseClicked(*this, ev);
+        }
 
         if(down)
             ev.Redraw();

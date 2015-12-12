@@ -7,6 +7,19 @@
 namespace Sdl
 {
 
+void TextBox::SetFocus()
+{
+    Widget::SetFocus();
+    timer.Start();
+}
+
+void TextBox::ReleaseFocus()
+{
+    Widget::ReleaseFocus();
+    cursor_visible = false;
+    timer.Finish();
+}
+
 void TextBox::setText(std::u16string const& value)
 {
     set_text(value);
@@ -29,6 +42,7 @@ void TextBox::MouseClick(MouseClickEvent& ev)
 
     if(IsClicked(ev.p))
     {
+        parent->SetFocus(this);
         size_t min = 0, max = text.length();
         bool found = false;
 

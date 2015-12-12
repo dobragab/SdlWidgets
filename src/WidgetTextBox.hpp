@@ -11,7 +11,7 @@ namespace Sdl
 
 class TextBox : public Widget
 {
-    bool cursor_visible = true;
+    bool cursor_visible = false;
 
     uint16_t cursor_position = 0;
 
@@ -34,9 +34,10 @@ public:
         Widget{defloc, defsize},
         text{text},
         timer{500, this}
-    {
-        timer.Start();
-    }
+    {}
+
+    virtual void SetFocus() override;
+    virtual void ReleaseFocus() override;
 
     virtual void Paint(Renderer& screen) override;
 

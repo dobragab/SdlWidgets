@@ -31,6 +31,7 @@ void Slider::MouseClick(MouseClickEvent& ev)
     {
         if(IsClicked(ev.p))
         {
+            parent->SetFocus(this);
             down = true;
             setval(ev.p.x);
             ev.Redraw();
