@@ -9,6 +9,8 @@ Theme Widget::DefaultTheme
 {
     Color(0x000000FF),
     Color(0xFFFFFF20),
+    Color(0xFFFFFF00),
+    Color(0xFFFFFF60),
     Color(0x101010FF),
     Color(0x00C0F0FF),
     new Font("micross.ttf"),
@@ -19,6 +21,8 @@ Theme Slider::DefaultTheme
 {
     Widget::DefaultTheme.InnerBorderColor,
     Widget::DefaultTheme.OuterBorderColor,
+    Widget::DefaultTheme.BackgroundColor1,
+    Widget::DefaultTheme.BackgroundColor2,
     Widget::DefaultTheme.BaseColor,
     Color(0x00CCFF70),
     Widget::DefaultTheme.MainFont,
@@ -29,6 +33,8 @@ Theme ColorBox::DefaultTheme
 {
     Widget::DefaultTheme.InnerBorderColor,
     Widget::DefaultTheme.OuterBorderColor,
+    Widget::DefaultTheme.BackgroundColor1,
+    Widget::DefaultTheme.BackgroundColor2,
     Widget::DefaultTheme.BaseColor,
     Color(0x000000FF),
     Widget::DefaultTheme.MainFont,

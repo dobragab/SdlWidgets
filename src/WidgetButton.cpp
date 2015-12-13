@@ -32,7 +32,6 @@ void Button::MouseClick(MouseClickEvent& ev)
 
         down = false;
     }
-
 }
 
 void Button::Paint(Renderer& screen)
@@ -40,18 +39,23 @@ void Button::Paint(Renderer& screen)
     if (!Visible)
         return;
 
-    int stripes = 20;
-
     Surface temp{size.w, size.h};
 
     temp.draw_rounded_rectangle(0, 0, size.w-1, size.h-1, 2, MainTheme.InnerBorderColor);
     temp.draw_box(1, 1, size.w-2, size.h-2, MainTheme.BaseColor);
 
-    for (int y=0; y<stripes-1; ++y)
-    {
-        Color c(255, 255, 255, down ? y*3 : (stripes-1-y)*3);
-        temp.draw_box(1, 1+y*size.h/stripes, size.w-2, (y+1)*size.h/stripes, c);
-    }
+    if(down)
+        for (int y = 0; y < size.h - 2; ++y)
+        {
+            Color c = Color::Transition(MainTheme.BackgroundColor1, MainTheme.BackgroundColor2, double(y) / (size.h-3));
+            temp.draw_hline(1, size.w-2, y+1, c);
+        }
+    else
+        for (int y = 0; y < size.h - 2; ++y)
+        {
+            Color c = Color::Transition(MainTheme.BackgroundColor2, MainTheme.BackgroundColor1, double(y) / (size.h-3));
+            temp.draw_hline(1, size.w-2, y+1, c);
+        }
 
     temp.draw_rectangle(1, 1, size.w-2, size.h-2, MainTheme.OuterBorderColor);
 

@@ -48,4 +48,14 @@ void Init()
 
 }
 
+Color Color::Transition(Color Primary, Color Secondary, double ratio)
+{
+    int r = Primary.r * (1.0-ratio) + Secondary.r * ratio;
+    int g = Primary.g * (1.0-ratio) + Secondary.g * ratio;
+    int b = Primary.b * (1.0-ratio) + Secondary.b * ratio;
+    int a = Primary.a * (1.0-ratio) + Secondary.a * ratio;
+
+    return Color(r, g, b, a);
+}
+
 }

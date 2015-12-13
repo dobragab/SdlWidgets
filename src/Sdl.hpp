@@ -87,6 +87,7 @@ struct Color
                 a;
     }
 
+    static Color Transition(Color Primary, Color Secondary, double ratio);
 
 };
 

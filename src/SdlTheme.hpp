@@ -11,12 +11,16 @@ struct Theme
 {
     Color InnerBorderColor;
     Color OuterBorderColor;
+    Color BackgroundColor1;
+    Color BackgroundColor2;
     Color BaseColor;
     Color MainColor;
     Font * MainFont;
     size_t FontSize;
     Theme ( Color InnerBorderColor,
             Color OuterBorderColor,
+            Color BackgroundColor1,
+            Color BackgroundColor2,
             Color BaseColor,
             Color MainColor,
             Font * MainFont,
@@ -24,6 +28,8 @@ struct Theme
 
         InnerBorderColor{InnerBorderColor},
         OuterBorderColor{OuterBorderColor},
+        BackgroundColor1{BackgroundColor1},
+        BackgroundColor2{BackgroundColor2},
         BaseColor{BaseColor},
         MainColor{MainColor},
         MainFont{MainFont},
