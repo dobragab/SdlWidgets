@@ -64,7 +64,7 @@ void Window::ReleaseFocus()
 
 void Window::Redraw()
 {
-    screen.Fill((Color)hatter);
+    screen.Fill(BackgroundColor);
 
     for(auto item : Items)
         item.w->Paint(screen);

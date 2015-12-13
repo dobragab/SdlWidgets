@@ -12,16 +12,13 @@ namespace Sdl
 class Slider : public Widget
 {
     static Dimension defsize;
-    static Color default_color;
 
     int minvalue = 0, maxvalue = 100;
     int value = 0;
-    Color color = default_color;
-
 
     bool down = false;
 
-    GETTERSETTER(color, Color, BoxColor)
+    GETTERSETTER(MainTheme.MainColor, Color, BoxnColor)
 
     GETTER(minvalue, int, Minimum)
     GETTER(maxvalue, int, Maximum)
@@ -58,7 +55,7 @@ class Slider : public Widget
 public:
 
     Slider() :
-        Widget{defloc, defsize}
+        Widget{defloc, defsize, SliderTheme}
     { }
 
     PROPERTY(Slider, int, Minimum);

@@ -44,8 +44,8 @@ void Button::Paint(Renderer& screen)
 
     Surface temp{size.w, size.h};
 
-    temp.draw_rounded_rectangle(0, 0, size.w-1, size.h-1, 2, Color(keret));
-    temp.draw_box(1, 1, size.w-2, size.h-2, Color(alapszin));
+    temp.draw_rounded_rectangle(0, 0, size.w-1, size.h-1, 2, MainTheme.InnerBorderColor);
+    temp.draw_box(1, 1, size.w-2, size.h-2, MainTheme.BaseColor);
 
     for (int y=0; y<stripes-1; ++y)
     {
@@ -53,9 +53,9 @@ void Button::Paint(Renderer& screen)
         temp.draw_box(1, 1+y*size.h/stripes, size.w-2, (y+1)*size.h/stripes, c);
     }
 
-    temp.draw_rectangle(1, 1, size.w-2, size.h-2, Color(keretvilagos));
+    temp.draw_rectangle(1, 1, size.w-2, size.h-2, MainTheme.OuterBorderColor);
 
-    Surface textsurf = WindowFont.Render(text, default_font_size, (Color)gombfeliratszin, Font::Blended);
+    Surface textsurf = WindowFont.Render(text, MainTheme.FontSize, MainTheme.MainColor, Font::Blended);
 
     Dimension textsize = textsurf.Size();
     Rect sp;

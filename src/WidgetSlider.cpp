@@ -14,7 +14,7 @@ void Slider::Paint(Renderer& screen)
 
     Surface temp{size.w, size.h};
 
-    temp.draw_box(1, 1, ((size.w-2)*(value - minvalue - 1)/(maxvalue - minvalue) + 1), size.h-2, color);
+    temp.draw_box(1, 1, ((size.w-2)*(value - minvalue - 1)/(maxvalue - minvalue) + 1), size.h-2, MainTheme.MainColor);
 
     Texture cache{screen, temp};
     Rect dstrect(location.x, location.y, size.w, size.h);

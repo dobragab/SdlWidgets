@@ -23,6 +23,8 @@ class Window
         { }
     };
 
+    static Color BackgroundColor;
+
     SDL_Window * window = nullptr;
     Renderer screen;
 

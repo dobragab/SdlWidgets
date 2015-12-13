@@ -99,6 +99,8 @@
 		<Unit filename="src/SdlSurface.hpp" />
 		<Unit filename="src/SdlTexture.cpp" />
 		<Unit filename="src/SdlTexture.hpp" />
+		<Unit filename="src/SdlTheme.cpp" />
+		<Unit filename="src/SdlTheme.hpp" />
 		<Unit filename="src/SdlTimer.cpp" />
 		<Unit filename="src/SdlTimer.hpp" />
 		<Unit filename="src/SdlWidget.cpp" />

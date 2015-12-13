@@ -11,20 +11,16 @@ namespace Sdl
 
 class ColorBox : public Widget
 {
-    static Color default_color;
     static Dimension defsize;
 
-    Color color;
-
-    GETTERSETTER(color, Color, DisplayedColor)
+    GETTERSETTER(MainTheme.MainColor, Color, DisplayedColor)
 
 public:
 
     PROPERTY(ColorBox, Color, DisplayedColor);
 
-    ColorBox(Color c = default_color) :
-        Widget{defloc, defsize},
-        color{c}
+    ColorBox() :
+        Widget{defloc, defsize, ColorBoxTheme}
     { }
 
     virtual void Paint(Renderer& screen) override;
