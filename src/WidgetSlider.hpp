@@ -53,9 +53,10 @@ class Slider : public Widget
     void setval(int16_t x);
 
 public:
+    static Theme DefaultTheme;
 
     Slider() :
-        Widget{defloc, defsize, SliderTheme}
+        Widget{defloc, defsize, Slider::DefaultTheme}
     { }
 
     PROPERTY(Slider, int, Minimum);

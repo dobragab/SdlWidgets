@@ -16,11 +16,12 @@ class ColorBox : public Widget
     GETTERSETTER(MainTheme.MainColor, Color, DisplayedColor)
 
 public:
+    static Theme DefaultTheme;
 
     PROPERTY(ColorBox, Color, DisplayedColor);
 
     ColorBox() :
-        Widget{defloc, defsize, ColorBoxTheme}
+        Widget{defloc, defsize, ColorBox::DefaultTheme}
     { }
 
     virtual void Paint(Renderer& screen) override;

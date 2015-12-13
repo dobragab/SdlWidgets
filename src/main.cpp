@@ -63,7 +63,6 @@ int main(int argc, char **argv)
 try
 {
     Sdl::Init();
-    Sdl::SetFont(Sdl::Font{"micross.ttf"});
     Sdl::Window screen(640, 480, "Sdl::Trial");
     screenptr = &screen;
 

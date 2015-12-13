@@ -5,7 +5,7 @@
 namespace Sdl
 {
 
-Theme WidgetTheme
+Theme Widget::DefaultTheme
 {
     Color(0x000000FF),
     Color(0xFFFFFF20),
@@ -15,33 +15,34 @@ Theme WidgetTheme
     int(16)
 };
 
-Theme SliderTheme
+Theme Slider::DefaultTheme
 {
-    WidgetTheme.InnerBorderColor,
-    WidgetTheme.OuterBorderColor,
-    WidgetTheme.BaseColor,
-    Color(0x00FFFF50),
-    WidgetTheme.MainFont,
-    WidgetTheme.FontSize
+    Widget::DefaultTheme.InnerBorderColor,
+    Widget::DefaultTheme.OuterBorderColor,
+    Widget::DefaultTheme.BaseColor,
+    Color(0x00CCFF70),
+    Widget::DefaultTheme.MainFont,
+    Widget::DefaultTheme.FontSize
 };
 
-
-Theme ColorBoxTheme
+Theme ColorBox::DefaultTheme
 {
-    WidgetTheme.InnerBorderColor,
-    WidgetTheme.OuterBorderColor,
-    WidgetTheme.BaseColor,
+    Widget::DefaultTheme.InnerBorderColor,
+    Widget::DefaultTheme.OuterBorderColor,
+    Widget::DefaultTheme.BaseColor,
     Color(0x000000FF),
-    WidgetTheme.MainFont,
-    WidgetTheme.FontSize
+    Widget::DefaultTheme.MainFont,
+    Widget::DefaultTheme.FontSize
 };
+
+Color Window::DefaultColor(0x303030FF);
+
+Point Widget::defloc = Point(0, 0);
 
 Dimension Button::defsize = Dimension(75, 23);
 Dimension Label::defsize = Dimension(0, 0);
 Dimension Slider::defsize = Dimension(100, 23);
 Dimension ColorBox::defsize = Dimension(128, 32);
 Dimension TextBox::defsize = Dimension(128, 32);
-Point Widget::defloc = Point(0, 0);
-Color Window::BackgroundColor(0x303030FF);
 
 }

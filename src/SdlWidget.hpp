@@ -11,9 +11,6 @@
 namespace Sdl
 {
 
-extern Font WindowFont;
-void SetFont(Font&& f);
-
 class Window;
 
 class Widget
@@ -32,6 +29,7 @@ protected:
     GETTERSETTER(MainTheme.MainColor, Color, MainColor)
 
 public:
+    static Theme DefaultTheme;
 
     bool Enabled = true;
     bool Visible = true;
@@ -41,7 +39,7 @@ public:
     PROPERTY(Widget, Dimension, Size);
     PROPERTY(Widget, Point, Location);
 
-    Widget(Point p, Dimension s, Theme theme = WidgetTheme) :
+    Widget(Point p, Dimension s, Theme theme = Widget::DefaultTheme) :
         location{p},
         size{s},
         MainTheme{theme}

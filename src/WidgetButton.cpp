@@ -55,7 +55,7 @@ void Button::Paint(Renderer& screen)
 
     temp.draw_rectangle(1, 1, size.w-2, size.h-2, MainTheme.OuterBorderColor);
 
-    Surface textsurf = WindowFont.Render(text, MainTheme.FontSize, MainTheme.MainColor, Font::Blended);
+    Surface textsurf = MainTheme.MainFont->Render(text, MainTheme.FontSize, MainTheme.MainColor, Font::Blended);
 
     Dimension textsize = textsurf.Size();
     Rect sp;

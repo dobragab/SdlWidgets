@@ -23,8 +23,6 @@ class Window
         { }
     };
 
-    static Color BackgroundColor;
-
     SDL_Window * window = nullptr;
     Renderer screen;
 
@@ -33,6 +31,10 @@ class Window
     Widget * focused = nullptr;
 
 public:
+    static Color DefaultColor;
+
+    Color BackgroundColor = DefaultColor;
+
     Window(int16_t width, int16_t height, const char * caption = "");
 
     ~Window();

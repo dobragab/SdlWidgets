@@ -5,13 +5,6 @@
 namespace Sdl
 {
 
-Font WindowFont;
-
-void SetFont(Font&& f)
-{
-    WindowFont = std::move(f);
-}
-
 void Widget::Paint(Renderer& screen)
 {
     int stripes = 20;

@@ -15,14 +15,13 @@ struct Theme
     Color MainColor;
     Font * MainFont;
     int FontSize;
-    Theme(
-        Color InnerBorderColor,
-        Color OuterBorderColor,
-        Color BaseColor,
-        Color MainColor,
-        Font * MainFont,
-        int FontSize
-    ) :
+    Theme ( Color InnerBorderColor,
+            Color OuterBorderColor,
+            Color BaseColor,
+            Color MainColor,
+            Font * MainFont,
+            int FontSize) :
+
         InnerBorderColor{InnerBorderColor},
         OuterBorderColor{OuterBorderColor},
         BaseColor{BaseColor},
@@ -31,10 +30,6 @@ struct Theme
         FontSize{FontSize}
     { }
 };
-
-extern Theme WidgetTheme;
-extern Theme SliderTheme;
-extern Theme ColorBoxTheme;
 
 }
 
