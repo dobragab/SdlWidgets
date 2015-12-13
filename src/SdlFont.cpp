@@ -47,7 +47,7 @@ Font::~Font()
     free(membuffer);
 }
 
-TTF_Font * Font::get_font_by_size(int fontsize) const
+TTF_Font * Font::get_font_by_size(size_t fontsize) const
 {
     auto it = font_sizes.find(fontsize);
     if (it != font_sizes.end())
@@ -60,7 +60,7 @@ TTF_Font * Font::get_font_by_size(int fontsize) const
     return font;
 }
 
-Surface Font::Render(std::u16string text, int fontsize, Color color, Font::RenderMode mode, Color bgnd_color) const
+Surface Font::Render(std::u16string text, size_t fontsize, Color color, Font::RenderMode mode, Color bgnd_color) const
 {
     if(text.length() == 0)
         return Surface{1, 1};
@@ -94,14 +94,14 @@ Surface Font::Render(std::u16string text, int fontsize, Color color, Font::Rende
 }
 
 
-Texture Font::Render(Renderer& renderer, std::u16string text, int fontsize, Color color, Font::RenderMode mode, Color bgnd_color) const
+Texture Font::Render(Renderer& renderer, std::u16string text, size_t fontsize, Color color, Font::RenderMode mode, Color bgnd_color) const
 {
     Surface surf = Render(text, fontsize, color, mode, bgnd_color);
 
     return Texture{renderer, surf};
 }
 
-Point Font::RenderSize(std::u16string text, int fontsize) const
+Point Font::RenderSize(std::u16string text, size_t fontsize) const
 {
     TTF_Font * font = get_font_by_size(fontsize);
 

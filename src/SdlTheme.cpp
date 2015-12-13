@@ -12,7 +12,7 @@ Theme Widget::DefaultTheme
     Color(0x101010FF),
     Color(0x00C0F0FF),
     new Font("micross.ttf"),
-    int(16)
+    size_t(16)
 };
 
 Theme Slider::DefaultTheme

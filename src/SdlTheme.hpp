@@ -14,13 +14,13 @@ struct Theme
     Color BaseColor;
     Color MainColor;
     Font * MainFont;
-    int FontSize;
+    size_t FontSize;
     Theme ( Color InnerBorderColor,
             Color OuterBorderColor,
             Color BaseColor,
             Color MainColor,
             Font * MainFont,
-            int FontSize) :
+            size_t FontSize) :
 
         InnerBorderColor{InnerBorderColor},
         OuterBorderColor{OuterBorderColor},

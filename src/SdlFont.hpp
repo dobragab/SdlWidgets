@@ -14,9 +14,9 @@ class Font final
     void * membuffer;
     SDL_RWops * memcontent;
 
-    mutable std::map<int, TTF_Font*> font_sizes;
+    mutable std::map<size_t, TTF_Font*> font_sizes;
 
-    TTF_Font * get_font_by_size(int fontsize) const;
+    TTF_Font * get_font_by_size(size_t fontsize) const;
 
 public:
 
@@ -42,10 +42,10 @@ public:
 
     ~Font();
 
-    Surface Render(std::u16string text, int fontsize, Color color, Font::RenderMode mode, Color bgnd_color = Color{}) const;
-    Texture Render(Renderer& renderer, std::u16string text, int fontsize, Color color, Font::RenderMode mode, Color bgnd_color = Color{}) const;
+    Surface Render(std::u16string text, size_t fontsize, Color color, Font::RenderMode mode, Color bgnd_color = Color{}) const;
+    Texture Render(Renderer& renderer, std::u16string text, size_t fontsize, Color color, Font::RenderMode mode, Color bgnd_color = Color{}) const;
 
-    Point RenderSize(std::u16string text, int fontsize) const;
+    Point RenderSize(std::u16string text, size_t fontsize) const;
 
 };
 
