@@ -26,7 +26,41 @@ protected:
 
     GETTERSETTER(size, Dimension, Size)
     GETTERSETTER(location, Point, Location)
-    GETTERSETTER(MainTheme.MainColor, Color, MainColor)
+
+    template<typename TARGET>
+    void draw_outer_border(TARGET& target)
+    {
+        target.draw_rounded_rectangle(0, 0, size.w-1, size.h-1, 2, MainTheme.OuterBorderColor);
+    }
+
+    template<typename TARGET>
+    void draw_inner_border(TARGET& target)
+    {
+        target.draw_rectangle(1, 1, size.w-2, size.h-2, MainTheme.InnerBorderColor);
+    }
+
+    template<typename TARGET>
+    void draw_stripes(TARGET& target, bool pushed = false)
+    {
+        if(pushed)
+            for (int y = 0; y < size.h - 2; ++y)
+            {
+                Color c = Color::Transition(MainTheme.BackgroundColor1, MainTheme.BackgroundColor2, double(y) / (size.h-3));
+                target.draw_hline(1, size.w-2, y+1, c);
+            }
+        else
+            for (int y = 0; y < size.h - 2; ++y)
+            {
+                Color c = Color::Transition(MainTheme.BackgroundColor2, MainTheme.BackgroundColor1, double(y) / (size.h-3));
+                target.draw_hline(1, size.w-2, y+1, c);
+            }
+    }
+
+    template<typename TARGET>
+    void draw_base(TARGET& target)
+    {
+        target.draw_box(1, 1, size.w-2, size.h-2, MainTheme.BaseColor);
+    }
 
 public:
     static Theme DefaultTheme;
@@ -68,7 +102,7 @@ public:
     virtual void TextInput(TextInputEvent& ev) = 0;
     virtual void TimerTick(TimerEvent& ev) = 0;
 
-    virtual void Paint(Renderer& screen);
+    virtual void Paint(Renderer& screen) = 0;
 
     virtual ~Widget() {}
 };

@@ -10,9 +10,12 @@ void Slider::Paint(Renderer& screen)
     if (!Visible)
         return;
 
-    Widget::Paint(screen);
-
     Surface temp{size.w, size.h};
+
+    draw_outer_border(temp);
+    draw_base(temp);
+    draw_stripes(temp);
+    draw_inner_border(temp);
 
     temp.draw_box(1, 1, ((size.w-2)*(value - minvalue - 1)/(maxvalue - minvalue) + 1), size.h-2, MainTheme.MainColor);
 

@@ -7,8 +7,8 @@ namespace Sdl
 
 Theme Widget::DefaultTheme
 {
-    Color(0x000000FF),
     Color(0xFFFFFF20),
+    Color(0x000000FF),
     Color(0xFFFFFF00),
     Color(0xFFFFFF60),
     Color(0x101010FF),
