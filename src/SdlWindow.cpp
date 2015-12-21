@@ -42,6 +42,27 @@ void Window::Add(Widget& w)
     w.SetParent(this);
 }
 
+void Window::Remove(Widget * w)
+{
+    for(auto it = Items.begin(); it < Items.end(); ++it)
+    {
+        if(it->w == w)
+        {
+            if(it->owner)
+                delete it->w;
+
+            Items.erase(it);
+            break;
+        }
+
+    }
+}
+
+void Window::Remove(Widget& w)
+{
+    Remove(&w);
+}
+
 void Window::SetFocus(Widget * w)
 {
     if(focused != w)

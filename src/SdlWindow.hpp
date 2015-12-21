@@ -44,6 +44,9 @@ public:
     void Add(Widget * w);
     void Add(Widget& w);
 
+    void Remove(Widget * w);
+    void Remove(Widget& w);
+
     void SetFocus(Widget * w);
     void ReleaseFocus();
 
