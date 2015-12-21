@@ -77,7 +77,6 @@ void Window::ShowDialog()
     Redraw();
 
     SDL_Event ev;
-    bool quit = false;
 
     bool to_redraw = false;
 
@@ -159,6 +158,11 @@ void Window::ShowDialog()
         if (to_redraw)
             Redraw();
     }
+}
+
+void Window::Close()
+{
+    quit = true;
 }
 
 }

@@ -23,6 +23,8 @@ class Window
         { }
     };
 
+    bool quit = false;
+
     SDL_Window * window = nullptr;
     Renderer screen;
 
@@ -47,6 +49,8 @@ public:
 
     void Redraw();
     void ShowDialog();
+
+    void Close();
 };
 
 }
