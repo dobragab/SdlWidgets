@@ -18,7 +18,7 @@ CC = gcc
 CFLAGS = -std=c99 -O3 $(WARNINGS) $(SDL_CONFIG)
 
 CXX = g++
-CXXFLAGS = -std=c++11 -O3 $(WARNINGS) $(SDL_CONFIG)
+CXXFLAGS = -std=c++11 -O3 $(WARNINGS) $(SDL_CONFIG) -pthread
 LDFLAGS = $(SDL_LIBS) -lm -lz
 
 HEADERS := $(wildcard $(SRCDIR)/*.h) $(wildcard $(SRCDIR)/*.hpp) $(wildcard $(SRCDIR)/*.hh) $(wildcard $(SRCDIR)/*.hxx)
