@@ -34,7 +34,8 @@ Color ConvertColor(SDL_Color c);
 SDL_Rect ConvertRect(Rect r);
 Rect ConvertRect(SDL_Rect r);
 
-std::u16string utf8_2_unicode(uint8_t const *be);
+std::u16string utf8_2_unicode(std::string instr);
+std::string unicode_2_utf8(std::u16string in);
 
 SDL_RWops * SDL_RWFromFileToMemory(const char * filename, const char * mode, void *& bytebuffer);
 
