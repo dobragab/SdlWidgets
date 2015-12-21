@@ -33,6 +33,7 @@ Window::~Window()
 void Window::Add(Widget * w)
 {
     Items.push_back(Item{w, true});
+    w->SetParent(this);
 }
 
 void Window::Add(Widget& w)
