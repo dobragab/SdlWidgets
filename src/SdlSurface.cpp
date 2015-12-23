@@ -1,7 +1,7 @@
 #include "SdlWidgets.hpp"
 
 #include "SDL_custom.hpp"
-#include "SDL_gfx/SDL_gfxPrimitives.h"
+#include <SDL_gfx/SDL_gfxPrimitives.h>
 
 namespace Sdl
 {
