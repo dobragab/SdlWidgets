@@ -12,12 +12,12 @@ std::string ToString(T const& val)
 }
 
 template<typename T>
-std::u16string Tou16string(T const& val)
+std::string Tou16string(T const& val)
 {
     std::wstringstream oss;
     oss << val;
     std::wstring ws = oss.str();
-    return std::u16string{ws.begin(), ws.end()};
+    return std::string{ws.begin(), ws.end()};
 }
 
 Sdl::Window * screenptr;
@@ -66,12 +66,12 @@ try
     Sdl::Window screen(640, 480, "Sdl::Trial");
     screenptr = &screen;
 
-    button1.Text = u"Gomb";
+    button1.Text = "Gomb";
     button1.Size = Sdl::Dimension(75, 40);
     button1.Location = Sdl::Point(100, 100);
     button1.MouseClicked = button1_MouseClicked;
 
-    button2.Text = u"Csere";
+    button2.Text = "Csere";
     button2.Size = Sdl::Dimension(75, 40);
     button2.Location = Sdl::Point(150, 100);
     button2.MouseClicked = button2_MouseClicked;
@@ -82,7 +82,7 @@ try
     slider1.Maximum = 255;
     slider1.ValueChanged = slider_ValueChanged;
 
-    label1.Text = u"Árvíztűrő tükörfúrógép";
+    label1.Text = "Árvíztűrő tükörfúrógép";
     label1.Location = Sdl::Point(100, 80);
 
     label2.Text = Tou16string(slider1.Value);
@@ -93,12 +93,12 @@ try
 
     textbox.Location = Sdl::Point(100, 185);
     textbox.Size = Sdl::Dimension(100, 23);
-    textbox.Text = u"Default";
+    textbox.Text = "Default";
     textbox.TextChanged = textbox_TextChanged;
 
     textbox2.Location = Sdl::Point(100, 215);
     textbox2.Size = Sdl::Dimension(100, 23);
-    textbox2.Text = u"Default2";
+    textbox2.Text = "Default2";
     textbox2.TextChanged = textbox2_TextChanged;
 
     screen.Add(button1);

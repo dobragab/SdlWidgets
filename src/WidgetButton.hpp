@@ -11,7 +11,7 @@ namespace Sdl
 
 class Button : public Widget
 {
-    std::u16string text;
+    std::string text;
 
     static Dimension defsize;
 
@@ -19,13 +19,13 @@ class Button : public Widget
 
     Timer timer;
 
-    GETTERSETTER(text, std::u16string, Text)
+    GETTERSETTER(text, std::string, Text)
 
 public:
 
-    PROPERTY(Button, std::u16string, Text);
+    PROPERTY(Button, std::string, Text);
 
-    Button(std::u16string text = u"Button") :
+    Button(std::string text = "Button") :
         Widget{defloc, defsize},
         text{text},
         timer{500, this}

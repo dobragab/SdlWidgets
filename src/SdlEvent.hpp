@@ -41,9 +41,9 @@ struct TextInputEvent : public Event
 {
     using Handler = std::function<void(Widget& sender, TextInputEvent& ev)>;
 
-    std::u16string text;
+    std::string text;
 
-    TextInputEvent(std::u16string text) :
+    TextInputEvent(std::string text) :
         text{text}
     { }
 };
@@ -120,7 +120,7 @@ struct ValueChangedEvent : public Event
     { }
 };
 
-using TextChangedEvent = ValueChangedEvent<std::u16string>;
+using TextChangedEvent = ValueChangedEvent<std::string>;
 
 }
 

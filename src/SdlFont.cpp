@@ -60,7 +60,7 @@ TTF_Font * Font::get_font_by_size(size_t fontsize) const
     return font;
 }
 
-Surface Font::Render(std::u16string text, size_t fontsize, Color color, Font::RenderMode mode, Color bgnd_color) const
+Surface Font::Render(std::string text, size_t fontsize, Color color, Font::RenderMode mode, Color bgnd_color) const
 {
     if(text.length() == 0)
         return Surface{1, 1};
@@ -69,21 +69,19 @@ Surface Font::Render(std::u16string text, size_t fontsize, Color color, Font::Re
     SDL_Color c = ConvertColor(color);
     TTF_Font * font = get_font_by_size(fontsize);
 
-    const uint16_t * utext = reinterpret_cast<const uint16_t*>(text.c_str());
-
     switch(mode)
     {
         case Font::Solid:
-            surf = TTF_RenderUNICODE_Solid(font, utext, c);
+            surf = TTF_RenderUTF8_Solid(font, text.c_str(), c);
             break;
         case Font::Shaded:
         {
             SDL_Color bgnd = ConvertColor(bgnd_color);
-            surf = TTF_RenderUNICODE_Shaded(font, utext, c, bgnd );
+            surf = TTF_RenderUTF8_Shaded(font, text.c_str(), c, bgnd );
             break;
         }
         case Font::Blended:
-            surf = TTF_RenderUNICODE_Blended(font, utext, c);
+            surf = TTF_RenderUTF8_Blended(font, text.c_str(), c);
             break;
 
         default:
@@ -94,22 +92,20 @@ Surface Font::Render(std::u16string text, size_t fontsize, Color color, Font::Re
 }
 
 
-Texture Font::Render(Renderer& renderer, std::u16string text, size_t fontsize, Color color, Font::RenderMode mode, Color bgnd_color) const
+Texture Font::Render(Renderer& renderer, std::string text, size_t fontsize, Color color, Font::RenderMode mode, Color bgnd_color) const
 {
     Surface surf = Render(text, fontsize, color, mode, bgnd_color);
 
     return Texture{renderer, surf};
 }
 
-Point Font::RenderSize(std::u16string text, size_t fontsize) const
+Point Font::RenderSize(std::string text, size_t fontsize) const
 {
     TTF_Font * font = get_font_by_size(fontsize);
 
     int x, y;
 
-    const uint16_t * utext = reinterpret_cast<const uint16_t*>(text.c_str());
-
-    TTF_SizeUNICODE(font, utext, &x, &y);
+    TTF_SizeUTF8(font, text.c_str(), &x, &y);
 
     return Point(x, y);
 }

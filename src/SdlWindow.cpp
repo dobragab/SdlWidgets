@@ -152,7 +152,7 @@ void Window::ShowDialog()
 
             case SDL_TEXTINPUT:
             {
-                TextInputEvent e(std::u16string{utf8_2_unicode(ev.text.text)});
+                TextInputEvent e(ev.text.text);
 
                 if(focused)
                 {

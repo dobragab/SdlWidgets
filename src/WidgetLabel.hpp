@@ -13,14 +13,14 @@ class Label : public Widget
 {
     static Dimension defsize;
 
-    std::u16string text;
-    GETTERSETTER(text, std::u16string, Text)
+    std::string text;
+    GETTERSETTER(text, std::string, Text)
 
 public:
 
-    PROPERTY(Label, std::u16string, Text);
+    PROPERTY(Label, std::string, Text);
 
-    Label(std::u16string text = u"Label") :
+    Label(std::string text = "Label") :
         Widget{defloc, defsize},
         text{text}
     { }

@@ -15,22 +15,22 @@ class TextBox : public Widget
 
     uint16_t cursor_position = 0;
 
-    std::u16string text;
+    std::string text;
 
     static Dimension defsize;
 
     Timer timer;
 
-    GETTER(text, std::u16string, Text)
-    void set_text(std::u16string const& value);
+    GETTER(text, std::string, Text)
+    void set_text(std::string const& value);
 
 public:
 
-    void setText(std::u16string const& value);
+    void setText(std::string const& value);
 
-    PROPERTY(TextBox, std::u16string, Text);
+    PROPERTY(TextBox, std::string, Text);
 
-    TextBox(std::u16string text = u"TextBox") :
+    TextBox(std::string text = "TextBox") :
         Widget{defloc, defsize},
         text{text},
         timer{500, this}

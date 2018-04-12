@@ -21,13 +21,13 @@ void TextBox::ReleaseFocus()
     timer.Finish();
 }
 
-void TextBox::setText(std::u16string const& value)
+void TextBox::setText(std::string const& value)
 {
     set_text(value);
     cursor_position = text.length();
 }
 
-void TextBox::set_text(std::u16string const& value)
+void TextBox::set_text(std::string const& value)
 {
     TextChangedEvent ev{text};
     text = value;
@@ -51,7 +51,7 @@ void TextBox::MouseClick(MouseClickEvent& ev)
         while(!found && min <= max)
         {
             current = (min + max) / 2;
-            std::u16string tempstring{text.begin(), text.begin() + current};
+            std::string tempstring{text.begin(), text.begin() + current};
             int16_t cursor_x = MainTheme.MainFont->RenderSize(tempstring, MainTheme.FontSize).x;
 
             if(cursor_x <= ev.p.x - location.x)
@@ -60,7 +60,7 @@ void TextBox::MouseClick(MouseClickEvent& ev)
                     found = true;
                 else
                 {
-                    tempstring = std::u16string{text.begin(), text.begin() + current + 1};
+                    tempstring = std::string{text.begin(), text.begin() + current + 1};
                     cursor_x = MainTheme.MainFont->RenderSize(tempstring, MainTheme.FontSize).x;
 
                     if(cursor_x > ev.p.x - location.x)
@@ -111,7 +111,7 @@ void TextBox::Paint(Renderer& screen)
 
     if(cursor_visible)
     {
-        std::u16string tempstring{text, 0, cursor_position};
+        std::string tempstring{text, 0, cursor_position};
         int16_t cursor_x = MainTheme.MainFont->RenderSize(tempstring, MainTheme.FontSize).x;
         temp.draw_line((int16_t)cursor_x, (int16_t)0, (int16_t)cursor_x, (int16_t)size.h, MainTheme.MainColor);
     }
@@ -151,8 +151,8 @@ void TextBox::KeyPress (KeyboardEvent& ev) {
     case (uint16_t)SDLK_BACKSPACE:
         if(0 < cursor_position)
         {
-            set_text(std::u16string{text.begin(), text.begin() + cursor_position - 1} +
-                     std::u16string{text.begin() + cursor_position, text.end()});
+            set_text(std::string{text.begin(), text.begin() + cursor_position - 1} +
+                     std::string{text.begin() + cursor_position, text.end()});
             --cursor_position;
             ev.Redraw();
         }
@@ -160,8 +160,8 @@ void TextBox::KeyPress (KeyboardEvent& ev) {
     case (uint16_t)SDLK_DELETE:
         if(cursor_position < text.length())
         {
-            set_text(std::u16string{text.begin(), text.begin() + cursor_position} +
-                     std::u16string{text.begin() + cursor_position + 1, text.end()});
+            set_text(std::string{text.begin(), text.begin() + cursor_position} +
+                     std::string{text.begin() + cursor_position + 1, text.end()});
             ev.Redraw();
         }
         break;
@@ -180,9 +180,9 @@ void TextBox::KeyPress (KeyboardEvent& ev) {
 
 void TextBox::TextInput (TextInputEvent& ev)
 {
-    set_text(std::u16string{text.begin(), text.begin() + cursor_position} +
+    set_text(std::string{text.begin(), text.begin() + cursor_position} +
              ev.text +
-             std::u16string{text.begin() + cursor_position, text.end()});
+             std::string{text.begin() + cursor_position, text.end()});
     ++cursor_position;
 
     timer.Finish();

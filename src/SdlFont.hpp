@@ -42,10 +42,10 @@ public:
 
     ~Font();
 
-    Surface Render(std::u16string text, size_t fontsize, Color color, Font::RenderMode mode, Color bgnd_color = Color{}) const;
-    Texture Render(Renderer& renderer, std::u16string text, size_t fontsize, Color color, Font::RenderMode mode, Color bgnd_color = Color{}) const;
+    Surface Render(std::string text, size_t fontsize, Color color, Font::RenderMode mode, Color bgnd_color = Color{}) const;
+    Texture Render(Renderer& renderer, std::string text, size_t fontsize, Color color, Font::RenderMode mode, Color bgnd_color = Color{}) const;
 
-    Point RenderSize(std::u16string text, size_t fontsize) const;
+    Point RenderSize(std::string text, size_t fontsize) const;
 
 };
 
