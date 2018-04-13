@@ -62,6 +62,7 @@ struct MouseClickEvent : public Event
     MouseClickEvent(MouseButton button, bool down, uint8_t no_clicks, Point p) :
         button{button},
         down{down},
+        no_clicks{no_clicks},
         p{p}
     { }
 };
