@@ -54,45 +54,31 @@ struct MouseClickEvent : public Event
 {
     using Handler = std::function<void(Widget& sender, MouseClickEvent& ev)>;
 
-    uint8_t button; // The mouse button index (SDL_BUTTON_LEFT, SDL_BUTTON_MIDDLE, SDL_BUTTON_RIGHT)
+    MouseButton button;
     bool down;
+    uint8_t no_clicks;
     Point p;
 
-    MouseClickEvent(uint8_t button, bool down, Point p) :
+    MouseClickEvent(MouseButton button, bool down, uint8_t no_clicks, Point p) :
         button{button},
         down{down},
         p{p}
     { }
-
-    MouseClickEvent(uint8_t button, bool down, int16_t x, int16_t y) :
-        button{button},
-        down{down},
-        p{x, y}
-    { }
-
 };
+
 struct MouseMoveEvent : public Event
 {
     using Handler = std::function<void(Widget& sender, MouseMoveEvent& ev)>;
 
-    uint8_t state; // button states
+    MouseButtonState state;
     Point p;
-    int16_t xrel, yrel;
+    Point vec;
 
-    MouseMoveEvent(uint8_t state, Point p, int16_t xrel, int16_t yrel) :
+    MouseMoveEvent(MouseButtonState state, Point p, Point vec) :
         state{state},
         p{p},
-        xrel{xrel},
-        yrel{yrel}
+        vec{vec}
     { }
-
-    MouseMoveEvent(uint8_t state, int16_t x, int16_t y, int16_t xrel, int16_t yrel) :
-        state{state},
-        p{x, y},
-        xrel{xrel},
-        yrel{yrel}
-    { }
-
 };
 
 struct TimerEvent : public Event

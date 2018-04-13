@@ -56,7 +56,7 @@ void Window::ShowDialog()
             case SDL_MOUSEBUTTONDOWN:
             case SDL_MOUSEBUTTONUP:
             {
-                MouseClickEvent e(ev.button.button, ev.button.state, ev.button.x, ev.button.y);
+                MouseClickEvent e(MouseButton(ev.button.button), ev.button.state == SDL_PRESSED, ev.button.clicks, Point(ev.button.x, ev.button.y));
                 MouseClick(e);
                 to_redraw = e.NeedsRedraw();
                 break;
@@ -64,7 +64,7 @@ void Window::ShowDialog()
 
             case SDL_MOUSEMOTION:
             {
-                MouseMoveEvent e(ev.motion.state, ev.motion.x, ev.motion.y, ev.motion.xrel, ev.motion.yrel);
+                MouseMoveEvent e(MouseButtonState(ev.motion.state), Point(ev.motion.x, ev.motion.y), Point(ev.motion.xrel, ev.motion.yrel));
                 MouseMove(e);
                 to_redraw = e.NeedsRedraw();
                 break;
