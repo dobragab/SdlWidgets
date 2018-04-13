@@ -9,7 +9,7 @@
 namespace Sdl
 {
 
-class TextBox : public Widget
+class TextBox : public Widget, public TimerHandler
 {
     bool cursor_visible = false;
 

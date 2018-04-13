@@ -8,7 +8,7 @@ namespace Sdl
 uint32_t TimerCallback(uint32_t interval, void *param)
 {
     SDL_Event ev;
-    ev.user.code = 0;
+    ev.user.code = interval;
     ev.user.data1 = param;
     ev.user.data2 = nullptr;
     ev.user.type = SDL_TICK;
@@ -17,7 +17,7 @@ uint32_t TimerCallback(uint32_t interval, void *param)
     return interval;
 }
 
-Timer::Timer(uint32_t interval, void * param) :
+Timer::Timer(uint32_t interval, TimerHandler * param) :
     id{0},
     interval{interval},
     param{param}

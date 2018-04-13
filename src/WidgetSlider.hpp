@@ -71,7 +71,6 @@ public:
     virtual void MouseMove (MouseMoveEvent & ev) override;
     virtual void KeyPress  (KeyboardEvent  & ev) override { }
     virtual void TextInput (TextInputEvent & ev) override { }
-    virtual void TimerTick (TimerEvent     & ev) override { }
 
 };
 

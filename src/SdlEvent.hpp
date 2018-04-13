@@ -99,14 +99,10 @@ struct TimerEvent : public Event
 {
     using Handler = std::function<void(Widget& sender, TimerEvent& ev)>;
 
-    int code;
-    void * data1;
-    void * data2;
+    uint32_t interval;
 
-    TimerEvent(int code, void * data1, void * data2) :
-        code{code},
-        data1{data1},
-        data2{data2}
+    explicit TimerEvent(uint32_t interval) :
+        interval{interval}
     { }
 };
 

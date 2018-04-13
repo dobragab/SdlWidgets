@@ -9,7 +9,7 @@
 namespace Sdl
 {
 
-class Button : public Widget
+class Button : public Widget, public TimerHandler
 {
     std::string text;
 

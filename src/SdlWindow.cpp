@@ -2,6 +2,7 @@
 #include "SdlSurface.hpp"
 #include "SdlWidget.hpp"
 #include "SdlWindow.hpp"
+#include "SdlTimer.hpp"
 
 #include "SDL_custom.hpp"
 
@@ -164,10 +165,9 @@ void Window::ShowDialog()
 
             case SDL_TICK:
             {
-                TimerEvent e(ev.user.code, ev.user.data1, ev.user.data2);
-                for (int i = Items.size() - 1; i >= 0 && !e.NeedsRedraw(); --i)
-                    if (Items[i].w == ev.user.data1)
-                        Items[i].w->TimerTick(e);
+                TimerEvent e(ev.user.code);
+                TimerHandler * handler = static_cast<TimerHandler*>(ev.user.data1);
+                handler->TimerTick(e);
 
                 to_redraw = e.NeedsRedraw();
                 break;
