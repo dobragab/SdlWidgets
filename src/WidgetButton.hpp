@@ -21,6 +21,8 @@ class Button : public Widget, public TimerHandler
 
     GETTERSETTER(text, std::string, Text)
 
+    MouseClickEvent::Handler mouseClicked;
+
 public:
 
     PROPERTY(Button, std::string, Text);
@@ -41,7 +43,18 @@ public:
     virtual void TextInput (TextInputEvent & ev) override { }
     virtual void TimerTick (TimerEvent     & ev) override;
 
-    MouseClickEvent::Handler MouseClicked = nullptr;
+    void MouseClicked(MouseClickEvent::Handler clicked)
+    {
+        mouseClicked = std::move(clicked);
+    }
+
+    void MouseClicked(void(WidgetContainer::*clicked)(Widget&, MouseClickEvent&));
+
+    template<typename Derived>
+    void MouseClicked(void(Derived::*clicked)(Widget&, MouseClickEvent&))
+    {
+        MouseClicked(static_cast<void(WidgetContainer::*)(Widget&, MouseClickEvent&)>(clicked));
+    }
 };
 
 }

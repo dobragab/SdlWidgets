@@ -43,14 +43,16 @@ class Slider : public Widget
 
         int oldval = value;
         value = val;
-        if (ValueChanged)
+        if (valueChanged)
         {
             ValueChangedEvent<int> ev{oldval};
-            ValueChanged(*this, ev);
+            valueChanged(*this, ev);
         }
     }
 
     void setval(int16_t x);
+
+    typename ValueChangedEvent<int>::Handler valueChanged = nullptr;
 
 public:
     static Theme DefaultTheme;
@@ -63,7 +65,19 @@ public:
     PROPERTY(Slider, int, Maximum);
     PROPERTY(Slider, int, Value);
 
-    typename ValueChangedEvent<int>::Handler ValueChanged = nullptr;
+    void ValueChanged(ValueChangedEvent<int>::Handler clicked)
+    {
+        valueChanged = std::move(clicked);
+    }
+
+    void ValueChanged(void(WidgetContainer::*clicked)(Widget&, ValueChangedEvent<int>&));
+
+    template<typename Derived>
+    void ValueChanged(void(Derived::*clicked)(Widget&, ValueChangedEvent<int>&))
+    {
+        ValueChanged(static_cast<void(WidgetContainer::*)(Widget&, ValueChangedEvent<int>&)>(clicked));
+    }
+
 
     virtual void Paint(Renderer& screen) override;
 

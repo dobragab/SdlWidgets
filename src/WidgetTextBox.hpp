@@ -47,7 +47,20 @@ public:
     virtual void TextInput (TextInputEvent & ev) override;
     virtual void TimerTick (TimerEvent     & ev) override;
 
-    TextChangedEvent::Handler TextChanged = nullptr;
+    TextChangedEvent::Handler textChanged = nullptr;
+
+    void TextChanged(TextChangedEvent::Handler clicked)
+    {
+        textChanged = std::move(clicked);
+    }
+
+    void TextChanged(void(WidgetContainer::*clicked)(Widget&, TextChangedEvent&));
+
+    template<typename Derived>
+    void TextChanged(void(Derived::*clicked)(Widget&, TextChangedEvent&))
+    {
+        TextChanged(static_cast<void(WidgetContainer::*)(Widget&, TextChangedEvent&)>(clicked));
+    }
 };
 
 }

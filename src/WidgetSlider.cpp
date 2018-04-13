@@ -67,4 +67,9 @@ void Slider::setval(int16_t x)
         Value = minvalue + (maxvalue - minvalue) * (x-location.x)/(size.w-2);
 }
 
+void Slider::ValueChanged(void(WidgetContainer::*clicked)(Widget&, ValueChangedEvent<int>&))
+{
+    valueChanged = std::bind(clicked, parent, std::placeholders::_1, std::placeholders::_2);
+}
+
 }

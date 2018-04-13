@@ -31,8 +31,8 @@ void TextBox::set_text(std::string const& value)
 {
     TextChangedEvent ev{text};
     text = value;
-    if (TextChanged)
-        TextChanged(*this, ev);
+    if (textChanged)
+        textChanged(*this, ev);
 }
 
 void TextBox::MouseClick(MouseClickEvent& ev)
@@ -189,6 +189,11 @@ void TextBox::TextInput (TextInputEvent& ev)
     timer.Start();
     cursor_visible = true;
     ev.Redraw();
+}
+
+void TextBox::TextChanged(void(WidgetContainer::*clicked)(Widget&, TextChangedEvent&))
+{
+    textChanged = std::bind(clicked, parent, std::placeholders::_1, std::placeholders::_2);
 }
 
 }

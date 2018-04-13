@@ -2,6 +2,8 @@
 
 #include "SDL_custom.hpp"
 
+#include <functional>
+
 namespace Sdl
 {
 
@@ -21,10 +23,10 @@ void Button::MouseClick(MouseClickEvent& ev)
     }
     else
     {
-        if (down && MouseClicked && IsClicked(ev.p))
+        if (down && mouseClicked && IsClicked(ev.p))
         {
             parent->SetFocus(this);
-            MouseClicked(*this, ev);
+            mouseClicked(*this, ev);
         }
 
         if(down)
@@ -69,5 +71,11 @@ void Button::TimerTick (TimerEvent& ev)
     //Visible = !Visible;
     ev.Redraw();
 }
+
+void Button::MouseClicked(void(WidgetContainer::*clicked)(Widget&, MouseClickEvent&))
+{
+    mouseClicked = std::bind(clicked, parent, std::placeholders::_1, std::placeholders::_2);
+}
+
 
 }
