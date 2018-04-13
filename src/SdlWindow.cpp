@@ -9,12 +9,12 @@
 namespace Sdl
 {
 
-Window::Window(int16_t width, int16_t height, const char * caption) :
+Window::Window(Dimension dim, const char * caption) :
     window{SDL_CreateWindow(caption,
                             SDL_WINDOWPOS_CENTERED,
                             SDL_WINDOWPOS_CENTERED,
-                            width,
-                            height,
+                            dim.w,
+                            dim.h,
                             SDL_WINDOW_OPENGL)},
     screen{SDL_CreateRenderer(window, -1, 0)}
 {
@@ -24,74 +24,13 @@ Window::Window(int16_t width, int16_t height, const char * caption) :
 
 Window::~Window()
 {
-    for(unsigned i = 0; i < Items.size(); ++i)
-        if(Items[i].owner)
-            delete Items[i].w;
-
     SDL_DestroyWindow(window);
 }
 
-void Window::Add(Widget * w)
-{
-    Items.push_back(Item{w, true});
-    w->SetParent(this);
-}
-
-void Window::Add(Widget& w)
-{
-    Items.push_back(Item{&w, false});
-    w.SetParent(this);
-}
-
-void Window::Remove(Widget * w)
-{
-    for(auto it = Items.begin(); it < Items.end(); ++it)
-    {
-        if(it->w == w)
-        {
-            if(it->owner)
-                delete it->w;
-
-            Items.erase(it);
-            break;
-        }
-
-    }
-}
-
-void Window::Remove(Widget& w)
-{
-    Remove(&w);
-}
-
-void Window::SetFocus(Widget * w)
-{
-    if(focused != w)
-    {
-        if(focused)
-            focused->ReleaseFocus();
-
-        focused = w;
-        focused->SetFocus();
-    }
-}
-
-void Window::ReleaseFocus()
-{
-    if(focused)
-    {
-        focused->ReleaseFocus();
-        focused = nullptr;
-    }
-}
 
 void Window::Redraw()
 {
-    screen.Fill(BackgroundColor);
-
-    for(auto item : Items)
-        item.w->Paint(screen);
-
+    Paint(screen);
     screen.Flip();
 }
 
@@ -118,23 +57,15 @@ void Window::ShowDialog()
             case SDL_MOUSEBUTTONUP:
             {
                 MouseClickEvent e(ev.button.button, ev.button.state, ev.button.x, ev.button.y);
-                for (int i = Items.size() - 1; i >= 0 && !e.NeedsRedraw(); --i)
-                    Items[i].w->MouseClick(e);
-
+                MouseClick(e);
                 to_redraw = e.NeedsRedraw();
-
-                if (!to_redraw)
-                    ReleaseFocus();
-
                 break;
             }
 
             case SDL_MOUSEMOTION:
             {
                 MouseMoveEvent e(ev.motion.state, ev.motion.x, ev.motion.y, ev.motion.xrel, ev.motion.yrel);
-                for (int i = Items.size() - 1; i >= 0 && !e.NeedsRedraw(); --i)
-                    Items[i].w->MouseMove(e);
-
+                MouseMove(e);
                 to_redraw = e.NeedsRedraw();
                 break;
             }
@@ -142,24 +73,16 @@ void Window::ShowDialog()
             case SDL_KEYDOWN:
             {
                 KeyboardEvent e{ev.key.keysym.scancode, Keycode(ev.key.keysym.sym), Keymod(ev.key.keysym.mod)};
-
-                if(focused)
-                {
-                    focused->KeyPress(e);
-                    to_redraw = e.NeedsRedraw();
-                }
+                KeyPress(e);
+                to_redraw = e.NeedsRedraw();
                 break;
             }
 
             case SDL_TEXTINPUT:
             {
                 TextInputEvent e(ev.text.text);
-
-                if(focused)
-                {
-                    focused->TextInput(e);
-                    to_redraw = e.NeedsRedraw();
-                }
+                TextInput(e);
+                to_redraw = e.NeedsRedraw();
                 break;
             }
 
@@ -168,7 +91,6 @@ void Window::ShowDialog()
                 TimerEvent e(ev.user.code);
                 TimerHandler * handler = static_cast<TimerHandler*>(ev.user.data1);
                 handler->TimerTick(e);
-
                 to_redraw = e.NeedsRedraw();
                 break;
             }

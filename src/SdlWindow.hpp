@@ -11,44 +11,23 @@ namespace Sdl
 
 class Window
 {
-
-    struct Item
-    {
-        Widget * w;
-        bool owner;
-
-        Item(Widget * w, bool owner) :
-            w{w},
-            owner{owner}
-        { }
-    };
-
     bool quit = false;
 
     SDL_Window * window = nullptr;
     Renderer screen;
 
-    std::vector<Item> Items;
+    virtual void MouseClick(MouseClickEvent& ev) = 0;
+    virtual void MouseMove(MouseMoveEvent& ev) = 0;
+    virtual void KeyPress(KeyboardEvent& ev) = 0;
+    virtual void TextInput(TextInputEvent& ev) = 0;
 
-    Widget * focused = nullptr;
+    virtual void Paint(Renderer& screen) = 0;
 
 public:
-    static Color DefaultColor;
 
-    Color BackgroundColor = DefaultColor;
+    Window(Dimension dim, const char * caption = "");
 
-    Window(int16_t width, int16_t height, const char * caption = "");
-
-    ~Window();
-
-    void Add(Widget * w);
-    void Add(Widget& w);
-
-    void Remove(Widget * w);
-    void Remove(Widget& w);
-
-    void SetFocus(Widget * w);
-    void ReleaseFocus();
+    virtual ~Window();
 
     void Redraw();
     void ShowDialog();

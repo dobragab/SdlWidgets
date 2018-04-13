@@ -10,6 +10,9 @@
 #include "SdlWidget.hpp"
 #include "SdlWindow.hpp"
 
+#include "WidgetContainer.hpp"
+#include "WidgetWindow.hpp"
+
 #include "WidgetButton.hpp"
 #include "WidgetColorBox.hpp"
 #include "WidgetLabel.hpp"

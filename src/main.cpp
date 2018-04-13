@@ -3,24 +3,7 @@
 
 #include "SdlWidgets.hpp"
 
-template<typename T>
-std::string ToString(T const& val)
-{
-    std::ostringstream oss;
-    oss << val;
-    return oss.str();
-}
-
-template<typename T>
-std::string Tou16string(T const& val)
-{
-    std::wstringstream oss;
-    oss << val;
-    std::wstring ws = oss.str();
-    return std::string{ws.begin(), ws.end()};
-}
-
-Sdl::Window * screenptr;
+Sdl::WidgetWindow * screenptr;
 Sdl::Button button1;
 Sdl::Button button2;
 Sdl::Label label1;
@@ -43,7 +26,7 @@ void button2_MouseClicked(Sdl::Widget& sender, Sdl::MouseClickEvent& ev)
 void slider_ValueChanged(Sdl::Widget& sender, Sdl::ValueChangedEvent<int>& ev)
 {
     Sdl::Slider& slider = dynamic_cast<Sdl::Slider&>(sender);
-    label2.Text = Tou16string(slider.Value);
+    label2.Text = std::to_string(slider.Value);
     box.DisplayedColor = Sdl::Color(slider1.Value, 0, 0 );
 }
 
@@ -63,7 +46,7 @@ int main(int argc, char **argv)
 try
 {
     Sdl::Init();
-    Sdl::Window screen(640, 480, "Sdl::Trial");
+    Sdl::WidgetWindow screen(Sdl::Dimension(640, 480), "Sdl::Trial");
     screenptr = &screen;
 
     button1.Text = "Gomb";
@@ -85,7 +68,7 @@ try
     label1.Text = "Árvíztűrő tükörfúrógép";
     label1.Location = Sdl::Point(100, 80);
 
-    label2.Text = Tou16string(slider1.Value);
+    label2.Text = std::to_string(slider1.Value);
     label2.Location = Sdl::Point(210, 150);
 
     box.Location = Sdl::Point(100, 250);

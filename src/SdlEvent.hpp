@@ -113,7 +113,7 @@ struct ValueChangedEvent : public Event
 
     T oldvalue;
 
-    ValueChangedEvent(T oldvalue) :
+    explicit ValueChangedEvent(T oldvalue) :
         oldvalue{oldvalue}
     { }
 };

@@ -11,7 +11,7 @@
 namespace Sdl
 {
 
-class Window;
+class WidgetContainer;
 
 class Widget
 {
@@ -22,7 +22,7 @@ protected:
     Point location;
     Dimension size;
     bool isfocused;
-    Window * parent = nullptr;
+    WidgetContainer * parent = nullptr;
 
     GETTERSETTER(size, Dimension, Size)
     GETTERSETTER(location, Point, Location)
@@ -79,7 +79,7 @@ public:
         MainTheme{theme}
     { }
 
-    virtual void SetParent(Window * parent)
+    virtual void SetParent(WidgetContainer * parent)
     {
         this->parent = parent;
     }
