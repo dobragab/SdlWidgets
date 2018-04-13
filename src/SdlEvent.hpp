@@ -28,12 +28,14 @@ struct KeyboardEvent : public Event
 {
     using Handler = std::function<void(Widget& sender, KeyboardEvent& ev)>;
 
-    uint16_t modifiers; // SDLMod
-    uint16_t keysym;    // SDLKey
+    Scancode scancode;
+    Keycode keysym;
+    Keymod modifiers;
 
-    KeyboardEvent(uint16_t modifiers, uint16_t keysym) :
-        modifiers{modifiers},
-        keysym{keysym}
+    KeyboardEvent(Scancode scancode, Keycode keysym, Keymod modifiers) :
+        scancode{scancode},
+        keysym{keysym},
+        modifiers{modifiers}
     { }
 };
 

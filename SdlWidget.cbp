@@ -79,21 +79,21 @@
 			<Add directory="$(#sdl.lib)" />
 		</Linker>
 		<Unit filename="Makefile" />
+		<Unit filename="SDL_gfx/SDL_gfxBlitFunc.cpp" />
+		<Unit filename="SDL_gfx/SDL_gfxBlitFunc.h" />
+		<Unit filename="SDL_gfx/SDL_gfxPrimitives.cpp" />
+		<Unit filename="SDL_gfx/SDL_gfxPrimitives.h" />
+		<Unit filename="SDL_gfx/SDL_gfxPrimitives_font.h" />
 		<Unit filename="src/Property.hpp" />
 		<Unit filename="src/PropertyNull.hpp" />
 		<Unit filename="src/SDL_custom.cpp" />
 		<Unit filename="src/SDL_custom.hpp" />
-		<Unit filename="src/SDL_gfx/SDL_gfxBlitFunc.cpp" />
-		<Unit filename="src/SDL_gfx/SDL_gfxBlitFunc.h" />
-		<Unit filename="src/SDL_gfx/SDL_gfxPrimitives.cpp" />
-		<Unit filename="src/SDL_gfx/SDL_gfxPrimitives.h" />
-		<Unit filename="src/SDL_gfx/SDL_gfxPrimitives_font.h" />
 		<Unit filename="src/Sdl.cpp" />
 		<Unit filename="src/Sdl.hpp" />
-		<Unit filename="src/SdlEvent.cpp" />
 		<Unit filename="src/SdlEvent.hpp" />
 		<Unit filename="src/SdlFont.cpp" />
 		<Unit filename="src/SdlFont.hpp" />
+		<Unit filename="src/SdlKeys.hpp" />
 		<Unit filename="src/SdlRenderer.cpp" />
 		<Unit filename="src/SdlRenderer.hpp" />
 		<Unit filename="src/SdlSurface.cpp" />

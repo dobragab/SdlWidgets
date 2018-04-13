@@ -140,7 +140,7 @@ void Window::ShowDialog()
 
             case SDL_KEYDOWN:
             {
-                KeyboardEvent e(ev.key.keysym.mod, ev.key.keysym.sym);
+                KeyboardEvent e{ev.key.keysym.scancode, Keycode(ev.key.keysym.sym), Keymod(ev.key.keysym.mod)};
 
                 if(focused)
                 {

@@ -134,21 +134,21 @@ void TextBox::KeyPress (KeyboardEvent& ev) {
 
     switch(ev.keysym)
     {
-    case (uint16_t)SDLK_RIGHT:
+    case SDLK_RIGHT:
         if(cursor_position < text.length())
         {
             ++cursor_position;
             ev.Redraw();
         }
         break;
-    case (uint16_t)SDLK_LEFT:
+    case SDLK_LEFT:
         if(0 < cursor_position)
         {
             --cursor_position;
             ev.Redraw();
         }
         break;
-    case (uint16_t)SDLK_BACKSPACE:
+    case SDLK_BACKSPACE:
         if(0 < cursor_position)
         {
             set_text(std::string{text.begin(), text.begin() + cursor_position - 1} +
@@ -157,7 +157,7 @@ void TextBox::KeyPress (KeyboardEvent& ev) {
             ev.Redraw();
         }
         break;
-    case (uint16_t)SDLK_DELETE:
+    case SDLK_DELETE:
         if(cursor_position < text.length())
         {
             set_text(std::string{text.begin(), text.begin() + cursor_position} +
