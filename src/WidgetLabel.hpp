@@ -1,6 +1,8 @@
 #ifndef WIDGETLABEL_HPP_INCLUDED
 #define WIDGETLABEL_HPP_INCLUDED
 
+#include <utility>
+
 #include "Sdl.hpp"
 #include "SdlEvent.hpp"
 #include "SdlWidget.hpp"
@@ -22,7 +24,7 @@ public:
 
     Label(std::string text = "Label") :
         Widget{defloc, defsize},
-        text{text}
+        text{std::move(text)}
     { }
 
     virtual void Paint(Renderer& screen) override;

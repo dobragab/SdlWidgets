@@ -1,6 +1,8 @@
 #ifndef WIDGETTEXTBOX_HPP_INCLUDED
 #define WIDGETTEXTBOX_HPP_INCLUDED
 
+#include <utility>
+
 #include "Sdl.hpp"
 #include "SdlEvent.hpp"
 #include "SdlWidget.hpp"
@@ -32,7 +34,7 @@ public:
 
     TextBox(std::string text = "TextBox") :
         Widget{defloc, defsize},
-        text{text},
+        text{std::move(text)},
         timer{500, this}
     {}
 

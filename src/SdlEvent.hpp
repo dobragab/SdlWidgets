@@ -3,6 +3,7 @@
 
 #include "Sdl.hpp"
 #include <functional>
+#include <utility>
 
 namespace Sdl
 {
@@ -46,7 +47,7 @@ struct TextInputEvent : public Event
     std::string text;
 
     TextInputEvent(std::string text) :
-        text{text}
+        text{std::move(text)}
     { }
 };
 

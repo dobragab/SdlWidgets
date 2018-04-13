@@ -1,6 +1,8 @@
 #ifndef WIDGETBUTTON_HPP_INCLUDED
 #define WIDGETBUTTON_HPP_INCLUDED
 
+#include <utility>
+
 #include "Sdl.hpp"
 #include "SdlEvent.hpp"
 #include "SdlWidget.hpp"
@@ -29,7 +31,7 @@ public:
 
     Button(std::string text = "Button") :
         Widget{defloc, defsize},
-        text{text},
+        text{std::move(text)},
         timer{500, this}
     {
         timer.Start();
