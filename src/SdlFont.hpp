@@ -11,13 +11,6 @@ namespace Sdl
 
 class Font final
 {
-    void * membuffer;
-    SDL_RWops * memcontent;
-
-    mutable std::map<size_t, TTF_Font*> font_sizes;
-
-    TTF_Font * get_font_by_size(size_t fontsize) const;
-
 public:
 
     enum RenderMode
@@ -27,12 +20,30 @@ public:
         Blended = 3,
     };
 
+    enum RenderStyle
+    {
+        Normal = 0,
+        Bold = 1,
+        Italic = 2,
+        Underline = 4,
+        Strikethrough = 8,
+    };
+
+private:
+    void * membuffer;
+    SDL_RWops * memcontent;
+
+    mutable std::map<size_t, _TTF_Font*> font_sizes;
+
+    _TTF_Font * get_font_by_size(size_t fontsize, RenderStyle style) const;
+
+public:
     Font() :
         membuffer{nullptr},
         memcontent{nullptr}
     { }
 
-    Font(std::string filename);
+    explicit Font(std::string const& filename);
 
     Font(Font const& old) = delete;
     Font& operator=(Font const& old) = delete;
@@ -42,10 +53,10 @@ public:
 
     ~Font();
 
-    Surface Render(std::string text, size_t fontsize, Color color, Font::RenderMode mode, Color bgnd_color = Color{}) const;
-    Texture Render(Renderer& renderer, std::string text, size_t fontsize, Color color, Font::RenderMode mode, Color bgnd_color = Color{}) const;
+    Surface Render(std::string const& text, size_t fontsize, Color color, RenderMode mode = Blended, RenderStyle style = Normal, Color bgnd_color = Color{}) const;
+    Texture Render(Renderer& renderer, std::string const& text, size_t fontsize, Color color, RenderMode mode = Blended, RenderStyle style = Normal, Color bgnd_color = Color{}) const;
 
-    Point RenderSize(std::string text, size_t fontsize) const;
+    Dimension RenderSize(std::string const& text, size_t fontsize, RenderStyle style = Normal) const;
 
 };
 

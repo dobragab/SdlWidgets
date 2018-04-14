@@ -17,6 +17,7 @@ struct Theme
     Color MainColor;
     Font * MainFont;
     size_t FontSize;
+    Font::RenderStyle FontStyle;
     Theme ( Color InnerBorderColor,
             Color OuterBorderColor,
             Color BackgroundColor1,
@@ -24,7 +25,8 @@ struct Theme
             Color BaseColor,
             Color MainColor,
             Font * MainFont,
-            size_t FontSize) :
+            size_t FontSize,
+            Font::RenderStyle FontStyle) :
 
         InnerBorderColor{InnerBorderColor},
         OuterBorderColor{OuterBorderColor},
@@ -33,7 +35,8 @@ struct Theme
         BaseColor{BaseColor},
         MainColor{MainColor},
         MainFont{MainFont},
-        FontSize{FontSize}
+        FontSize{FontSize},
+        FontStyle{FontStyle}
     { }
 };
 

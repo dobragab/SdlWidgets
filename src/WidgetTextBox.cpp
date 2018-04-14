@@ -52,7 +52,7 @@ void TextBox::MouseClick(MouseClickEvent& ev)
         {
             current = (min + max) / 2;
             std::string tempstring{text.begin(), text.begin() + current};
-            int16_t cursor_x = MainTheme.MainFont->RenderSize(tempstring, MainTheme.FontSize).x;
+            int16_t cursor_x = MainTheme.MainFont->RenderSize(tempstring, MainTheme.FontSize).w;
 
             if(cursor_x <= ev.p.x - location.x)
             {
@@ -61,7 +61,7 @@ void TextBox::MouseClick(MouseClickEvent& ev)
                 else
                 {
                     tempstring = std::string{text.begin(), text.begin() + current + 1};
-                    cursor_x = MainTheme.MainFont->RenderSize(tempstring, MainTheme.FontSize).x;
+                    cursor_x = MainTheme.MainFont->RenderSize(tempstring, MainTheme.FontSize).w;
 
                     if(cursor_x > ev.p.x - location.x)
                         found = true;
@@ -97,7 +97,7 @@ void TextBox::Paint(Renderer& screen, Point offset)
 
     temp.draw_rectangle(1, 1, size.w-2, size.h-2, MainTheme.OuterBorderColor);
 
-    Surface textsurf = MainTheme.MainFont->Render(text, MainTheme.FontSize, MainTheme.MainColor, Font::Blended);
+    Surface textsurf = MainTheme.MainFont->Render(text, MainTheme.FontSize, MainTheme.MainColor, Font::Blended, MainTheme.FontStyle);
 
     Dimension textsize = textsurf.Size();
     Rect sp;
@@ -112,7 +112,7 @@ void TextBox::Paint(Renderer& screen, Point offset)
     if(cursor_visible)
     {
         std::string tempstring{text, 0, cursor_position};
-        int16_t cursor_x = MainTheme.MainFont->RenderSize(tempstring, MainTheme.FontSize).x;
+        int16_t cursor_x = MainTheme.MainFont->RenderSize(tempstring, MainTheme.FontSize).w;
         temp.draw_line((int16_t)cursor_x, (int16_t)0, (int16_t)cursor_x, (int16_t)size.h, MainTheme.MainColor);
     }
 

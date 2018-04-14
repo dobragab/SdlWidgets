@@ -20,7 +20,7 @@ class MainWindow : public Sdl::WidgetWindow
 public:
     MainWindow()
         : Sdl::WidgetWindow(Sdl::Dimension(640, 480), "Sdl::Trial")
-        , panel(Sdl::Point(250, 150), Sdl::Dimension(100, 60))
+        , panel(Sdl::Point(250, 150), Sdl::Dimension(120, 60))
     {
         Add(button1);
         Add(button2);
@@ -72,7 +72,7 @@ public:
         panel.Add(buttonPanel);
 
         buttonPanel.Text = "PanelGomb";
-        buttonPanel.Size = Sdl::Dimension(75, 40);
+        buttonPanel.Size = Sdl::Dimension(100, 40);
         buttonPanel.Location = Sdl::Point(10, 10);
     }
 

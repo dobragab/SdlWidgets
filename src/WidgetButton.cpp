@@ -48,7 +48,7 @@ void Button::Paint(Renderer& screen, Point offset)
     draw_stripes(temp, down);
     draw_inner_border(temp);
 
-    Surface textsurf = MainTheme.MainFont->Render(text, MainTheme.FontSize, MainTheme.MainColor, Font::Blended);
+    Surface textsurf = MainTheme.MainFont->Render(text, MainTheme.FontSize, MainTheme.MainColor, Font::Blended, MainTheme.FontStyle);
 
     Dimension textsize = textsurf.Size();
     Rect sp;

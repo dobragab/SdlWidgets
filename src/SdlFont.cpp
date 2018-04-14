@@ -5,7 +5,7 @@
 namespace Sdl
 {
 
-Font::Font(std::string filename) :
+Font::Font(std::string const& filename) :
     membuffer{nullptr},
     memcontent{SDL_RWFromFileToMemory(filename.c_str(), "rb", membuffer)}
 {
@@ -47,27 +47,37 @@ Font::~Font()
     free(membuffer);
 }
 
-TTF_Font * Font::get_font_by_size(size_t fontsize) const
+_TTF_Font * Font::get_font_by_size(size_t fontsize, RenderStyle style) const
 {
+    _TTF_Font * font;
+
     auto it = font_sizes.find(fontsize);
     if (it != font_sizes.end())
-        return it->second;
+        font = it->second;
+    else
+    {
+        font = TTF_OpenFontRW(memcontent, false, fontsize);
 
-    TTF_Font * font = TTF_OpenFontRW(memcontent, false, fontsize);
+        if (font == NULL)
+            throw exception();
 
-    font_sizes[fontsize] = font;
+        font_sizes[fontsize] = font;
+    }
+
+    if (TTF_GetFontStyle(font) != int(style))
+        TTF_SetFontStyle(font, style);
 
     return font;
 }
 
-Surface Font::Render(std::string text, size_t fontsize, Color color, Font::RenderMode mode, Color bgnd_color) const
+Surface Font::Render(std::string const& text, size_t fontsize, Color color, RenderMode mode, RenderStyle style, Color bgnd_color) const
 {
     if(text.length() == 0)
         return Surface{1, 1};
 
     SDL_Surface * surf = nullptr;
     SDL_Color c = ConvertColor(color);
-    TTF_Font * font = get_font_by_size(fontsize);
+    _TTF_Font * font = get_font_by_size(fontsize, style);
 
     switch(mode)
     {
@@ -92,22 +102,20 @@ Surface Font::Render(std::string text, size_t fontsize, Color color, Font::Rende
 }
 
 
-Texture Font::Render(Renderer& renderer, std::string text, size_t fontsize, Color color, Font::RenderMode mode, Color bgnd_color) const
+Texture Font::Render(Renderer& renderer, std::string const& text, size_t fontsize, Color color, RenderMode mode, RenderStyle style, Color bgnd_color) const
 {
-    Surface surf = Render(text, fontsize, color, mode, bgnd_color);
+    Surface surf = Render(text, fontsize, color, mode, style, bgnd_color);
 
     return Texture{renderer, surf};
 }
 
-Point Font::RenderSize(std::string text, size_t fontsize) const
+Dimension Font::RenderSize(std::string const& text, size_t fontsize, RenderStyle style) const
 {
-    TTF_Font * font = get_font_by_size(fontsize);
+    TTF_Font * font = get_font_by_size(fontsize, style);
 
     int x, y;
-
     TTF_SizeUTF8(font, text.c_str(), &x, &y);
-
-    return Point(x, y);
+    return Dimension(x, y);
 }
 
 }
