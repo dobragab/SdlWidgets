@@ -43,7 +43,7 @@ void TextBox::MouseClick(MouseClickEvent& ev)
 
     if(IsClicked(ev.p))
     {
-        parent->SetFocus(this);
+        parent->SetFocus(*this);
         size_t min = 0, max = text.length();
         bool found = false;
 
@@ -85,7 +85,7 @@ void TextBox::MouseClick(MouseClickEvent& ev)
 
 }
 
-void TextBox::Paint(Renderer& screen)
+void TextBox::Paint(Renderer& screen, Point offset)
 {
     if (!Visible)
         return;
@@ -117,7 +117,7 @@ void TextBox::Paint(Renderer& screen)
     }
 
     Texture cache{screen, temp};
-    Rect dstrect(location.x-1, location.y-1, size.w, size.h);
+    Rect dstrect(location + Point(-1, -1) + offset, size);
 
     screen.Blit(cache, nullptr, dstrect);
 }
@@ -191,7 +191,7 @@ void TextBox::TextInput (TextInputEvent& ev)
     ev.Redraw();
 }
 
-void TextBox::TextChanged(void(WidgetContainer::*clicked)(Widget&, TextChangedEvent&))
+void TextBox::TextChanged(void(WidgetPanel::*clicked)(Widget&, TextChangedEvent&))
 {
     textChanged = std::bind(clicked, parent, std::placeholders::_1, std::placeholders::_2);
 }

@@ -121,15 +121,14 @@
 		<Unit filename="src/WidgetButton.hpp" />
 		<Unit filename="src/WidgetColorBox.cpp" />
 		<Unit filename="src/WidgetColorBox.hpp" />
-		<Unit filename="src/WidgetContainer.cpp" />
-		<Unit filename="src/WidgetContainer.hpp" />
 		<Unit filename="src/WidgetLabel.cpp" />
 		<Unit filename="src/WidgetLabel.hpp" />
+		<Unit filename="src/WidgetPanel.cpp" />
+		<Unit filename="src/WidgetPanel.hpp" />
 		<Unit filename="src/WidgetSlider.cpp" />
 		<Unit filename="src/WidgetSlider.hpp" />
 		<Unit filename="src/WidgetTextBox.cpp" />
 		<Unit filename="src/WidgetTextBox.hpp" />
-		<Unit filename="src/WidgetWindow.cpp" />
 		<Unit filename="src/WidgetWindow.hpp" />
 		<Unit filename="src/main.cpp" />
 		<Extensions>

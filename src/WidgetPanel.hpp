@@ -8,7 +8,7 @@
 namespace Sdl
 {
 
-class WidgetContainer : public Widget
+class WidgetPanel : public Widget
 {
     struct Item
     {
@@ -28,7 +28,7 @@ class WidgetContainer : public Widget
 public:
 
     using Widget::Widget;
-    ~WidgetContainer();
+    ~WidgetPanel();
 
     static Color DefaultColor;
 
@@ -40,17 +40,15 @@ public:
     void Remove(Widget * w);
     void Remove(Widget& w);
 
-    void SetFocus(Widget * w);
+    void SetFocus(Widget& w);
     void ReleaseFocus();
-
-    void Redraw();
 
     void MouseClick(MouseClickEvent& ev) override;
     void MouseMove(MouseMoveEvent& ev) override;
     void KeyPress(KeyboardEvent& ev) override;
     void TextInput(TextInputEvent& ev) override;
 
-    void Paint(Renderer& screen) override;
+    void Paint(Renderer& screen, Point offset) override;
 };
 
 }

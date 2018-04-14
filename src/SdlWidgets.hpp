@@ -10,7 +10,7 @@
 #include "SdlWidget.hpp"
 #include "SdlWindow.hpp"
 
-#include "WidgetContainer.hpp"
+#include "WidgetPanel.hpp"
 #include "WidgetWindow.hpp"
 
 #include "WidgetButton.hpp"

@@ -5,7 +5,7 @@
 namespace Sdl
 {
 
-void Slider::Paint(Renderer& screen)
+void Slider::Paint(Renderer& screen, Point offset)
 {
     if (!Visible)
         return;
@@ -20,7 +20,7 @@ void Slider::Paint(Renderer& screen)
     temp.draw_box(1, 1, ((size.w-2)*(value - minvalue - 1)/(maxvalue - minvalue) + 1), size.h-2, MainTheme.MainColor);
 
     Texture cache{screen, temp};
-    Rect dstrect(location.x, location.y, size.w, size.h);
+    Rect dstrect(location + offset, size);
 
     screen.Blit(cache, nullptr, dstrect);
 }
@@ -34,7 +34,7 @@ void Slider::MouseClick(MouseClickEvent& ev)
     {
         if(IsClicked(ev.p))
         {
-            parent->SetFocus(this);
+            parent->SetFocus(*this);
             down = true;
             setval(ev.p.x);
             ev.Redraw();
@@ -67,7 +67,7 @@ void Slider::setval(int16_t x)
         Value = minvalue + (maxvalue - minvalue) * (x-location.x)/(size.w-2);
 }
 
-void Slider::ValueChanged(void(WidgetContainer::*clicked)(Widget&, ValueChangedEvent<int>&))
+void Slider::ValueChanged(void(WidgetPanel::*clicked)(Widget&, ValueChangedEvent<int>&))
 {
     valueChanged = std::bind(clicked, parent, std::placeholders::_1, std::placeholders::_2);
 }

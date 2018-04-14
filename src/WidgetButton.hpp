@@ -37,7 +37,7 @@ public:
         timer.Start();
     }
 
-    virtual void Paint(Renderer& screen) override;
+    virtual void Paint(Renderer& screen, Point offset) override;
 
     virtual void MouseClick(MouseClickEvent& ev) override;
     virtual void MouseMove (MouseMoveEvent & ev) override { }
@@ -50,12 +50,12 @@ public:
         mouseClicked = std::move(clicked);
     }
 
-    void MouseClicked(void(WidgetContainer::*clicked)(Widget&, MouseClickEvent&));
+    void MouseClicked(void(WidgetPanel::*clicked)(Widget&, MouseClickEvent&));
 
     template<typename Derived>
     void MouseClicked(void(Derived::*clicked)(Widget&, MouseClickEvent&))
     {
-        MouseClicked(static_cast<void(WidgetContainer::*)(Widget&, MouseClickEvent&)>(clicked));
+        MouseClicked(static_cast<void(WidgetPanel::*)(Widget&, MouseClickEvent&)>(clicked));
     }
 };
 

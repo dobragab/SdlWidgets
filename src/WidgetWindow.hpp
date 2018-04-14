@@ -2,40 +2,45 @@
 #define WIDGETWINDOW_H
 
 #include "SdlWindow.hpp"
-#include "WidgetContainer.hpp"
+#include "WidgetPanel.hpp"
 
 namespace Sdl
 {
 
-class WidgetWindow : public Window, public WidgetContainer
+class WidgetWindow : public Window, public WidgetPanel
 {
 public:
     WidgetWindow(Dimension dim, const char * caption = "")
         : Window(dim, caption)
-        , WidgetContainer(Point(0, 0), dim)
+        , WidgetPanel(Point(0, 0), dim)
     { }
 
 private:
     void MouseClick(MouseClickEvent& ev) override
     {
-        WidgetContainer::MouseClick(ev);
+        WidgetPanel::MouseClick(ev);
     }
     void MouseMove(MouseMoveEvent& ev) override
     {
-        WidgetContainer::MouseMove(ev);
+        WidgetPanel::MouseMove(ev);
     }
     void KeyPress(KeyboardEvent& ev) override
     {
-        WidgetContainer::KeyPress(ev);
+        WidgetPanel::KeyPress(ev);
     }
     void TextInput(TextInputEvent& ev) override
     {
-        WidgetContainer::TextInput(ev);
+        WidgetPanel::TextInput(ev);
+    }
+
+    void Paint(Renderer& screen, Point offset) override
+    {
+        WidgetPanel::Paint(screen, offset);
     }
 
     void Paint(Renderer& screen) override
     {
-        WidgetContainer::Paint(screen);
+        WidgetPanel::Paint(screen, location);
     }
 };
 

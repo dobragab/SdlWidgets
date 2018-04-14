@@ -25,10 +25,10 @@ class TextBox : public Widget, public TimerHandler
 
     GETTER(text, std::string, Text)
     void set_text(std::string const& value);
+    void setText(std::string const& value);
 
 public:
 
-    void setText(std::string const& value);
 
     PROPERTY(TextBox, std::string, Text);
 
@@ -41,7 +41,7 @@ public:
     virtual void SetFocus() override;
     virtual void ReleaseFocus() override;
 
-    virtual void Paint(Renderer& screen) override;
+    virtual void Paint(Renderer& screen, Point offset) override;
 
     virtual void MouseClick(MouseClickEvent& ev) override;
     virtual void MouseMove (MouseMoveEvent & ev) override { }
@@ -56,12 +56,12 @@ public:
         textChanged = std::move(clicked);
     }
 
-    void TextChanged(void(WidgetContainer::*clicked)(Widget&, TextChangedEvent&));
+    void TextChanged(void(WidgetPanel::*clicked)(Widget&, TextChangedEvent&));
 
     template<typename Derived>
     void TextChanged(void(Derived::*clicked)(Widget&, TextChangedEvent&))
     {
-        TextChanged(static_cast<void(WidgetContainer::*)(Widget&, TextChangedEvent&)>(clicked));
+        TextChanged(static_cast<void(WidgetPanel::*)(Widget&, TextChangedEvent&)>(clicked));
     }
 };
 

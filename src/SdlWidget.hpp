@@ -11,7 +11,7 @@
 namespace Sdl
 {
 
-class WidgetContainer;
+class WidgetPanel;
 
 class Widget
 {
@@ -22,7 +22,7 @@ protected:
     Point location;
     Dimension size;
     bool isfocused;
-    WidgetContainer * parent = nullptr;
+    WidgetPanel * parent = nullptr;
 
     GETTERSETTER(size, Dimension, Size)
     GETTERSETTER(location, Point, Location)
@@ -79,7 +79,7 @@ public:
         MainTheme{theme}
     { }
 
-    virtual void SetParent(WidgetContainer * parent)
+    virtual void SetParent(WidgetPanel * parent)
     {
         this->parent = parent;
     }
@@ -101,7 +101,7 @@ public:
     virtual void KeyPress(KeyboardEvent& ev) = 0;
     virtual void TextInput(TextInputEvent& ev) = 0;
 
-    virtual void Paint(Renderer& screen) = 0;
+    virtual void Paint(Renderer& screen, Point offset) = 0;
 
     virtual ~Widget() {}
 };

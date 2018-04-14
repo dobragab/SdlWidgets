@@ -27,7 +27,7 @@ public:
         text{std::move(text)}
     { }
 
-    virtual void Paint(Renderer& screen) override;
+    virtual void Paint(Renderer& screen, Point offset) override;
 
     virtual void MouseClick(MouseClickEvent& ev) override { }
     virtual void MouseMove (MouseMoveEvent & ev) override { }

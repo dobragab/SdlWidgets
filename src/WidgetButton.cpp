@@ -16,7 +16,7 @@ void Button::MouseClick(MouseClickEvent& ev)
     {
         if(IsClicked(ev.p))
         {
-            parent->SetFocus(this);
+            parent->SetFocus(*this);
             down = true;
             ev.Redraw();
         }
@@ -25,7 +25,7 @@ void Button::MouseClick(MouseClickEvent& ev)
     {
         if (down && mouseClicked && IsClicked(ev.p))
         {
-            parent->SetFocus(this);
+            parent->SetFocus(*this);
             mouseClicked(*this, ev);
         }
 
@@ -36,7 +36,7 @@ void Button::MouseClick(MouseClickEvent& ev)
     }
 }
 
-void Button::Paint(Renderer& screen)
+void Button::Paint(Renderer& screen, Point offset)
 {
     if (!Visible)
         return;
@@ -61,7 +61,7 @@ void Button::Paint(Renderer& screen)
     temp.Blit(textsurf, sp);
 
     Texture cache{screen, temp};
-    Rect dstrect(location.x-1, location.y-1, size.w, size.h);
+    Rect dstrect(location.x-1 + offset.x, location.y-1 + offset.y, size.w, size.h);
 
     screen.Blit(cache, nullptr, dstrect);
 }
@@ -72,7 +72,7 @@ void Button::TimerTick (TimerEvent& ev)
     ev.Redraw();
 }
 
-void Button::MouseClicked(void(WidgetContainer::*clicked)(Widget&, MouseClickEvent&))
+void Button::MouseClicked(void(WidgetPanel::*clicked)(Widget&, MouseClickEvent&))
 {
     mouseClicked = std::bind(clicked, parent, std::placeholders::_1, std::placeholders::_2);
 }

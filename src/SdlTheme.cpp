@@ -41,7 +41,7 @@ Theme ColorBox::DefaultTheme
     Widget::DefaultTheme.FontSize
 };
 
-Color WidgetContainer::DefaultColor(0x303030FF);
+Color WidgetPanel::DefaultColor(0x303030FF);
 
 Point Widget::defloc = Point(0, 0);
 

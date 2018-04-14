@@ -38,6 +38,16 @@ struct Point
     { }
 };
 
+inline Point operator+(Point p1, Point p2)
+{
+    return Point(p1.x + p2.x, p1.y + p2.y);
+}
+
+inline Point operator-(Point p1, Point p2)
+{
+    return Point(p1.x +- p2.x, p1.y - p2.y);
+}
+
 struct Dimension
 {
     uint16_t w = 0, h = 0;
@@ -59,6 +69,10 @@ struct Rect
 
     Rect(int x, int y, int w = 0, int h = 0) :
         x(x), y(y), w(w), h(h)
+    { }
+
+    Rect(Point p, Dimension d)
+        : x(p.x), y(p.y), w(d.w), h(d.h)
     { }
 };
 

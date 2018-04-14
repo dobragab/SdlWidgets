@@ -13,9 +13,14 @@ class MainWindow : public Sdl::WidgetWindow
     Sdl::ColorBox box;
     Sdl::TextBox textbox;
     Sdl::TextBox textbox2;
+
+    Sdl::WidgetPanel panel;
+    Sdl::Button buttonPanel;
+
 public:
     MainWindow()
         : Sdl::WidgetWindow(Sdl::Dimension(640, 480), "Sdl::Trial")
+        , panel(Sdl::Point(250, 150), Sdl::Dimension(100, 60))
     {
         Add(button1);
         Add(button2);
@@ -60,11 +65,20 @@ public:
         textbox2.Size = Sdl::Dimension(100, 23);
         textbox2.Text = "Default2";
         textbox2.TextChanged(&MainWindow::textbox2_TextChanged);
+
+        Add(panel);
+        panel.BackgroundColor = Sdl::Color(100, 0, 0);
+
+        panel.Add(buttonPanel);
+
+        buttonPanel.Text = "PanelGomb";
+        buttonPanel.Size = Sdl::Dimension(75, 40);
+        buttonPanel.Location = Sdl::Point(10, 10);
     }
 
     void button1_MouseClicked(Sdl::Widget& sender, Sdl::MouseClickEvent& ev)
     {
-        SetFocus(&textbox);
+        SetFocus(textbox);
     }
 
     void button2_MouseClicked(Sdl::Widget& sender, Sdl::MouseClickEvent& ev)

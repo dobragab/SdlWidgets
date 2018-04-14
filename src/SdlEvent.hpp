@@ -59,12 +59,14 @@ struct MouseClickEvent : public Event
     bool down;
     uint8_t no_clicks;
     Point p;
+    Point absolute;
 
     MouseClickEvent(MouseButton button, bool down, uint8_t no_clicks, Point p) :
         button{button},
         down{down},
         no_clicks{no_clicks},
-        p{p}
+        p{p},
+        absolute{p}
     { }
 };
 
@@ -74,11 +76,13 @@ struct MouseMoveEvent : public Event
 
     MouseButtonState state;
     Point p;
+    Point absolute;
     Point vec;
 
     MouseMoveEvent(MouseButtonState state, Point p, Point vec) :
         state{state},
         p{p},
+        absolute{p},
         vec{vec}
     { }
 };

@@ -5,15 +5,14 @@
 namespace Sdl
 {
 
-void Label::Paint(Renderer& screen)
+void Label::Paint(Renderer& screen, Point offset)
 {
     if (!Visible)
         return;
 
     Texture textsurf = MainTheme.MainFont->Render(screen, text, MainTheme.FontSize, MainTheme.MainColor, Font::Blended);
 
-    Dimension textsize = textsurf.Size();
-    Rect sp{location.x, location.y, textsize.w, textsize.h};
+    Rect sp{location + offset, textsurf.Size()};
 
     screen.Blit(textsurf, nullptr, sp);
 }

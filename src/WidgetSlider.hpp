@@ -70,16 +70,16 @@ public:
         valueChanged = std::move(clicked);
     }
 
-    void ValueChanged(void(WidgetContainer::*clicked)(Widget&, ValueChangedEvent<int>&));
+    void ValueChanged(void(WidgetPanel::*clicked)(Widget&, ValueChangedEvent<int>&));
 
     template<typename Derived>
     void ValueChanged(void(Derived::*clicked)(Widget&, ValueChangedEvent<int>&))
     {
-        ValueChanged(static_cast<void(WidgetContainer::*)(Widget&, ValueChangedEvent<int>&)>(clicked));
+        ValueChanged(static_cast<void(WidgetPanel::*)(Widget&, ValueChangedEvent<int>&)>(clicked));
     }
 
 
-    virtual void Paint(Renderer& screen) override;
+    virtual void Paint(Renderer& screen, Point offset) override;
 
     virtual void MouseClick(MouseClickEvent& ev) override;
     virtual void MouseMove (MouseMoveEvent & ev) override;

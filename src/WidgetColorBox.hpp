@@ -24,7 +24,7 @@ public:
         Widget{defloc, defsize, ColorBox::DefaultTheme}
     { }
 
-    virtual void Paint(Renderer& screen) override;
+    virtual void Paint(Renderer& screen, Point offset) override;
 
     virtual void MouseClick(MouseClickEvent& ev) override { }
     virtual void MouseMove (MouseMoveEvent & ev) override { }

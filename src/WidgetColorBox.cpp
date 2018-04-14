@@ -5,7 +5,7 @@
 namespace Sdl
 {
 
-void ColorBox::Paint(Renderer& screen)
+void ColorBox::Paint(Renderer& screen, Point offset)
 {
     if (!Visible)
         return;
@@ -19,7 +19,7 @@ void ColorBox::Paint(Renderer& screen)
     temp.draw_box(1, 1, size.w-2, size.h-2, MainTheme.MainColor);
 
     Texture cache{screen, temp};
-    Rect dstrect(location.x, location.y, size.w, size.h);
+    Rect dstrect(location + offset, size);
 
     screen.Blit(cache, nullptr, dstrect);
 }
