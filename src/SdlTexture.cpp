@@ -41,6 +41,10 @@ Texture::~Texture()
     SDL_DestroyTexture(txt);
 }
 
+Texture Texture::ImgLoad(Renderer& renderer, std::string const& filename)
+{
+    return Texture{IMG_LoadTexture((SDL_Renderer*)renderer, filename.c_str())};
+}
 
 Dimension Texture::Size() const
 {

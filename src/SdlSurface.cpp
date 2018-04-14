@@ -48,6 +48,29 @@ Surface::~Surface()
     SDL_FreeSurface(surf);
 }
 
+Surface Surface::ImgLoad(std::string const& filename)
+{
+    return Surface(IMG_Load(filename.c_str()));
+}
+
+void Surface::SaveJPG(std::string const& filename, int quality)
+{
+    if (IMG_SaveJPG(surf, filename.c_str(), quality) < 0)
+        throw exception();
+}
+
+void Surface::SavePNG(std::string const& filename)
+{
+    if (IMG_SavePNG(surf, filename.c_str()) < 0)
+        throw exception();
+}
+
+void Surface::SaveBMP(std::string const& filename)
+{
+    if (SDL_SaveBMP(surf, filename.c_str()) < 0)
+        throw exception();
+}
+
 int Surface::Width() const
 {
     return surf->w;

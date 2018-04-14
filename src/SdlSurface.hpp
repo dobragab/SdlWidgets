@@ -43,6 +43,12 @@ public:
 
     ~Surface();
 
+    static Surface ImgLoad(std::string const& filename);
+
+    void SaveJPG(std::string const& filename, int quality); // 0 <= quality <= 100
+    void SavePNG(std::string const& filename);
+    void SaveBMP(std::string const& filename);
+
     int Width() const;
     int Height() const;
     Dimension Size() const;

@@ -24,6 +24,8 @@ class Texture
 
     ~Texture();
 
+    static Texture ImgLoad(Renderer& renderer, std::string const& filename);
+
     explicit operator SDL_Texture*() const
     {
         return txt;
